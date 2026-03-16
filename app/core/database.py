@@ -38,7 +38,6 @@ async def init_pool() -> asyncpg.Pool:
         min_size=2,
         max_size=10,
         command_timeout=30,
-        ssl="require",
     )
     logger.info("database_pool_initialized", dsn=dsn[:40] + "...")
     return _pool
