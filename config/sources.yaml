@@ -1,0 +1,118 @@
+# ============================================
+# The Architect — Data Source Configuration
+# ============================================
+# Defines all knowledge sources, their collectors, and update schedules.
+
+sources:
+  # ── Layer 1: Harde Arbeidsmarktdata ──
+
+  - name: CBS StatLine
+    collector: cbs_statline
+    frequency: weekly
+    priority: 1
+    description: Arbeidsmarktdata via CBS OData API
+    tables:
+      - beroepsbevolking
+      - vacatures
+      - cao_lonen
+      - ziekteverzuim
+      - banen_werknemers
+      - bedrijven_grootte
+
+  - name: UWV Arbeidsmarkt
+    collector: uwv_arbeidsmarkt
+    frequency: weekly
+    priority: 1
+    description: Arbeidsmarktkrapte en sectorinformatie
+    pages:
+      - spanningsindicator
+      - sectorpaginas
+
+  # ── Layer 2: Sectorspecifieke Kennis ──
+
+  - name: AZW Monitor
+    collector: azw_monitor
+    frequency: weekly
+    priority: 1
+    description: Arbeidsmarkt Zorg & Welzijn
+    sector: zorg
+
+  - name: Techniekpact
+    collector: techniekpact
+    frequency: monthly
+    priority: 2
+    description: Monitor techniek arbeidsmarkt
+    sector: techniek
+    status: planned
+
+  - name: EIB Bouw
+    collector: eib_bouw
+    frequency: monthly
+    priority: 2
+    description: Economisch Instituut voor de Bouw
+    sector: bouw
+    status: planned
+
+  - name: ROA Prognoses
+    collector: roa_prognoses
+    frequency: quarterly
+    priority: 2
+    description: Research Centre for Education and the Labour Market
+    status: planned
+
+  # ── Layer 3: Regelgeving ──
+
+  - name: AWVN CAO-kijker
+    collector: awvn_cao
+    frequency: monthly
+    priority: 2
+    description: CAO-overzichten per sector
+    status: planned
+
+  # ── Layer 4: Internationale Context ──
+
+  - name: CPB Economie
+    collector: cpb_economie
+    frequency: quarterly
+    priority: 3
+    description: CPB economische verkenningen
+    status: planned
+
+  # ── Layer 5: Eigen Kennis ──
+
+  - name: ModellenWerk Research
+    collector: seed
+    frequency: manual
+    priority: 1
+    description: Eigen onderzoeksrapporten en sectoranalyses
+    files:
+      - MW_Sectorale_Analyse_8x5_Dimensies.md
+      - MW_Organisatie_Analyse_40_Organisaties.md
+      - MW_Workforce_Intelligence_Report_2026.md
+      - MW_Workforce_Agent_Training_Blueprint.md
+
+
+# ============================================
+# Schedule Configuration
+# ============================================
+
+schedule:
+  weekly:
+    cron: "0 7 * * 1"  # Monday 07:00 CET
+    collectors:
+      - cbs_statline
+      - uwv_arbeidsmarkt
+      - azw_monitor
+
+  monthly:
+    cron: "0 7 1 * *"  # 1st of month, 07:00 CET
+    collectors:
+      - techniekpact
+      - eib_bouw
+      - awvn_cao
+
+  quarterly:
+    cron: "0 7 1 1,4,7,10 *"  # 1st of Jan/Apr/Jul/Oct
+    collectors:
+      - roa_prognoses
+      - cpb_economie
