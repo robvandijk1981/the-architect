@@ -112,25 +112,37 @@ async def get_analysis(
     if not analysis:
         raise HTTPException(status_code=404, detail="Analysis not found")
 
-    results = analysis.get("results") or {}
-    if isinstance(results, str):
-        try:
-            results = json.loads(results)
-        except json.JSONDecodeError:
-            results = {}
+    def _parse_jsonb(value) -> dict | list | None:
+        """Parse a value that may be a JSON string or already a dict/list."""
+        if value is None:
+            return None
+        if isinstance(value, (dict, list)):
+            return value
+        if isinstance(value, str):
+            try:
+                return json.loads(value)
+            except json.JSONDecodeError:
+                return None
+        return value
+
+    results = _parse_jsonb(analysis.get("results")) or {}
+    risk_matrix = _parse_jsonb(analysis.get("risk_matrix"))
+    business_case = _parse_jsonb(analysis.get("business_case"))
+    sources_used = _parse_jsonb(analysis.get("sources_used")) or []
 
     return AnalysisResponse(
         analysis_id=str(analysis["id"]),
         status=AnalysisStatus(analysis["status"]),
-        risk_matrix=analysis.get("risk_matrix"),
-        business_case=analysis.get("business_case"),
+        risk_matrix=risk_matrix,
+        business_case=business_case,
         workforce_health_score=results.get("workforce_health_score") if results else None,
+        benchmark_comparison=results.get("benchmark_comparison") if results else None,
         arbeidsmarkt_analyse=results.get("arbeidsmarkt_analyse") if results else None,
         ai_impact_analyse=results.get("ai_impact_analyse") if results else None,
         skills_gap_analyse=results.get("skills_gap_analyse") if results else None,
         verloop_verzuim_diagnose=results.get("verloop_verzuim_diagnose") if results else None,
         actieplan=results.get("actieplan") if results else None,
-        sources=analysis.get("sources_used") or [],
+        sources=sources_used,
         processing_time_ms=analysis.get("processing_time_ms"),
     )
 
@@ -416,6 +428,21 @@ async def _run_analysis(
 
         elapsed = int((time.time() - start) * 1000)
 
+        # Parse the raw Claude JSON output into a structured dict
+        raw_text = ai_results.get("raw_analysis", "")
+        parsed_analysis: dict = {}
+        if raw_text:
+            # Claude may wrap JSON in markdown code fences — strip them
+            clean = raw_text.strip()
+            if clean.startswith("```"):
+                lines = clean.splitlines()
+                clean = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
+            try:
+                parsed_analysis = json.loads(clean)
+            except json.JSONDecodeError:
+                # Fallback: store raw text under a key so it's not lost
+                parsed_analysis = {"raw_analysis": raw_text}
+
         # Store results
         citations = [c.model_dump(mode="json") for c in ai_results.get("citations", [])]
         await execute(
@@ -431,7 +458,7 @@ async def _run_analysis(
             aid,
             json.dumps(risk_matrix.model_dump(mode="json")),
             json.dumps(business_case.model_dump(mode="json")),
-            json.dumps(ai_results.get("raw_analysis")),
+            json.dumps(parsed_analysis),
             json.dumps(citations),
             elapsed,
         )
