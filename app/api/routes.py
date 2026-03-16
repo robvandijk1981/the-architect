@@ -34,10 +34,19 @@ router = APIRouter(prefix="/api/v1")
 @router.get("/health")
 async def health_check():
     """Health check endpoint for Railway."""
+    db_ok = False
+    try:
+        from app.core.database import get_pool
+        pool = get_pool()
+        db_ok = pool is not None and pool.get_size() > 0
+    except Exception:
+        pass
+
     return {
         "status": "healthy",
         "service": "the-architect",
         "version": "0.1.0",
+        "database": "connected" if db_ok else "unavailable",
     }
 
 

@@ -29,13 +29,17 @@ async def lifespan(app: FastAPI):
     import structlog
     logger = structlog.get_logger()
 
-    # Startup: initialize database pool
-    await init_pool()
-    logger.info(
-        "architect_api_started",
-        environment=settings.environment,
-        version=settings.app_version,
-    )
+    # Startup: initialize database pool (non-fatal — healthcheck must work)
+    try:
+        await init_pool()
+        logger.info(
+            "architect_api_started",
+            environment=settings.environment,
+            version=settings.app_version,
+        )
+    except Exception as e:
+        logger.error("database_pool_failed", error=str(e))
+        # App starts anyway — healthcheck will respond, DB endpoints will fail gracefully
     yield
     # Shutdown: close database pool
     await close_pool()

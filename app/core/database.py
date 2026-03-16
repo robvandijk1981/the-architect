@@ -4,6 +4,7 @@ import json
 import asyncpg
 import structlog
 from contextlib import asynccontextmanager
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 from app.core.config import get_settings
 
@@ -12,18 +13,34 @@ logger = structlog.get_logger()
 # Global connection pool
 _pool: asyncpg.Pool | None = None
 
+# Parameters in the DSN that asyncpg doesn't understand (libpq-only)
+_UNSUPPORTED_DSN_PARAMS = {"channel_binding"}
+
+
+def _clean_dsn(dsn: str) -> str:
+    """Remove libpq-only parameters that asyncpg cannot handle."""
+    parsed = urlparse(dsn)
+    params = parse_qs(parsed.query)
+    cleaned = {k: v for k, v in params.items() if k not in _UNSUPPORTED_DSN_PARAMS}
+    # parse_qs returns lists; flatten single values for urlencode
+    flat = {k: v[0] if len(v) == 1 else v for k, v in cleaned.items()}
+    new_query = urlencode(flat, doseq=True)
+    return urlunparse(parsed._replace(query=new_query))
+
 
 async def init_pool() -> asyncpg.Pool:
     """Initialize the connection pool. Called on app startup."""
     global _pool
     settings = get_settings()
+    dsn = _clean_dsn(settings.database_url)
     _pool = await asyncpg.create_pool(
-        dsn=settings.database_url,
+        dsn=dsn,
         min_size=2,
         max_size=10,
         command_timeout=30,
+        ssl="require",
     )
-    logger.info("database_pool_initialized", dsn=settings.database_url[:40] + "...")
+    logger.info("database_pool_initialized", dsn=dsn[:40] + "...")
     return _pool
 
 
