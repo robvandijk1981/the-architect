@@ -267,6 +267,58 @@ async def get_sector(
 
 
 # ============================================
+# GET /admin/debug-search — Test vector search
+# ============================================
+
+@router.get("/admin/debug-search")
+async def debug_search(
+    q: str = "arbeidsmarktrisicos zorg",
+    _: str = Depends(verify_api_key),
+):
+    """Debug vector search — test retrieval without Claude."""
+    from app.services.embedder import EmbeddingService
+    embedder = EmbeddingService()
+
+    # Step 1: Generate embedding
+    try:
+        query_embedding = await embedder.embed_query(q)
+        embed_ok = True
+        embed_dim = len(query_embedding)
+    except Exception as e:
+        return {"error": f"Embedding failed: {type(e).__name__}: {e}"}
+
+    # Step 2: Try search with different thresholds
+    results = {}
+    for threshold in [0.0, 0.3, 0.5, 0.65]:
+        try:
+            chunks = await embedder.search(
+                query=q,
+                match_count=5,
+                threshold=threshold,
+            )
+            results[f"threshold_{threshold}"] = {
+                "count": len(chunks),
+                "top": [
+                    {"source": c.get("source_name"), "similarity": c.get("similarity"), "text": c.get("chunk_text", "")[:100]}
+                    for c in chunks[:3]
+                ] if chunks else [],
+            }
+        except Exception as e:
+            results[f"threshold_{threshold}"] = {"error": f"{type(e).__name__}: {e}"}
+
+    # Step 3: Raw chunk count
+    chunk_count = await fetch_val("SELECT count(*) FROM knowledge_embeddings")
+
+    return {
+        "query": q,
+        "embedding_ok": embed_ok,
+        "embedding_dimensions": embed_dim,
+        "total_chunks_in_db": chunk_count,
+        "search_results": results,
+    }
+
+
+# ============================================
 # POST /admin/seed — Seed knowledge base
 # ============================================
 
