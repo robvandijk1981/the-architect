@@ -272,14 +272,34 @@ async def get_sector(
 
 @router.post("/admin/seed")
 async def admin_seed(
-    background_tasks: BackgroundTasks,
     _: str = Depends(verify_api_key),
 ):
-    """Seed the knowledge base with ModellenWerk research files."""
-    from app.pipeline.seed import seed_knowledge_base_online
+    """Seed the knowledge base with ModellenWerk research files (synchronous for debugging)."""
+    from app.pipeline.seed import seed_knowledge_base_online, _default_data_dir, SEED_FILES
+    from pathlib import Path
 
-    background_tasks.add_task(seed_knowledge_base_online)
-    return {"status": "seeding_started", "message": "Seed running in background. Check /api/v1/stats for progress."}
+    # First check which files exist
+    data_dir = _default_data_dir()
+    file_status = {}
+    for f in SEED_FILES:
+        path = data_dir / f["filename"]
+        file_status[f["filename"]] = {
+            "exists": path.exists(),
+            "size": path.stat().st_size if path.exists() else 0,
+        }
+
+    # Run synchronously so we catch errors
+    try:
+        result = await seed_knowledge_base_online()
+        return {"status": "seed_complete", "files": file_status, "result": result}
+    except Exception as e:
+        import traceback
+        return {
+            "status": "seed_failed",
+            "files": file_status,
+            "error": f"{type(e).__name__}: {e}",
+            "traceback": traceback.format_exc(),
+        }
 
 
 # ============================================

@@ -125,27 +125,23 @@ async def seed_knowledge_base(data_dir: str | None = None):
     print(f"\nSeed complete: {total_docs} documents, {total_chunks} chunks embedded.")
 
 
-async def seed_knowledge_base_online():
+async def seed_knowledge_base_online() -> dict:
     """Online version — called from API endpoint, pool already exists."""
     embedder = EmbeddingService()
     data_path = _default_data_dir()
 
     total_docs = 0
     total_chunks = 0
+    results = []
 
     for file_config in SEED_FILES:
         filepath = data_path / file_config["filename"]
 
         if not filepath.exists():
-            logger.warning("seed_file_not_found", path=str(filepath))
+            results.append({"file": file_config["filename"], "status": "not_found"})
             continue
 
         content = filepath.read_text(encoding="utf-8")
-        logger.info(
-            "seeding_file",
-            filename=file_config["filename"],
-            length=len(content),
-        )
 
         doc = KnowledgeDocument(
             source_name=file_config["source_name"],
@@ -164,18 +160,25 @@ async def seed_knowledge_base_online():
             source_date=datetime.now().date(),
         )
 
-        doc_id, chunks = await embedder.process_document(doc)
-        total_docs += 1
-        total_chunks += len(chunks)
+        try:
+            doc_id, chunks = await embedder.process_document(doc)
+            total_docs += 1
+            total_chunks += len(chunks)
+            results.append({
+                "file": file_config["filename"],
+                "status": "ok",
+                "doc_id": doc_id,
+                "chunks": len(chunks),
+                "content_length": len(content),
+            })
+        except Exception as e:
+            results.append({
+                "file": file_config["filename"],
+                "status": "error",
+                "error": f"{type(e).__name__}: {e}",
+            })
 
-        logger.info(
-            "file_seeded",
-            filename=file_config["filename"],
-            document_id=doc_id,
-            chunks=len(chunks),
-        )
-
-    print(f"[SEED] Complete: {total_docs} documents, {total_chunks} chunks embedded.")
+    return {"total_docs": total_docs, "total_chunks": total_chunks, "details": results}
 
 
 def main():
