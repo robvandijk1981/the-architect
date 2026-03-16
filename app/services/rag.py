@@ -72,7 +72,7 @@ class RAGService:
             query=question,
             match_count=max_sources,
             sector=sector,
-            threshold=0.65,
+            threshold=0.25,
         )
 
         if not chunks:

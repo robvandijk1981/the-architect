@@ -14,11 +14,11 @@ logger = structlog.get_logger()
 _pool: asyncpg.Pool | None = None
 
 # Parameters in the DSN that asyncpg doesn't understand (libpq-only)
-_UNSUPPORTED_DSN_PARAMS = {"channel_binding"}
+_UNSUPPORTED_DSN_PARAMS = {"channel_binding", "sslmode"}
 
 
 def _clean_dsn(dsn: str) -> str:
-    """Remove libpq-only parameters that asyncpg cannot handle."""
+    """Remove libpq-only and SSL parameters that asyncpg handles differently."""
     parsed = urlparse(dsn)
     params = parse_qs(parsed.query)
     cleaned = {k: v for k, v in params.items() if k not in _UNSUPPORTED_DSN_PARAMS}
@@ -30,14 +30,21 @@ def _clean_dsn(dsn: str) -> str:
 
 async def init_pool() -> asyncpg.Pool:
     """Initialize the connection pool. Called on app startup."""
+    import ssl as _ssl
+
     global _pool
     settings = get_settings()
     dsn = _clean_dsn(settings.database_url)
+
+    # Neon requires TLS with SNI — use a proper SSL context
+    ssl_ctx = _ssl.create_default_context()
+
     _pool = await asyncpg.create_pool(
         dsn=dsn,
         min_size=2,
         max_size=10,
         command_timeout=30,
+        ssl=ssl_ctx,
     )
     logger.info("database_pool_initialized", dsn=dsn[:40] + "...")
     return _pool
@@ -120,7 +127,7 @@ async def vector_search(
     filter_sector: str | None = None,
     filter_layer: int | None = None,
     filter_category: str | None = None,
-    similarity_threshold: float = 0.7,
+    similarity_threshold: float = 0.25,
 ) -> list[dict]:
     """
     Search knowledge base using vector similarity.
