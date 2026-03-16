@@ -267,6 +267,38 @@ async def get_sector(
 
 
 # ============================================
+# POST /admin/seed — Seed knowledge base
+# ============================================
+
+@router.post("/admin/seed")
+async def admin_seed(
+    background_tasks: BackgroundTasks,
+    _: str = Depends(verify_api_key),
+):
+    """Seed the knowledge base with ModellenWerk research files."""
+    from app.pipeline.seed import seed_knowledge_base_online
+
+    background_tasks.add_task(seed_knowledge_base_online)
+    return {"status": "seeding_started", "message": "Seed running in background. Check /api/v1/stats for progress."}
+
+
+# ============================================
+# POST /admin/collect — Run data collectors
+# ============================================
+
+@router.post("/admin/collect")
+async def admin_collect(
+    background_tasks: BackgroundTasks,
+    _: str = Depends(verify_api_key),
+):
+    """Run all data collectors (CBS, UWV, AZW)."""
+    from app.pipeline.orchestrator import run_pipeline_online
+
+    background_tasks.add_task(run_pipeline_online)
+    return {"status": "collection_started", "message": "Collectors running in background. Check /api/v1/stats for progress."}
+
+
+# ============================================
 # Background Task: Full Analysis
 # ============================================
 

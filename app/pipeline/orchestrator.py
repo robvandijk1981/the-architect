@@ -213,5 +213,14 @@ async def main():
     print(f"\nSuccess: {'✓' if report['success'] else '✗'}")
 
 
+async def run_pipeline_online():
+    """Online version — called from API endpoint, pool already exists."""
+    orchestrator = PipelineOrchestrator()
+    report = await orchestrator.run()
+    print(f"[PIPELINE] Complete: {report['summary']['documents_new']} new docs, "
+          f"{report['summary']['chunks_created']} chunks")
+    return report
+
+
 if __name__ == "__main__":
     asyncio.run(main())

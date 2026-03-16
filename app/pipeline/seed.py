@@ -64,12 +64,17 @@ SEED_FILES = [
 ]
 
 
-async def seed_knowledge_base(data_dir: str):
+def _default_data_dir() -> Path:
+    """Return the data/seed directory shipped with the repo."""
+    return Path(__file__).resolve().parent.parent.parent / "data" / "seed"
+
+
+async def seed_knowledge_base(data_dir: str | None = None):
     """Load initial knowledge base from existing research files."""
     setup_logging()
     await init_pool()
     embedder = EmbeddingService()
-    data_path = Path(data_dir)
+    data_path = Path(data_dir) if data_dir else _default_data_dir()
 
     total_docs = 0
     total_chunks = 0
@@ -120,12 +125,65 @@ async def seed_knowledge_base(data_dir: str):
     print(f"\nSeed complete: {total_docs} documents, {total_chunks} chunks embedded.")
 
 
+async def seed_knowledge_base_online():
+    """Online version — called from API endpoint, pool already exists."""
+    embedder = EmbeddingService()
+    data_path = _default_data_dir()
+
+    total_docs = 0
+    total_chunks = 0
+
+    for file_config in SEED_FILES:
+        filepath = data_path / file_config["filename"]
+
+        if not filepath.exists():
+            logger.warning("seed_file_not_found", path=str(filepath))
+            continue
+
+        content = filepath.read_text(encoding="utf-8")
+        logger.info(
+            "seeding_file",
+            filename=file_config["filename"],
+            length=len(content),
+        )
+
+        doc = KnowledgeDocument(
+            source_name=file_config["source_name"],
+            source_url=None,
+            source_type=file_config["source_type"],
+            category=file_config["category"],
+            layer=file_config["layer"],
+            sector=file_config["sector"],
+            title=file_config["title"],
+            content=content,
+            metadata={
+                "seeded": True,
+                "seed_date": datetime.now().isoformat(),
+                "original_file": file_config["filename"],
+            },
+            source_date=datetime.now().date(),
+        )
+
+        doc_id, chunks = await embedder.process_document(doc)
+        total_docs += 1
+        total_chunks += len(chunks)
+
+        logger.info(
+            "file_seeded",
+            filename=file_config["filename"],
+            document_id=doc_id,
+            chunks=len(chunks),
+        )
+
+    print(f"[SEED] Complete: {total_docs} documents, {total_chunks} chunks embedded.")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Seed the knowledge base")
     parser.add_argument(
         "--data-dir",
-        required=True,
-        help="Path to the Workspace directory with MW_*.md files",
+        default=None,
+        help="Path to directory with MW_*.md files (default: data/seed/ in repo)",
     )
     args = parser.parse_args()
     asyncio.run(seed_knowledge_base(args.data_dir))
