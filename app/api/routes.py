@@ -4,7 +4,7 @@ import json
 import time
 import uuid
 
-from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, UploadFile, Form
 import structlog
 
 from app.api.deps import (
@@ -352,6 +352,92 @@ async def admin_seed(
             "error": f"{type(e).__name__}: {e}",
             "traceback": traceback.format_exc(),
         }
+
+
+# ============================================
+# POST /admin/upload — Upload a document to the knowledge base
+# ============================================
+
+@router.post("/admin/upload")
+async def admin_upload(
+    file: UploadFile,
+    title: str = Form(...),
+    category: str = Form("sectorkennis"),
+    layer: int = Form(2),
+    source_type: str = Form("own_research"),
+    sector: str = Form(None),
+    _: str = Depends(verify_api_key),
+):
+    """
+    Upload a document to the knowledge base.
+    Supported: .md, .txt, .pdf (text extraction)
+    The document is chunked, embedded, and stored immediately.
+    """
+    from app.services.embedder import EmbeddingService
+    from app.models.knowledge import KnowledgeDocument, SourceType, KnowledgeCategory
+
+    # Read file content
+    raw = await file.read()
+    filename = file.filename or "upload.md"
+
+    if filename.endswith(".pdf"):
+        # Extract text from PDF
+        try:
+            import pypdf
+            import io
+            reader = pypdf.PdfReader(io.BytesIO(raw))
+            content = "\n\n".join(page.extract_text() or "" for page in reader.pages)
+        except Exception as e:
+            return {"status": "error", "error": f"PDF extraction failed: {e}"}
+    else:
+        content = raw.decode("utf-8")
+
+    if len(content.strip()) < 50:
+        return {"status": "error", "error": "Document too short or empty"}
+
+    # Parse enums
+    try:
+        src_type = SourceType(source_type)
+    except ValueError:
+        src_type = SourceType.OWN_RESEARCH
+
+    try:
+        cat = KnowledgeCategory(category)
+    except ValueError:
+        cat = KnowledgeCategory.SECTORKENNIS
+
+    sector_list = [s.strip() for s in sector.split(",")] if sector else None
+
+    doc = KnowledgeDocument(
+        source_name=f"Upload: {filename}",
+        source_url=None,
+        source_type=src_type,
+        category=cat,
+        layer=layer,
+        sector=sector_list,
+        title=title,
+        content=content,
+        metadata={
+            "uploaded": True,
+            "original_filename": filename,
+        },
+        source_date=__import__("datetime").date.today(),
+    )
+
+    embedder = EmbeddingService()
+    try:
+        doc_id, chunks = await embedder.process_document(doc)
+        return {
+            "status": "ok",
+            "document_id": doc_id,
+            "title": title,
+            "chunks_created": len(chunks),
+            "content_length": len(content),
+            "category": cat.value,
+            "layer": layer,
+        }
+    except Exception as e:
+        return {"status": "error", "error": f"{type(e).__name__}: {e}"}
 
 
 # ============================================
