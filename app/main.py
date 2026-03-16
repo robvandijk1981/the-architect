@@ -32,13 +32,18 @@ async def lifespan(app: FastAPI):
     # Startup: initialize database pool (non-fatal — healthcheck must work)
     try:
         await init_pool()
+        print(f"[STARTUP] Database pool initialized OK")
         logger.info(
             "architect_api_started",
             environment=settings.environment,
             version=settings.app_version,
         )
     except Exception as e:
-        logger.error("database_pool_failed", error=str(e))
+        import traceback
+        err_msg = f"{type(e).__name__}: {e}"
+        print(f"[STARTUP] DATABASE POOL FAILED: {err_msg}")
+        traceback.print_exc()
+        app.state.db_error = err_msg
         # App starts anyway — healthcheck will respond, DB endpoints will fail gracefully
     yield
     # Shutdown: close database pool
