@@ -35,24 +35,18 @@ router = APIRouter(prefix="/api/v1")
 async def health_check():
     """Health check endpoint for Railway."""
     db_ok = False
-    db_error = None
     try:
         from app.core.database import get_pool
         pool = get_pool()
         db_ok = pool is not None and pool.get_size() > 0
-    except Exception as e:
-        db_error = str(e)
-
-    # Also check if startup recorded an error
-    from app.main import app as _app
-    startup_error = getattr(_app.state, "db_error", None)
+    except Exception:
+        pass
 
     return {
         "status": "healthy",
         "service": "the-architect",
         "version": "0.1.0",
         "database": "connected" if db_ok else "unavailable",
-        "db_error": startup_error or db_error,
     }
 
 
@@ -267,58 +261,6 @@ async def get_sector(
 
 
 # ============================================
-# GET /admin/debug-search — Test vector search
-# ============================================
-
-@router.get("/admin/debug-search")
-async def debug_search(
-    q: str = "arbeidsmarktrisicos zorg",
-    _: str = Depends(verify_api_key),
-):
-    """Debug vector search — test retrieval without Claude."""
-    from app.services.embedder import EmbeddingService
-    embedder = EmbeddingService()
-
-    # Step 1: Generate embedding
-    try:
-        query_embedding = await embedder.embed_query(q)
-        embed_ok = True
-        embed_dim = len(query_embedding)
-    except Exception as e:
-        return {"error": f"Embedding failed: {type(e).__name__}: {e}"}
-
-    # Step 2: Try search with different thresholds
-    results = {}
-    for threshold in [0.0, 0.3, 0.5, 0.65]:
-        try:
-            chunks = await embedder.search(
-                query=q,
-                match_count=5,
-                threshold=threshold,
-            )
-            results[f"threshold_{threshold}"] = {
-                "count": len(chunks),
-                "top": [
-                    {"source": c.get("source_name"), "similarity": c.get("similarity"), "text": c.get("chunk_text", "")[:100]}
-                    for c in chunks[:3]
-                ] if chunks else [],
-            }
-        except Exception as e:
-            results[f"threshold_{threshold}"] = {"error": f"{type(e).__name__}: {e}"}
-
-    # Step 3: Raw chunk count
-    chunk_count = await fetch_val("SELECT count(*) FROM knowledge_embeddings")
-
-    return {
-        "query": q,
-        "embedding_ok": embed_ok,
-        "embedding_dimensions": embed_dim,
-        "total_chunks_in_db": chunk_count,
-        "search_results": results,
-    }
-
-
-# ============================================
 # POST /admin/seed — Seed knowledge base
 # ============================================
 
@@ -326,32 +268,14 @@ async def debug_search(
 async def admin_seed(
     _: str = Depends(verify_api_key),
 ):
-    """Seed the knowledge base with ModellenWerk research files (synchronous for debugging)."""
-    from app.pipeline.seed import seed_knowledge_base_online, _default_data_dir, SEED_FILES
-    from pathlib import Path
+    """Seed the knowledge base with ModellenWerk research files."""
+    from app.pipeline.seed import seed_knowledge_base_online
 
-    # First check which files exist
-    data_dir = _default_data_dir()
-    file_status = {}
-    for f in SEED_FILES:
-        path = data_dir / f["filename"]
-        file_status[f["filename"]] = {
-            "exists": path.exists(),
-            "size": path.stat().st_size if path.exists() else 0,
-        }
-
-    # Run synchronously so we catch errors
     try:
         result = await seed_knowledge_base_online()
-        return {"status": "seed_complete", "files": file_status, "result": result}
+        return {"status": "seed_complete", "result": result}
     except Exception as e:
-        import traceback
-        return {
-            "status": "seed_failed",
-            "files": file_status,
-            "error": f"{type(e).__name__}: {e}",
-            "traceback": traceback.format_exc(),
-        }
+        raise HTTPException(status_code=500, detail=f"Seed failed: {type(e).__name__}: {e}")
 
 
 # ============================================
