@@ -256,9 +256,50 @@ async def admin_reseed_organizations(
     """Force reseed of organization data. Runs migration + seed."""
     import traceback
     try:
-        # Run migration first (creates sector_profiles table + adds columns)
-        from app.pipeline.seed_organizations import run_migration, seed_organizations, seed_sector_profiles
-        await run_migration()
+        # Run migration inline (more reliable than file-based migration)
+        async with get_connection() as conn:
+            # Add columns to organizations table
+            for col in [
+                "personeelskosten_mln DECIMAL(10,2)", "omzet_budget_mln DECIMAL(12,2)",
+                "vacatures INTEGER", "verzuim_pct DECIMAL(5,2)", "gem_jaarsalaris DECIMAL(10,0)",
+                "kritieke_functies TEXT", "kosten_krapte_totaal_mln DECIMAL(10,2)",
+                "kosten_werving_mln DECIMAL(10,2)", "kosten_onvervuld_mln DECIMAL(10,2)",
+                "kosten_inhuur_mln DECIMAL(10,2)", "kosten_verzuim_mln DECIMAL(10,2)",
+                "kosten_burnout_mln DECIMAL(10,2)", "ai_baten_25_mln DECIMAL(10,2)",
+                "ai_baten_50_mln DECIMAL(10,2)", "ai_baten_75_mln DECIMAL(10,2)",
+                "fte_bespaard_50 INTEGER", "ai_ondersteuning_pct DECIMAL(5,2)",
+                "ai_augmentatie_pct DECIMAL(5,2)", "ai_vervanging_pct DECIMAL(5,2)",
+                "ai_status TEXT",
+            ]:
+                try:
+                    await conn.execute(f"ALTER TABLE organizations ADD COLUMN IF NOT EXISTS {col}")
+                except Exception:
+                    pass
+
+            # Create sector_profiles table
+            await conn.execute("""
+                CREATE TABLE IF NOT EXISTS sector_profiles (
+                    sector_slug TEXT PRIMARY KEY,
+                    fte INTEGER NOT NULL,
+                    personeelskosten_mln DECIMAL(10,2),
+                    omzet_budget_mln DECIMAL(12,2),
+                    vacatures INTEGER,
+                    gem_verzuim_pct DECIMAL(5,2),
+                    kosten_krapte_mln DECIMAL(10,2),
+                    ai_ondersteuning_pct DECIMAL(5,2),
+                    ai_augmentatie_pct DECIMAL(5,2),
+                    ai_vervanging_pct DECIMAL(5,2),
+                    ai_baten_25_mln DECIMAL(10,2),
+                    ai_baten_50_mln DECIMAL(10,2),
+                    ai_baten_75_mln DECIMAL(10,2),
+                    fte_bespaard_50 INTEGER,
+                    kritieke_functies TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+        from app.pipeline.seed_organizations import seed_organizations, seed_sector_profiles
         await seed_organizations()
         await seed_sector_profiles()
 
