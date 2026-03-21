@@ -299,7 +299,10 @@ async def admin_reseed_organizations(
                 )
             """)
 
+        # Clean existing readiness scan data before re-seed
         from app.pipeline.seed_organizations import seed_organizations, seed_sector_profiles
+        async with get_connection() as conn:
+            await conn.execute("DELETE FROM organizations WHERE source = 'readiness_scan_2026'")
         await seed_organizations()
         await seed_sector_profiles()
 
