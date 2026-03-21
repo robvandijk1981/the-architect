@@ -253,11 +253,14 @@ async def admin_reseed_functions(
 async def admin_reseed_organizations(
     _: str = Depends(verify_api_key),
 ) -> dict:
-    """Force reseed of organization data."""
+    """Force reseed of organization data. Runs migration + seed."""
     import traceback
     try:
-        from app.pipeline.seed_organizations import seed_organization_data
-        await seed_organization_data()
+        # Run migration first (creates sector_profiles table + adds columns)
+        from app.pipeline.seed_organizations import run_migration, seed_organizations, seed_sector_profiles
+        await run_migration()
+        await seed_organizations()
+        await seed_sector_profiles()
 
         count = await fetch_one("SELECT count(*) as cnt FROM organizations WHERE source = 'readiness_scan_2026'")
         sector_count = await fetch_one("SELECT count(*) as cnt FROM sector_profiles")
