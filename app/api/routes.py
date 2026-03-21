@@ -3,6 +3,23 @@
 import json
 import time
 import uuid
+from typing import Any
+
+
+def _parse_jsonb(value: Any) -> dict | list | None:
+    """Safely parse a JSONB value that asyncpg may return as raw JSON string."""
+    if value is None:
+        return None
+    if isinstance(value, (dict, list)):
+        return value
+    if isinstance(value, str):
+        try:
+            parsed = json.loads(value)
+            if isinstance(parsed, (dict, list)):
+                return parsed
+        except (json.JSONDecodeError, TypeError):
+            pass
+    return None
 
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, UploadFile, Form
 import structlog
@@ -112,37 +129,20 @@ async def get_analysis(
     if not analysis:
         raise HTTPException(status_code=404, detail="Analysis not found")
 
-    def _parse_jsonb(value) -> dict | list | None:
-        """Parse a value that may be a JSON string or already a dict/list."""
-        if value is None:
-            return None
-        if isinstance(value, (dict, list)):
-            return value
-        if isinstance(value, str):
-            try:
-                return json.loads(value)
-            except json.JSONDecodeError:
-                return None
-        return value
-
     results = _parse_jsonb(analysis.get("results")) or {}
-    risk_matrix = _parse_jsonb(analysis.get("risk_matrix"))
-    business_case = _parse_jsonb(analysis.get("business_case"))
-    sources_used = _parse_jsonb(analysis.get("sources_used")) or []
 
     return AnalysisResponse(
         analysis_id=str(analysis["id"]),
         status=AnalysisStatus(analysis["status"]),
-        risk_matrix=risk_matrix,
-        business_case=business_case,
+        risk_matrix=_parse_jsonb(analysis.get("risk_matrix")),
+        business_case=_parse_jsonb(analysis.get("business_case")),
         workforce_health_score=results.get("workforce_health_score") if results else None,
-        benchmark_comparison=results.get("benchmark_comparison") if results else None,
         arbeidsmarkt_analyse=results.get("arbeidsmarkt_analyse") if results else None,
         ai_impact_analyse=results.get("ai_impact_analyse") if results else None,
         skills_gap_analyse=results.get("skills_gap_analyse") if results else None,
         verloop_verzuim_diagnose=results.get("verloop_verzuim_diagnose") if results else None,
         actieplan=results.get("actieplan") if results else None,
-        sources=sources_used,
+        sources=_parse_jsonb(analysis.get("sources_used")) or [],
         processing_time_ms=analysis.get("processing_time_ms"),
     )
 
@@ -428,41 +428,6 @@ async def _run_analysis(
 
         elapsed = int((time.time() - start) * 1000)
 
-        # Parse the raw Claude JSON output into a structured dict
-        raw_text = ai_results.get("raw_analysis", "")
-        parsed_analysis: dict = {}
-        if raw_text:
-            # Claude may wrap JSON in markdown code fences — strip them
-            clean = raw_text.strip()
-            # Handle ```json ... ``` or ``` ... ``` fences
-            if clean.startswith("```"):
-                lines = clean.splitlines()
-                # Remove first line (```json or ```) and last line (```)
-                inner_lines = lines[1:]
-                if inner_lines and inner_lines[-1].strip() == "```":
-                    inner_lines = inner_lines[:-1]
-                clean = "\n".join(inner_lines).strip()
-            # Find JSON object boundaries in case Claude added preamble text
-            if not clean.startswith("{"):
-                start_idx = clean.find("{")
-                if start_idx != -1:
-                    clean = clean[start_idx:]
-            # Find the last closing brace
-            if clean and not clean.endswith("}"):
-                end_idx = clean.rfind("}")
-                if end_idx != -1:
-                    clean = clean[:end_idx + 1]
-            try:
-                parsed_analysis = json.loads(clean)
-                logger.info("analysis_parsed", analysis_id=analysis_id,
-                            keys=list(parsed_analysis.keys()),
-                            has_health_score="workforce_health_score" in parsed_analysis)
-            except json.JSONDecodeError as je:
-                logger.error("analysis_parse_failed", analysis_id=analysis_id,
-                             error=str(je), raw_preview=raw_text[:200])
-                # Fallback: store raw text under a key so it's not lost
-                parsed_analysis = {"raw_analysis": raw_text}
-
         # Store results
         citations = [c.model_dump(mode="json") for c in ai_results.get("citations", [])]
         await execute(
@@ -478,7 +443,7 @@ async def _run_analysis(
             aid,
             json.dumps(risk_matrix.model_dump(mode="json")),
             json.dumps(business_case.model_dump(mode="json")),
-            json.dumps(parsed_analysis),
+            json.dumps(ai_results.get("raw_analysis")),
             json.dumps(citations),
             elapsed,
         )

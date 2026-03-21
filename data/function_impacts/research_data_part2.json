@@ -1,0 +1,3429 @@
+{
+  "sectors": [
+    {
+      "name": "Energie",
+      "description": "Elektriciteitsproductie, gasnetbeheer, hernieuwbare energie en energieopslag. Het sector ondergaat transformatie door duurzame energietransitie, vraagstijging (25% tot 2030, 75% tot 2050) en AI-integratie in gridoptimalisatie en voorspellend onderhoud. 60% van energiebedrijven plant AI-gerelateerde functies uit te breiden. Robotisering in inspecties (drones), onderhoudsprocessen en zonnepaneelinstallatie.",
+      "functiegroepen": [
+        {
+          "name": "Productie & Opwekking",
+          "functies": [
+            {
+              "name": "Operator Centrales",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 8,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 20,
+                  "aiAugmentatie": 5,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Monitoring centraleprocessen",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI-systemen monitoren 24/7 parameter drift, voorspellen afwijkingen 4-6 uur vooruit met 94% accuratesse"
+                    },
+                    {
+                      "taak": "Optimalisatie brandstofmix",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI adviseert optimale brandstofmix per uur op basis van vraag, CO2-prijs, beschikbaarheid"
+                    },
+                    {
+                      "taak": "Alerting en notificaties",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "Intelligente alerting: alleen kritische meldingen doorgeven, false positives 87% gereduceerd"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-gestuurde operatie",
+                    "Energiedatawetenschap",
+                    "Duurzame energieintegratie",
+                    "Cyber-veiligheid voor energiesystemen"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig log-bijhouden",
+                    "Puur ervaringsgebaseerde troubleshooting"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "API-integratie",
+                    "Data-dashboards lezen",
+                    "Machine Learning modellen interpreteren"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Monitoring-kennis overbrengen op AI-systemen (6-9 maanden). Operators worden 'AI-coaches' die systemen bijsturen."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 10,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Preventief onderhoud scheduling",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robotische inspectiedrones + AI voorspellen onderhoudsbehoefte; operators plannen en valideren"
+                    },
+                    {
+                      "taak": "Demand forecasting",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI combineert weerdata, economische indicators, gedragspatronen; operators fine-tunen per regio"
+                    },
+                    {
+                      "taak": "Incident root-cause analyse",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI analyseert logs en sensordata; operators voeren vervolgstappen uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Robotische systemen supervisie",
+                    "Scenarioplanning",
+                    "Change management"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig onderhoud scheduling",
+                    "Pure observatie-ervaring"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Drone-systeembediening",
+                    "Advanced data analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Overgang naar 'remote operations centers' met operators die 2-3 centrales monitoren."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 18,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 35,
+                  "aiAugmentatie": 15,
+                  "aiVervanging": 5,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonome operatie toezicht",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Systemen draaien grotendeels autonoom; operators grijpen alleen in bij onverwachte situaties"
+                    },
+                    {
+                      "taak": "Real-time grid stabilisering",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI regelt microseconde-schaal instellingen; operators stellen doelstellingen in"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Human-in-the-loop systemen",
+                    "Cyber security en IT-veiligheid",
+                    "Complexe systeemdenken"
+                  ],
+                  "vervallenCompetencies": [
+                    "Dagelijkse operationele taken",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Advanced cybersecurity",
+                    "Quantum computing basics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige regelingen"
+                  ],
+                  "kennisoverdracht": "Transformatie naar strategische rollen: operators worden 'systeem-architects'."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 22,
+                  "robotiseringAugmentatie": 12,
+                  "robotiseringVervanging": 5,
+                  "aiOndersteuning": 40,
+                  "aiAugmentatie": 20,
+                  "aiVervanging": 8,
+                  "takenVerandering": [
+                    {
+                      "taak": "Governance van AI-systemen",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Operators valideren AI-besluiten, zorgen voor maatschappelijk verantwoorde operatie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI governance",
+                    "Ethische operatie",
+                    "Publieke communicatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige controle"
+                  ],
+                  "kennisoverdracht": "Focus op governance en stakeholder management."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 25,
+                  "robotiseringAugmentatie": 15,
+                  "robotiseringVervanging": 8,
+                  "aiOndersteuning": 45,
+                  "aiAugmentatie": 25,
+                  "aiVervanging": 12,
+                  "takenVerandering": [
+                    {
+                      "taak": "Strategische energieplanning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Operators/planners gebruiken AI-gegenereerde scenario's voor lange-termijn strategie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Strategische energieplanologie",
+                    "Duurzaamheids-transformatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen verschuiven volledig naar strategisch en changemanagement."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Midden",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Installateur Hernieuwbare Energie",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 10,
+                  "aiAugmentatie": 4,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Zonnepaneel installatie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robotische montagesystemen assisteren; installateurs controleren kwaliteit en veiligheid"
+                    },
+                    {
+                      "taak": "Kabeling optimalisatie",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI-designed kabelschema's op basis van dak-geometrie en schaduwanalyse"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Robotische systeembediening",
+                    "Drone-inspectie",
+                    "Energieopslagintegratie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Drone piloot certificering",
+                    "3D-scanning"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Training in robotische systemen (3-5 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 18,
+                  "robotiseringAugmentatie": 14,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 15,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Systeem-verificatie",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Drone-inspectie + AI detecteert defecten; installateurs voeren reparatie uit"
+                    },
+                    {
+                      "taak": "Batterij-integratie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI ontwerp voor optimale batterijplaatsing; installateurs assembleren"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Batterij-systeemkunde",
+                    "Microgrids",
+                    "IoT-installatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "API-integratie",
+                    "IoT sensor kalibrering"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Shift naar meer technisch-divers werk; minder routineuze montage."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 24,
+                  "robotiseringAugmentatie": 18,
+                  "robotiseringVervanging": 6,
+                  "aiOndersteuning": 20,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonome installatie-validatie",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robots doen installatie, AI valideert, installateurs doen compliance checks"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Compliance & regelgeving",
+                    "Klantcommunicatie",
+                    "Troubleshooting complexe systemen"
+                  ],
+                  "vervallenCompetencies": [
+                    "Repetitieve montage",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige montage"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar inspectie, compliance en klantservice."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 28,
+                  "robotiseringAugmentatie": 20,
+                  "robotiseringVervanging": 8,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 14,
+                  "aiVervanging": 6,
+                  "takenVerandering": [
+                    {
+                      "taak": "Klantadvisering technische aspecten",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert opties; installateurs communiceren met klanten over keuzes"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Sales en klantmanagement",
+                    "Complexe adviesvaardigheden"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Transitie naar verkoop en adviesrollen."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 30,
+                  "robotiseringAugmentatie": 22,
+                  "robotiseringVervanging": 10,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 16,
+                  "aiVervanging": 8,
+                  "takenVerandering": [
+                    {
+                      "taak": "Strategische projectplanning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Planners gebruiken AI-data voor project-scheduling en resource-allocatie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Projectmanagement",
+                    "Duurzaamheidsplanning"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk strategisch en manageriaal."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Midden",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Midden",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Energieopslagexpert",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 5,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 18,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Batterij State-of-Health monitoring",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI monitort batterijgezondheid via sensordata; expert analyseert afwijkingen"
+                    },
+                    {
+                      "taak": "Laad/ontlaadschedule optimalisatie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert optimale schema's op basis van marktprijzen en vraag"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-gestuurde batterijmanagement",
+                    "Marktprijs-integratie",
+                    "Energiemeteorologie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Python/R data-analyse",
+                    "Real-time systemmonitoring"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Training in AI-systemen en batterij-elektrochemie (8-12 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 8,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 26,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Predictive maintenance",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI voorspelt onderhoudsbehoefte met 6-maands horizon; expert plant interventies"
+                    },
+                    {
+                      "taak": "Multi-unit orchestration",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI coördineert lading over meerdere batterij-parken; expert valideert cross-asset impact"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Multi-asset orchestratie",
+                    "Vraagrespons-integratie",
+                    "Regelgeving (tariefregimes)"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "API-integratie",
+                    "Advanced forecasting"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar portfolio-beheer."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 32,
+                  "aiAugmentatie": 16,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom portfolio-beheer",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI beheert 80% operatie; expert interveneert in strategische situaties"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Strategische energiehandel",
+                    "Risicomodellering"
+                  ],
+                  "vervallenCompetencies": [
+                    "Dagelijkse operatie",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Transitie naar strategische handelsfuncties."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 16,
+                  "robotiseringAugmentatie": 11,
+                  "robotiseringVervanging": 5,
+                  "aiOndersteuning": 38,
+                  "aiAugmentatie": 20,
+                  "aiVervanging": 6,
+                  "takenVerandering": [
+                    {
+                      "taak": "Markt-strategie en policy advies",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert scenario's; expert adviseert C-level op strategische keuzes"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Strategisch advies",
+                    "Beleidsontwikkeling"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen verschuiven volledig naar advies en beleid."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 20,
+                  "robotiseringAugmentatie": 14,
+                  "robotiseringVervanging": 7,
+                  "aiOndersteuning": 42,
+                  "aiAugmentatie": 22,
+                  "aiVervanging": 8,
+                  "takenVerandering": [
+                    {
+                      "taak": "Duurzaamheidstransformatie begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Expert leidt organisatie door AI-gedreven energietransitie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Change leadership",
+                    "Duurzaamheidsgovernance"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk senior advies en change management."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Laag"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Netbeheer & Distributie",
+          "functies": [
+            {
+              "name": "Inspecteur Elektriciteitsnet",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 15,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 12,
+                  "aiAugmentatie": 3,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Drone-gebaseerde inspectie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Drones inspecteren power lines; inspecteur analyseert bevindingen en bepaalt vervolgacties"
+                    },
+                    {
+                      "taak": "Thermografische analyse",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI detecteert hotspots in thermische beelden; inspecteur prioriteert reparaties"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Drone-pilotage",
+                    "Thermografische analyse",
+                    "AI-output interpretatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige klim-inspectie"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Drone-certificering",
+                    "Thermische camerabediening"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Training drone- en thermischeanalyse (4-6 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 22,
+                  "robotiseringAugmentatie": 14,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 18,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Automatische inspectiecyclus planning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI bepaalt inspectiefrequentie per net-segment op basis van risicoscores; inspecteur plant routines"
+                    },
+                    {
+                      "taak": "Defect-prioritering",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI rankikt gevonden defecten op risico; inspecteur valideert en coordineert reparatie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Risicomodellering",
+                    "Prioriteringscriteria",
+                    "Inspectieroute-optimalisatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "GIS-mapping",
+                    "Advanced drone analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar risk-gebaseerde inspectie."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 28,
+                  "robotiseringAugmentatie": 18,
+                  "robotiseringVervanging": 6,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom inspectie-regime",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Drones + AI voeren routinische inspectie autonoom uit; inspecteur interveneert bij anomalieën"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Systeem-validatie",
+                    "Anomalie-onderzoek",
+                    "Kwaliteitsborging"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden",
+                    "Routineus inspectiewerk"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Manuele inspectie"
+                  ],
+                  "kennisoverdracht": "Rollen verschuiven naar exception-handling en data-review."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 32,
+                  "robotiseringAugmentatie": 22,
+                  "robotiseringVervanging": 8,
+                  "aiOndersteuning": 30,
+                  "aiAugmentatie": 16,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Net-gezondheid strategische planning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI voorspelt vervangingsbehoefte; inspecteur adviseert op investeringsprioriteiten"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Asset-lifecycle planning",
+                    "Investeringsadvisering"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Transitie naar strategische assetmanagement-rollen."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 35,
+                  "robotiseringAugmentatie": 24,
+                  "robotiseringVervanging": 10,
+                  "aiOndersteuning": 34,
+                  "aiAugmentatie": 18,
+                  "aiVervanging": 6,
+                  "takenVerandering": [
+                    {
+                      "taak": "Nettransformatie begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Expert leidt modernisering van distributienet in AI-tijdperk"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Transformatie-leiderschap",
+                    "Technologiestrategie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk strategisch."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Nettechnicus Onderhoud",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 10,
+                  "robotiseringAugmentatie": 5,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 14,
+                  "aiAugmentatie": 4,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Storingsprioriteitsbepaling",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI suggereert prioriteit op basis van impact; technicus valideert en dispatch"
+                    },
+                    {
+                      "taak": "Reparatiehandleiding AI-gegenereerd",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert reparatiestappen op basis van symptomen; technicus voert uit en geeft feedback"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-geleide troubleshooting",
+                    "Robotische hulpsystemen",
+                    "Real-time netdatainterpretatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AR-gebaseerde reparatiehandleidingen",
+                    "Mobile diagnostics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Training in AI-tools en mobiele diagnostieken (3-4 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 16,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 22,
+                  "aiAugmentatie": 9,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Robotische reparatie-assistentie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Kleine bots helpen met onderdelen-bediening; technicus voert complexe reparaties uit"
+                    },
+                    {
+                      "taak": "Preventief onderhoudsplanning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI voorspelt onderhoudsbehoefte; technicus voert pre-emptive reparaties uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Samenwerking mensch-robot",
+                    "Voorspellend onderhoudsdenken",
+                    "Energiemarktinzicht"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Robotsysteembediening",
+                    "Predictive analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar preventief onderhoud."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 22,
+                  "robotiseringAugmentatie": 15,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 13,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Intelligente netsegment-supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI en bots voeren routine werk; technicus beheerd netsegment strategisch"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Segment-management",
+                    "Kwaliteitsborgingstandaarden",
+                    "Systeem-denken"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine reparatiewerk",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige onderdeel-montage"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar supervisie en management."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 26,
+                  "robotiseringAugmentatie": 18,
+                  "robotiseringVervanging": 6,
+                  "aiOndersteuning": 32,
+                  "aiAugmentatie": 15,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Netmodernisatie begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Technicus adviseert op upgrade-keuzes en coördineert implementatie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Upgrade- en moderniseringsplanning",
+                    "Klantcommunicatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Transitie naar planning en projectcoördinatie."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 30,
+                  "robotiseringAugmentatie": 20,
+                  "robotiseringVervanging": 8,
+                  "aiOndersteuning": 36,
+                  "aiAugmentatie": 17,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Rollen technisch leiderschap",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Voormalige technicus leidt team van AI-robots en ondersteunend personeel"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Leiderschapsvaardigheden",
+                    "Team-samenwerking"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen verschuiven naar leadership."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Midden",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Midden",
+                "samenwerkingLocatie": "Midden"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Engineering & Projecten",
+          "functies": [
+            {
+              "name": "Engineer Systeemontwerp",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 3,
+                  "robotiseringAugmentatie": 1,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 25,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-ondersteund systeemontwerp",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert designvarianten op basis van constraints; engineer selecteert optimale variant"
+                    },
+                    {
+                      "taak": "Simulatie en stress-testing",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI voert 10000s iteraties; engineer analyzeert kritieke scenario's"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-gestuurde designmethodologie",
+                    "Scenario-denken",
+                    "Integratieve systeemplanning"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Generatieve design-tools",
+                    "Machine Learning model-interpretatie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Training in AI-design tools (4-6 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 5,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 35,
+                  "aiAugmentatie": 15,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Real-time operational feedback loop",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI integrert live netdata in ontwerp; engineer refineert op basis van bedrijfservaringen"
+                    },
+                    {
+                      "taak": "Complexe optimalisatieproblemen",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI lost multi-factor optimalisatie op; engineer valideert economics en haalbaarheid"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Adaptief ontwerp",
+                    "Real-time feedback-integratie",
+                    "Cross-sectorale systeemkennis"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Advanced optimization algorithms",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar operationele feedback-integratie."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 8,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 42,
+                  "aiAugmentatie": 20,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonome design-iteratie supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI itereert designs automatisch; engineer interveneert bij strategische keuzes"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "High-level strategic design",
+                    "Technologie-keuzebeslissingen",
+                    "Duurzaamheids-integratie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine design-iteratie",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige CAD-tekening"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar strategisch design-leiderschap."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 10,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 48,
+                  "aiAugmentatie": 24,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-strategie en governance",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Engineer bepaalt AI-gebruiksrichtlijnen voor projecten en teams"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-governance",
+                    "Technische strategie",
+                    "Change leadership"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Transitie naar governance- en strategierollen."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 5,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 52,
+                  "aiAugmentatie": 26,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Technische transformatieleiderschip",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Engineer leidt organisatiebrede AI-adoptie in energiesystemen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Transformatie-leiderschap",
+                    "Stakeholder-management",
+                    "Visionaire planning"
+                  ],
+                  "vervallenCompetencies": [
+                    "Analoge monitoring en analoge instrumenten",
+                    "Handmatige logboeken bijhouden"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Data-dashboards lezen",
+                    "API-integratie"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Analoge meetinstrumenten (voltmeter-naald)"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk C-level advies en transformatieleiding."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Laag"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bouw",
+      "description": "Bouw- en infrastuctuurprojecten ondergaan snelle automatisering. 30% van bouwtaken worden geautomatiseerd tegen 2030; 40% van werknemers gaat met pensioen. 500K openstaande vacatures vanuit arbeidskrappe markt. Robotische metselaars (3000 stenen/dag), autonome graafmachines, drones, 3D-printing van bouwcomponenten en BIM (Building Information Modeling) + AI-integratie transformeren de sector.",
+      "functiegroepen": [
+        {
+          "name": "Uitvoerend Bouwpersoneel",
+          "functies": [
+            {
+              "name": "Medewerker Ruwbouw",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 18,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 8,
+                  "aiAugmentatie": 2,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Robotische metselbots assistentie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robots plaatsen stenen; medewerker voert verificatie en lastkalibrering uit"
+                    },
+                    {
+                      "taak": "Site-veiligheid monitoring",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI-camera's detecteren veiligheidskwesties; medewerker voert correcties uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Robotische systeembediening",
+                    "Veiligheidsbewustzijn AI-gecontroleerd",
+                    "Quality assurance"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Robot-interfacing",
+                    "Mobile app sitemanagement"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Training robotische metselbots en kwaliteitscontrole (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 26,
+                  "robotiseringAugmentatie": 16,
+                  "robotiseringVervanging": 6,
+                  "aiOndersteuning": 12,
+                  "aiAugmentatie": 4,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonome robot-supervisie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robots voeren bouw uit; medewerker voert inspectie en aanpassingen uit"
+                    },
+                    {
+                      "taak": "Logistieke voorbereiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI bepaalt materialen-volgorde; medewerker zorgt voor juiste beschikbaarheid"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Robotische werk-supervisie",
+                    "Logistieke planning",
+                    "Probleemoplossing"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine bouwwerk"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Advanced robot monitoring"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige steen-plaatsing"
+                  ],
+                  "kennisoverdracht": "Transitie naar supervisie en quality control."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 32,
+                  "robotiseringAugmentatie": 21,
+                  "robotiseringVervanging": 8,
+                  "aiOndersteuning": 16,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Site-coördinatierol",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robots en AI voeren routine bouw; medewerker coördineert meerdere robotteams"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Multi-team coördinatie",
+                    "Real-time problem-solving",
+                    "Technologiekennis"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handwerk",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handelingen"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar coördinatierollen."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 37,
+                  "robotiseringAugmentatie": 25,
+                  "robotiseringVervanging": 10,
+                  "aiOndersteuning": 20,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Gespecialiseerde bouwwerk",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robots voeren standaardbouw uit; mensen doen complexe/creatieve elementen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Gespecialiseerde craftsmanship",
+                    "Robotische systeem-integratie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar gespecialiseerde craftsmanship."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 40,
+                  "robotiseringAugmentatie": 28,
+                  "robotiseringVervanging": 12,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 10,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Klant/eindgebruiker begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Rollen verschuiven naar klantinteractie en afwerking"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Klantcommunicatie",
+                    "Afwerkingscraftsmanship"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen focus op eindpresentatie en klanttevredenheid."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Hoog",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Hoog",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Midden",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Hoog",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Graafwerkoperator",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 15,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 10,
+                  "aiAugmentatie": 3,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonome graafmachines assistentie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robots graven op AI-gestuurde paden; operator volgt toezicht en fine-tuning"
+                    },
+                    {
+                      "taak": "Plaats-verificatie via drone",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "Drones scannen site; AI vergelijkt met plan; operator voert correcties uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Autonome machine-supervisie",
+                    "Drone-data integratie",
+                    "Plaatsingsnauwkeurigheid"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Remote machine operation",
+                    "Drone-data reading"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Training autonome machine-supervisie (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 22,
+                  "robotiseringAugmentatie": 13,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 15,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Multi-machine orchestratie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI coördineert graafmachines; operator supervisie en strategische aanpassingen"
+                    },
+                    {
+                      "taak": "Logistieke planning excavatie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI optimaliseert aarde-transport; operator voert out logistics"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Multi-machine coördinatie",
+                    "Logistieke optimalisatie",
+                    "Site-orchestratie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Fleet management software",
+                    "Lasermeetinstrumenten"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar site-orchestratie."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 28,
+                  "robotiseringAugmentatie": 18,
+                  "robotiseringVervanging": 6,
+                  "aiOndersteuning": 20,
+                  "aiAugmentatie": 9,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom graafwerk-team-management",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robots voeren werk autonoom uit; operator beheert team en communiceert met project-management"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Team-coördinatie",
+                    "Project-communicatie",
+                    "Probleemoplossing"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen",
+                    "Routine machine-bediening"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Directe machine-controle"
+                  ],
+                  "kennisoverdracht": "Transitie naar team-management."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 33,
+                  "robotiseringAugmentatie": 22,
+                  "robotiseringVervanging": 8,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 11,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Site-project-management rol",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Operator leidt site-project met AI en robotische systemen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Project management",
+                    "Stakeholder-management"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar project-management."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 38,
+                  "robotiseringAugmentatie": 26,
+                  "robotiseringVervanging": 10,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 13,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Geautomatiseerde bouwsite-leiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Operator supervisie van volledig geautomatiseerde bouwhokken"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Strategische bouwhokmanagement",
+                    "Risicobeheersing"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk strategisch."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Hoog",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Hoog",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Midden",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Hoog",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Staalconstructiewerker",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 6,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 7,
+                  "aiAugmentatie": 2,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "Robotische staal-assembly assistentie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robots assisteren met zware staal-plaatsing; werker voert welds en verificatie uit"
+                    },
+                    {
+                      "taak": "Structurele analyse support",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI analyzeert spantechnische sterkte; werker voert aanpassingen uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Mensch-robot samenwerking",
+                    "Geavanceerde weld-technieken",
+                    "Lasergewijze plaatsing"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Robotische assembly-tools",
+                    "Laser alignment systems"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Training robotische assembly-assistentie en geavanceerde welding (3-4 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 18,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 11,
+                  "aiAugmentatie": 4,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Geavanceerde constructieve laswerk",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI bepaalt optimale lasparameters; werker voert geavanceerde laswerk uit"
+                    },
+                    {
+                      "taak": "Constructieve inspectie en QA",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Drones en AI inspecteren; werker voert hand-verificatie en reparatie uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Geavanceerde constructietechnieken",
+                    "Laserwelds",
+                    "Drone-inspectie-validatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Laser welding systems",
+                    "Drone data integration"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar geavanceerde constructieve technieken."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 24,
+                  "robotiseringAugmentatie": 15,
+                  "robotiseringVervanging": 5,
+                  "aiOndersteuning": 15,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Constructieve supervisie",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robots voeren standardwerk uit; werker supervisie en laswerk complexe connecties"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Constructieve supervisie",
+                    "Complexe probleemoplossing",
+                    "Leiderschap"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine laswerk",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Eenvoudige welding"
+                  ],
+                  "kennisoverdracht": "Transitie naar supervisie en geavanceerd laswerk."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 29,
+                  "robotiseringAugmentatie": 19,
+                  "robotiseringVervanging": 7,
+                  "aiOndersteuning": 19,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Constructieve engineering supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Werker werkt met engineers op complexe constructieve oplossingen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Technische engineering-kennis",
+                    "Adviesvaardigheden"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar engineering-samenwerking."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 33,
+                  "robotiseringAugmentatie": 22,
+                  "robotiseringVervanging": 9,
+                  "aiOndersteuning": 22,
+                  "aiAugmentatie": 10,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Gespecialiseerde constructieve expert",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Expert adviseert op unieke constructieve uitdagingen en innovaties"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Strategische constructieve kennis",
+                    "Innovatie-leadership"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk expert en innovatie."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Midden",
+                "samenwerkingLocatie": "Midden"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Installatie & Techniek",
+          "functies": [
+            {
+              "name": "Elektricien Bouw",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 8,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 12,
+                  "aiAugmentatie": 4,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-ontworpen installatieschema's",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI ontwerpt optimale bedrading; elektricien voert uit en valideert"
+                    },
+                    {
+                      "taak": "Routeoptimalisatie buizen en kabels",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI bepaalt optimale routing; elektricien voert installatie uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-ondersteunde installatie",
+                    "BIM-integratie",
+                    "Smart building-systemen"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "BIM-data lezen",
+                    "Smart system interfacing"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Training in AI-ontwerp en BIM (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 6,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 18,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Robotische kabel-legging assistentie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Bots leggen kabels; elektricien connecteert en test"
+                    },
+                    {
+                      "taak": "Smart building-systeem integratie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI configureert systems; elektricien instelt en troubleshoots"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Smart building-technologie",
+                    "IoT-installatie",
+                    "Cyber-veiligheid bouw"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "IoT sensor installation",
+                    "Cybersecurity basics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar smart building-integratie."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 16,
+                  "robotiseringAugmentatie": 9,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom installatie-systeem supervisie",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robots voeren installatie uit; elektricien voert integratie en testing uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Systeem-integratie",
+                    "Troubleshooting intelligente systemen",
+                    "IoT-netwerk management"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine kabel-werk",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige kabel-legging"
+                  ],
+                  "kennisoverdracht": "Transitie naar systeem-integratie en troubleshooting."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 20,
+                  "robotiseringAugmentatie": 12,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 14,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Slimme gebouw-commissioning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Elektricien commissies en optimalisatie van slimme building-systems"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Building commissioning",
+                    "Smart system optimization"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar commissioning en optimalisatie."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 23,
+                  "robotiseringAugmentatie": 14,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 32,
+                  "aiAugmentatie": 16,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Smart building expert",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Elektricien adviseert op slimme gebouw-systemen en -integratie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Building technology strategy",
+                    "Adviesvaardigheden"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk expert en advies."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Midden",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Loodgieter Bouw",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 6,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 10,
+                  "aiAugmentatie": 3,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-ontworpen leidingschema's",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI ontwerpt optimale leiding-routering; loodgieter voert uit en valideert"
+                    },
+                    {
+                      "taak": "Duurzaamheids-groene water systemen",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI ontwerpt water-circulatie-systemen; loodgieter installeert"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-ondersteunde design",
+                    "Duurzame water-systemen",
+                    "Water efficiency"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Green tech installation",
+                    "Water system design"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Training duurzame water-systemen (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 10,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 15,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Robotische leiding-installatie assistentie",
+                      "type": "augmentatie",
+                      "technologie": "Robot",
+                      "beschrijving": "Robots leggen leidingen; loodgieter connecteert en test"
+                    },
+                    {
+                      "taak": "Smart water-systeem integratie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI configureert water-monitoring; loodgieter instelt sensoren"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Smart water systems",
+                    "IoT water-monitoring",
+                    "Circulaire watermodellen"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Water IoT sensors",
+                    "Smart metering"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar smart water-systemen."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 14,
+                  "robotiseringAugmentatie": 7,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 21,
+                  "aiAugmentatie": 10,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom water-systeem supervisie",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "Robots voeren installatie; loodgieter voert integratie en testing uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Smart system troubleshooting",
+                    "Water network management"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine leiding-werk",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige leiding-legging"
+                  ],
+                  "kennisoverdracht": "Transitie naar smart system-integratie."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 18,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 25,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Water-efficiëntie commissioning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Loodgieter commissies en optimaliseert water-efficiëntie systemen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Water efficiency optimization",
+                    "System commissioning"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar commissioning en optimalisatie."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 21,
+                  "robotiseringAugmentatie": 12,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 29,
+                  "aiAugmentatie": 14,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Water-systeem expert",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Loodgieter adviseert op geavanceerde water-systemen en duurzaamheid"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Water strategy advies",
+                    "Sustainability expertise"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk expert en advies."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Midden",
+                "samenwerkingLocatie": "Midden"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Projectmanagement",
+          "functies": [
+            {
+              "name": "Projectmanager Bouw",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 5,
+                  "robotiseringAugmentatie": 1,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 20,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-gegenereerde projectschema's",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert optimale timelineplanning; PM valideert en fine-tunes"
+                    },
+                    {
+                      "taak": "Budget-forecast AI-gesteund",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI voorspelt kostenafwijkingen; PM neemt corrigerende maatregelen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-gestuurde projectplanologie",
+                    "Predictive budget-management",
+                    "Risk-modeling"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI forecasting tools",
+                    "Advanced project analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Training AI-projectmanagement tools (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 8,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Real-time site-orchestratie",
+                      "type": "augmentatie",
+                      "technologie": "Beide",
+                      "beschrijving": "AI en robots voeren werk; PM coördineert teams en external stakeholders"
+                    },
+                    {
+                      "taak": "Geautomatiseerde risicomonitoring",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI monitort 24/7 risico's; PM interveneert strategisch"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Robotische site-orchestratie",
+                    "Stakeholder-communicatie",
+                    "Risk-response"
+                  ],
+                  "vervallenCompetencies": [
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Real-time monitoring platforms",
+                    "Lasermeetinstrumenten"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar AI-site-orchestratie."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 11,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 34,
+                  "aiAugmentatie": 16,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom projectbeheer supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI beheert meeste projectaspecten; PM focust op strategische beslissingen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Strategic project vision",
+                    "Stakeholder alignment",
+                    "Change leadership"
+                  ],
+                  "vervallenCompetencies": [
+                    "Operationele project-management",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Transitie naar strategisch projectleiderschap."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 13,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 40,
+                  "aiAugmentatie": 20,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Portfolio-beheer en AI-integratie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "PM beheert meerdere AI-gedreven projecten portefeuille-breed"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Portfolio strategy",
+                    "Multi-project governance"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar portfolio-beheer."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 15,
+                  "robotiseringAugmentatie": 5,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 44,
+                  "aiAugmentatie": 22,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Transformatie-leiderschap AI-bouwindustrie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "PM leidt organisatie-brede transformatie naar AI-gedreven bouwproces"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Transformation leadership",
+                    "Organizational change"
+                  ],
+                  "vervallenCompetencies": [
+                    "Traditionele landmeetkunde met theodoliet",
+                    "Volledig handmatig metselen zonder hulpmiddelen"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Lasermeetinstrumenten",
+                    "Moderne BIM-software"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Handmatige theodoliet"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk transformatie-leiding."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Hoog",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Laag"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Onderwijs",
+      "description": "AI en automatisering transformeren onderwijsinstellingen. 50%+ van docent-tijd gaat naar non-teaching activiteiten; AI reduceert dit significant. AI-marking tools (bv. Gradescope) besparen 60% beoordeling-tijd. Personalized learning via AI-tutors, robotische teaching assistants, chatbots voor administratie, en AI-ondersteund curriculum-ontwerp transformeren docent-rollen. Markt $32.27B tegen 2030 (CAGR 31.2%).",
+      "functiegroepen": [
+        {
+          "name": "Docenten Primair Onderwijs",
+          "functies": [
+            {
+              "name": "Groepsleerkracht Basisonderwijs",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 8,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 22,
+                  "aiAugmentatie": 5,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-gegenereerde lesplannen",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert lesplannen op basis van currculum; docent customizeert voor klas"
+                    },
+                    {
+                      "taak": "Geautomatiseerde huiswerk-controle",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI checkt basale huiswerk; docent geeft diepere feedback op inzichten"
+                    },
+                    {
+                      "taak": "Gedragsmonitoring van leerlingen",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI detecteert gedragspatronen; docent interveneert gericht"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-geleid onderwijsontwerp",
+                    "Personaliseerde leeraar-rollen",
+                    "Data-gestuurde interventie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI curriculum tools",
+                    "Learning analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Training AI-onderwijstools (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 32,
+                  "aiAugmentatie": 10,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-tutoringsystemen supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI-tutors geven 1-op-1 hulp; docent superviseert voortgang en stuurt aanpak"
+                    },
+                    {
+                      "taak": "Adaptieve leerroutes management",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI aanpassbare paden per leerling; docent coördineert groeps-activiteiten"
+                    },
+                    {
+                      "taak": "Emotioneel intelligentie en mentale gezondheid monitoring",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI detecteert emotionele signalen; docent voert ondersteuning uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-tutoring systeem-management",
+                    "Emotionele onderwijsondersteuning",
+                    "Adaptieve leercoaching"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine instructie-delivery"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Advanced learning analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Transitie naar coaching en begeleiding."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 16,
+                  "robotiseringAugmentatie": 7,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 40,
+                  "aiAugmentatie": 15,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom leerproces supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI leidt grootste leerproces; docent focust op creativiteit, kritisch denken en sociale ontwikkeling"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Meta-cognitieve coaching",
+                    "Creativiteit begeleiding",
+                    "Sociale-emotionele ondersteuning"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Instructie-delivery"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Klassieke instructie"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar persoonlijke mentorat."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 20,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 46,
+                  "aiAugmentatie": 19,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Individuele leerpad-architect",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Docent ontwerpt unieke leerroutes per leerling met AI-assistentie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Personalized learning design",
+                    "Individual learner advocacy"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar architect van persoonlijke leerpaden."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 23,
+                  "robotiseringAugmentatie": 12,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 50,
+                  "aiAugmentatie": 21,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Leerling-voorkampioen en transformatie-leiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Docent leidt transformatie van onderwijs in AI-gedreven omgeving"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Educational transformation leadership",
+                    "Visionaire teaching"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk transformatie-leiding."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Midden",
+                "wervingArbeidsmarkt": "Midden",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Midden"
+              }
+            },
+            {
+              "name": "Vakleerkracht",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 6,
+                  "robotiseringAugmentatie": 1,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 6,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-gegenereerde lessen per vakgebied",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert lessen; docent aanpast voor diepgang en context"
+                    },
+                    {
+                      "taak": "Geautomatiseerde beoordeling",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI beoordeelt meerkeuze en korte antwoorden (60% besparing); docent beoordeelt essays"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-vakuitdieping",
+                    "Kritisch denken-coaching",
+                    "Vakgebied-innovatie"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI assessment tools",
+                    "Subject-specific learning analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Training vak-specific AI tools (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 10,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 34,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-tutoringsystemen vakspecifiek",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI geeft vakgebied-begeleiding; docent stelt strategie en zware vragen"
+                    },
+                    {
+                      "taak": "Onderzoeksprojectbegeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI ondersteunt leerling-onderzoek; docent begeleidt onderzoeksdesign en kritische evaluatie"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Vakgebied-diepgang met AI",
+                    "Onderzoeksvaardigheden-coaching",
+                    "Innovatie-toepassingen"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Research analytics",
+                    "AI experiment design"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar onderzoeks-begeleiding."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 14,
+                  "robotiseringAugmentatie": 6,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 42,
+                  "aiAugmentatie": 17,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Vakgebied-meesterschap begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Docent als gids voor mastery; AI voert basis-ondersteuning"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Subject matter expert mentorship",
+                    "Mastery-based progression coaching"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Routine onderwijslevering"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Standaard instructie"
+                  ],
+                  "kennisoverdracht": "Transitie naar mentorschap en onderzoeks-coaching."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 18,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 48,
+                  "aiAugmentatie": 21,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Vakgebied-innovatie leaderschap",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Docent leidt innovatie in vakgebied-onderwijs met AI"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Subject innovation leadership",
+                    "Curriculum vision"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar innovatie-leiding."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 21,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 52,
+                  "aiAugmentatie": 23,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Vakgebied-wetenschap leider",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Expert voorkampioen van vakgebied-educatie in AI-era"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Thought leadership",
+                    "Educational research"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk expert en innovatie."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Midden",
+                "wervingArbeidsmarkt": "Midden",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Laag"
+              }
+            },
+            {
+              "name": "Schoolleider Primair Onderwijs",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 4,
+                  "robotiseringAugmentatie": 1,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 20,
+                  "aiAugmentatie": 5,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-gestuurde schoolkalender planologie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI optimaliseert schema's; directeur valideert en stuurt"
+                    },
+                    {
+                      "taak": "Personeelsperformance analytics",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI analyzeert docent-prestaties; directeur voert gesprekken en begeleiding"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Data-gestuurde school-management",
+                    "AI-ondersteunde HR-beleidsvorming",
+                    "Transformatie-leiding"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "School management analytics",
+                    "AI-learning platforms (bijv. Personalized Learning Engine)"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Training school-management AI tools (1-2 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 7,
+                  "robotiseringAugmentatie": 2,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 28,
+                  "aiAugmentatie": 9,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Curriculum-innovatie AI-ondersteund",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Directeur stuurt curriculum-transformatie met AI-gegenereerde opties"
+                    },
+                    {
+                      "taak": "Ouder-communicatie geautomatiseerd",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI communiceert routine-update; directeur voert diepere stakeholder-engagement"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Curriculum transformation leadership",
+                    "Community engagement in AI-era"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Advanced education analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar curriculum-innovatie."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 10,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 35,
+                  "aiAugmentatie": 13,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom school-beheer supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI beheert meeste operationele taken; directeur focust op visie en cultuur"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Educational vision setting",
+                    "Organizational culture leadership",
+                    "Stakeholder alignment"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Operationeel beheer"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Transitie naar strategisch leiderschap."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 12,
+                  "robotiseringAugmentatie": 4,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 41,
+                  "aiAugmentatie": 16,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Schooltransformatie-leiderschap",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Directeur leidt school-transformatie in AI-tijdperk"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Change leadership at scale",
+                    "AI integration strategy"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar transformatie-leiding."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 14,
+                  "robotiseringAugmentatie": 5,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 45,
+                  "aiAugmentatie": 18,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Educatief voorkampioen in AI-era",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Directeur voert visionaire educatieve leiding in transformatietijdperk"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Visionary educational leadership",
+                    "Thought leadership"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk strategisch en transformatief."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Laag",
+                "functieInvulling": "Midden",
+                "wervingArbeidsmarkt": "Laag",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Laag"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Docenten Voortgezet Onderwijs",
+          "functies": [
+            {
+              "name": "Docent VWO/HAVO",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 5,
+                  "robotiseringAugmentatie": 1,
+                  "robotiseringVervanging": 0,
+                  "aiOndersteuning": 26,
+                  "aiAugmentatie": 7,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-gestuurde lesvoorbereiding",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI genereert lessen; docent customizeert voor niveau en diepgang"
+                    },
+                    {
+                      "taak": "Geautomatiseerde huiswerk-beoordeling",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI beoordeelt routine vragen (70% workload reduction Gradescope); docent geeft kritiek-feedback"
+                    },
+                    {
+                      "taak": "Leerling-voortgangstracking",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI volgt voortgang; docent interveneert gericht bij achterlopen"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-ondersteund onderwijs",
+                    "Advanced assessment strategies",
+                    "Mentorschap diepgang"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI lesson platforms",
+                    "Advanced learning analytics"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Training AI-assessment tools (2-3 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 9,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 36,
+                  "aiAugmentatie": 13,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-tutoringsystemen supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI voert 1-op-1 ondersteuning; docent stelt strategie en moeilijke vragen"
+                    },
+                    {
+                      "taak": "Onderzoeksproject-mentoraat",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI ondersteunt onderzoeks-planning; docent begeleidt kritisch denken"
+                    },
+                    {
+                      "taak": "Universiteitsvoorbereiding begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI prepareert voor toetsen; docent geeft mentoraat op studiekeuzes"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Research mentorship",
+                    "University transition coaching",
+                    "Critical thinking facilitation"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine instructie"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Research platforms",
+                    "University data systems"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar mentoraat."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 13,
+                  "robotiseringAugmentatie": 6,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 44,
+                  "aiAugmentatie": 18,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Autonoom leerproces supervisie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI leidt leerroutes; docent focust op kritisch denken, creativiteit, onderzoek"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Meta-cognitive coaching",
+                    "Research supervision",
+                    "Creative problem solving"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Content delivery"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Standaard les-geven"
+                  ],
+                  "kennisoverdracht": "Transitie naar mentoraat en onderzoeks-begeleiding."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 16,
+                  "robotiseringAugmentatie": 8,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 50,
+                  "aiAugmentatie": 22,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Vakgebied-innovatie begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Docent als innovatiegids; leerlingen verkennen toekomst van vakgebied met AI"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Innovation mentorship",
+                    "Future-focused curriculum design"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar innovatie-begeleiding."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 19,
+                  "robotiseringAugmentatie": 10,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 54,
+                  "aiAugmentatie": 24,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Vakgebied-voorkampioen en transformatie",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Docent leidt vakgebied-transformatie in AI-era"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Subject leadership",
+                    "Educational transformation"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk transformatie-leiding."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Midden",
+                "wervingArbeidsmarkt": "Midden",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Hoog",
+                "werkbelevingAutonomie": "Hoog",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Laag"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Onderwijsondersteunend Personeel",
+          "functies": [
+            {
+              "name": "Onderwijsassistent",
+              "periods": [
+                {
+                  "period": "2025-2027",
+                  "robotiseringOndersteuning": 10,
+                  "robotiseringAugmentatie": 3,
+                  "robotiseringVervanging": 1,
+                  "aiOndersteuning": 16,
+                  "aiAugmentatie": 4,
+                  "aiVervanging": 0,
+                  "takenVerandering": [
+                    {
+                      "taak": "AI-ondersteunde leerling-ondersteuning",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI vertaalt les; assistent helpt leerlingen met begrip en vaardigheden"
+                    },
+                    {
+                      "taak": "Administratieve takenautomatisering",
+                      "type": "ondersteuning",
+                      "technologie": "AI",
+                      "beschrijving": "AI voert routine-administratie; assistent focust op leerling-ondersteuning"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "AI-ondersteunde leerling-hulp",
+                    "Inclusieve ondersteuning",
+                    "Digitale gereedschappen"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Assistive tech platforms",
+                    "Data entry automation"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Training AI-assistentie tools (1-2 weken)."
+                },
+                {
+                  "period": "2028-2030",
+                  "robotiseringOndersteuning": 15,
+                  "robotiseringAugmentatie": 6,
+                  "robotiseringVervanging": 2,
+                  "aiOndersteuning": 24,
+                  "aiAugmentatie": 8,
+                  "aiVervanging": 1,
+                  "takenVerandering": [
+                    {
+                      "taak": "Inclusieve leerling-begeleiding",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI voert basis-ondersteuning; assistent geeft persoonlijke hulp en coaching"
+                    },
+                    {
+                      "taak": "Sociale-emotionele steun",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "AI detecteert emotionele signalen; assistent voert ondersteuning uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Inclusief onderwijs",
+                    "Sociale-emotionele ondersteuning",
+                    "Gespecialiseerde hulp"
+                  ],
+                  "vervallenCompetencies": [
+                    "Routine administratie"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "Inclusive tech platforms",
+                    "AI-learning platforms (bijv. Personalized Learning Engine)"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen breiden uit naar inclusieve ondersteuning."
+                },
+                {
+                  "period": "2031-2033",
+                  "robotiseringOndersteuning": 20,
+                  "robotiseringAugmentatie": 9,
+                  "robotiseringVervanging": 3,
+                  "aiOndersteuning": 32,
+                  "aiAugmentatie": 12,
+                  "aiVervanging": 2,
+                  "takenVerandering": [
+                    {
+                      "taak": "Persoonlijke leerling-mentor",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Assistent wordt mentor; AI voert ondersteunende taken uit"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Mentoraat",
+                    "Coaching-vaardigheden",
+                    "Persoonlijke ontwikkeling"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Assistentie-basiswerk"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Transitie naar mentoraat-rollen."
+                },
+                {
+                  "period": "2034-2036",
+                  "robotiseringOndersteuning": 24,
+                  "robotiseringAugmentatie": 12,
+                  "robotiseringVervanging": 4,
+                  "aiOndersteuning": 38,
+                  "aiAugmentatie": 15,
+                  "aiVervanging": 3,
+                  "takenVerandering": [
+                    {
+                      "taak": "Leerling-voorkampioen",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Assistent wordt voorkampioen voor leerling-welzijn en ontwikkeling"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Advocacy",
+                    "Leadership",
+                    "Holistic development"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen transformeren naar advocacy en leiderschap."
+                },
+                {
+                  "period": "2037-2040",
+                  "robotiseringOndersteuning": 27,
+                  "robotiseringAugmentatie": 14,
+                  "robotiseringVervanging": 5,
+                  "aiOndersteuning": 42,
+                  "aiAugmentatie": 17,
+                  "aiVervanging": 4,
+                  "takenVerandering": [
+                    {
+                      "taak": "Leerling-transformatie begeleider",
+                      "type": "augmentatie",
+                      "technologie": "AI",
+                      "beschrijving": "Begeleider leidt transformatie van leerling-ervaringen in AI-era"
+                    }
+                  ],
+                  "nieuweCompetencies": [
+                    "Transformative coaching",
+                    "Future-ready development"
+                  ],
+                  "vervallenCompetencies": [
+                    "Handmatig nakijken van toetsen als kernactiviteit",
+                    "Standaard klassikaal lesgeven als enige didactiek"
+                  ],
+                  "nieuweTechnischeVaardigheden": [
+                    "AI-learning platforms (bijv. Personalized Learning Engine)",
+                    "Learning Analytics dashboards"
+                  ],
+                  "vervallenTechnischeVaardigheden": [
+                    "Traditionele toetssystemen"
+                  ],
+                  "kennisoverdracht": "Rollen voornamelijk coaching en transformatie."
+                }
+              ],
+              "impactDimensies": {
+                "fteImpact": "Midden",
+                "functieInvulling": "Midden",
+                "wervingArbeidsmarkt": "Midden",
+                "competentiesScholing": "Hoog",
+                "kennisbehoud": "Midden",
+                "werkbelevingAutonomie": "Midden",
+                "productiviteitKwaliteit": "Hoog",
+                "fysiekeBelasting": "Laag",
+                "samenwerkingLocatie": "Midden"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "2.0",
+    "created": "2026-03-21T10:11:35.058Z",
+    "title": "AIAIAI Wat Nu - Workforce Impact Research Part 2",
+    "subtitle": "Energie, Bouw, Onderwijs",
+    "description": "Comprehensive workforce transformation research across three major sectors (Energie, Bouw, Onderwijs) covering 2025-2040 robotization and AI integration impacts.",
+    "sectors_covered": 3,
+    "functiegroepen_total": 11,
+    "functies_total": 16,
+    "periods": [
+      "2025-2027",
+      "2028-2030",
+      "2031-2033",
+      "2034-2036",
+      "2037-2040"
+    ],
+    "language": "Nederlands"
+  }
+}
