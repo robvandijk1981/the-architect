@@ -317,6 +317,91 @@ async def admin_reseed_organizations(
         return {"status": "error", "error": str(e), "traceback": traceback.format_exc()}
 
 
+@router.get("/data-freshness")
+async def data_freshness(
+    _: str = Depends(verify_api_key),
+) -> dict:
+    """
+    Check data freshness across all layers and tables.
+    Returns status per data source: green (<1 month), orange (1-3 months), red (>3 months).
+    """
+    from datetime import datetime, timezone
+
+    now = datetime.now(timezone.utc)
+    layers = {}
+
+    # Check knowledge documents per layer
+    try:
+        layer_stats = await fetch_all("""
+            SELECT layer, category, count(*) as doc_count,
+                max(created_at) as latest_update,
+                min(created_at) as oldest_update
+            FROM knowledge_documents
+            WHERE is_current = true
+            GROUP BY layer, category
+            ORDER BY layer
+        """)
+        for row in layer_stats:
+            latest = row.get("latest_update")
+            if latest:
+                age_days = (now - latest).days if latest.tzinfo else (now.replace(tzinfo=None) - latest).days
+                if age_days < 30:
+                    status = "green"
+                elif age_days < 90:
+                    status = "orange"
+                else:
+                    status = "red"
+            else:
+                age_days = None
+                status = "unknown"
+
+            key = f"layer_{row['layer']}_{row['category']}"
+            layers[key] = {
+                "layer": row["layer"],
+                "category": row["category"],
+                "documents": row["doc_count"],
+                "latest_update": str(latest)[:10] if latest else None,
+                "age_days": age_days,
+                "status": status,
+            }
+    except Exception:
+        pass
+
+    # Check structured tables
+    tables = {}
+    for table, query in [
+        ("function_profiles", "SELECT count(*) as cnt, max(created_at) as latest FROM function_profiles"),
+        ("function_impacts", "SELECT count(*) as cnt, max(created_at) as latest FROM function_impacts"),
+        ("organizations", "SELECT count(*) as cnt, max(created_at) as latest FROM organizations WHERE source = 'readiness_scan_2026'"),
+        ("sector_profiles", "SELECT count(*) as cnt, max(created_at) as latest FROM sector_profiles"),
+    ]:
+        try:
+            row = await fetch_one(query)
+            if row:
+                latest = row.get("latest")
+                age_days = (now - latest).days if latest and latest.tzinfo else None
+                tables[table] = {
+                    "records": row.get("cnt", 0),
+                    "latest_update": str(latest)[:10] if latest else None,
+                    "age_days": age_days,
+                    "status": "green" if age_days and age_days < 30 else ("orange" if age_days and age_days < 90 else "red"),
+                }
+        except Exception:
+            tables[table] = {"records": 0, "status": "missing"}
+
+    return {
+        "checked_at": str(now)[:19],
+        "knowledge_layers": layers,
+        "structured_tables": tables,
+        "summary": {
+            "total_knowledge_docs": sum(v["documents"] for v in layers.values()),
+            "total_structured_records": sum(v.get("records", 0) for v in tables.values()),
+            "red_flags": [k for k, v in {**layers, **tables}.items() if v.get("status") == "red"],
+            "orange_flags": [k for k, v in {**layers, **tables}.items() if v.get("status") == "orange"],
+        },
+    }
+
+
 @router.get("/sectors")
 async def list_sectors(
     _: str = Depends(verify_api_key),
