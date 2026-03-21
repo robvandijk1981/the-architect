@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS function_tasks (
     function_id UUID NOT NULL REFERENCES function_profiles(id) ON DELETE CASCADE,
     period TEXT NOT NULL,
     taak TEXT NOT NULL,
-    type TEXT NOT NULL CHECK (type IN ('ondersteuning', 'augmentatie', 'vervanging')),
-    technologie TEXT NOT NULL CHECK (technologie IN ('AI', 'Robot', 'Beide')),
+    type TEXT NOT NULL,
+    technologie TEXT NOT NULL,
     beschrijving TEXT,
     created_at TIMESTAMPTZ DEFAULT now()
 );

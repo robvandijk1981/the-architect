@@ -62,17 +62,40 @@ async def run_migration():
                         continue
                     logger.warning("migration_statement_error", error=str(e), stmt=stmt[:100])
 
+    # Drop CHECK constraints on function_tasks if they exist (data has free-form values)
+    async with get_connection() as conn:
+        try:
+            await conn.execute("""
+                DO $$ BEGIN
+                    ALTER TABLE function_tasks DROP CONSTRAINT IF EXISTS function_tasks_type_check;
+                    ALTER TABLE function_tasks DROP CONSTRAINT IF EXISTS function_tasks_technologie_check;
+                EXCEPTION WHEN OTHERS THEN NULL;
+                END $$;
+            """)
+        except Exception:
+            pass  # Constraints may not exist
+
     logger.info("function_impacts_migration_complete")
 
 
 async def seed_function_data():
     """Load function impact data from JSON files into the database."""
 
-    # Check if data already loaded
+    # Check if all data is loaded (53 functions expected)
     count = await fetch_one("SELECT count(*) as cnt FROM function_profiles")
-    if count and count.get("cnt", 0) > 0:
-        logger.info("function_data_already_seeded", count=count["cnt"])
+    current = count.get("cnt", 0) if count else 0
+    if current >= 50:
+        logger.info("function_data_already_seeded", count=current)
         return
+
+    # Partial seed detected or first run — clean up and reseed
+    if current > 0:
+        logger.info("function_data_partial_seed_detected", count=current, action="reseed")
+        async with get_connection() as conn:
+            await conn.execute("DELETE FROM function_tasks")
+            await conn.execute("DELETE FROM function_competencies")
+            await conn.execute("DELETE FROM function_impacts")
+            await conn.execute("DELETE FROM function_profiles")
 
     # Load both JSON files
     all_sectors = []
