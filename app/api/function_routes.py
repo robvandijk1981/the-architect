@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Optional
 
 from app.api.deps import verify_api_key
-from app.core.database import fetch_all, fetch_one
+from app.core.database import fetch_all, fetch_one, get_connection
 from app.models.functions import (
     FunctionProfile, FunctionSummary, FunctionListResponse,
     ImpactPercentages, ImpactDimensions, TaskChange,
@@ -215,6 +215,59 @@ async def get_timeline(
         dimensions=_build_dimensions(row),
         timeline=periods,
     )
+
+
+@router.post("/admin/reseed-functions")
+async def admin_reseed_functions(
+    _: str = Depends(verify_api_key),
+) -> dict:
+    """Force reseed of function impact data. Clears existing data and reloads from JSON."""
+    import traceback
+    try:
+        # Drop constraints first
+        async with get_connection() as conn:
+            await conn.execute("""
+                DO $$ BEGIN
+                    ALTER TABLE function_tasks DROP CONSTRAINT IF EXISTS function_tasks_type_check;
+                    ALTER TABLE function_tasks DROP CONSTRAINT IF EXISTS function_tasks_technologie_check;
+                EXCEPTION WHEN OTHERS THEN NULL;
+                END $$;
+            """)
+            # Clear existing data
+            await conn.execute("DELETE FROM function_tasks")
+            await conn.execute("DELETE FROM function_competencies")
+            await conn.execute("DELETE FROM function_impacts")
+            await conn.execute("DELETE FROM function_profiles")
+
+        # Re-run seed
+        from app.pipeline.seed_functions import seed_function_data
+        await seed_function_data()
+
+        count = await fetch_one("SELECT count(*) as cnt FROM function_profiles")
+        return {"status": "ok", "functions_seeded": count.get("cnt", 0) if count else 0}
+    except Exception as e:
+        return {"status": "error", "error": str(e), "traceback": traceback.format_exc()}
+
+
+@router.post("/admin/reseed-organizations")
+async def admin_reseed_organizations(
+    _: str = Depends(verify_api_key),
+) -> dict:
+    """Force reseed of organization data."""
+    import traceback
+    try:
+        from app.pipeline.seed_organizations import seed_organization_data
+        await seed_organization_data()
+
+        count = await fetch_one("SELECT count(*) as cnt FROM organizations WHERE source = 'readiness_scan_2026'")
+        sector_count = await fetch_one("SELECT count(*) as cnt FROM sector_profiles")
+        return {
+            "status": "ok",
+            "organizations_seeded": count.get("cnt", 0) if count else 0,
+            "sector_profiles_seeded": sector_count.get("cnt", 0) if sector_count else 0,
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e), "traceback": traceback.format_exc()}
 
 
 @router.get("/sectors")
