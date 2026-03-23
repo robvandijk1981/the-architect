@@ -84,8 +84,7 @@ app.add_middleware(
         "https://www.modellenwerk.nl",
         "https://aiwatnow.nl",
         "https://www.aiwatnow.nl",
-            "https://aiaiaiwat-3vag3exs.manus.space",  # AIAIAI Wat Nu portal (Manus )
-
+        "https://aiaiaiwat-3vag3exs.manus.space",
     ],
     allow_credentials=True,
     allow_methods=["*"],
