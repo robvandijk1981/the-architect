@@ -377,6 +377,123 @@ async def admin_upload(
 
 
 # ============================================
+# GET /admin/documents — List all documents in the knowledge base
+# ============================================
+
+@router.get("/admin/documents")
+async def admin_list_documents(
+    layer: int | None = None,
+    category: str | None = None,
+    sector: str | None = None,
+    source_type: str | None = None,
+    limit: int = 500,
+    offset: int = 0,
+    _: str = Depends(verify_api_key),
+):
+    """
+    List all documents in the RAG knowledge base with metadata and chunk counts.
+    Supports filtering on layer, category, sector, source_type.
+    """
+    # Build query dynamically
+    conditions = ["d.is_current = true"]
+    params = []
+    param_idx = 0
+
+    if layer is not None:
+        param_idx += 1
+        conditions.append(f"d.layer = ${param_idx}")
+        params.append(layer)
+    if category is not None:
+        param_idx += 1
+        conditions.append(f"d.category = ${param_idx}")
+        params.append(category)
+    if sector is not None:
+        param_idx += 1
+        conditions.append(f"${param_idx} = ANY(d.sector)")
+        params.append(sector)
+    if source_type is not None:
+        param_idx += 1
+        conditions.append(f"d.source_type = ${param_idx}")
+        params.append(source_type)
+
+    where_clause = " AND ".join(conditions)
+
+    # Count total (before pagination)
+    count_query = f"SELECT COUNT(*) FROM knowledge_documents d WHERE {where_clause}"
+    total = await fetch_val(count_query, *params)
+
+    # Fetch documents with chunk count and first excerpt
+    param_idx += 1
+    limit_param = param_idx
+    param_idx += 1
+    offset_param = param_idx
+    params.extend([limit, offset])
+
+    docs_query = f"""
+        SELECT
+            d.id,
+            d.title,
+            d.source_name,
+            d.source_type,
+            d.category,
+            d.layer,
+            d.sector,
+            d.source_date,
+            d.created_at,
+            d.metadata,
+            (SELECT COUNT(*) FROM knowledge_embeddings e WHERE e.document_id = d.id) AS chunk_count,
+            (SELECT LEFT(e2.chunk_text, 200) FROM knowledge_embeddings e2
+             WHERE e2.document_id = d.id ORDER BY e2.chunk_index LIMIT 1) AS excerpt
+        FROM knowledge_documents d
+        WHERE {where_clause}
+        ORDER BY d.created_at DESC
+        LIMIT ${limit_param} OFFSET ${offset_param}
+    """
+    rows = await fetch_all(docs_query, *params)
+
+    documents = []
+    for row in rows:
+        # Extract filename from metadata or source_name
+        metadata = _parse_jsonb(row.get("metadata")) or {}
+        filename = metadata.get("original_filename")
+        if not filename and row.get("source_name"):
+            # Strip "Upload: " prefix if present
+            sn = row["source_name"]
+            filename = sn.replace("Upload: ", "") if sn.startswith("Upload: ") else sn
+
+        # Derive filetype
+        filetype = None
+        if filename and "." in filename:
+            filetype = filename.rsplit(".", 1)[-1].lower()
+
+        # Parse sector (stored as text[] in postgres)
+        sector_val = row.get("sector")
+        if isinstance(sector_val, list):
+            sector_str = ",".join(sector_val) if sector_val else None
+        else:
+            sector_str = sector_val
+
+        documents.append({
+            "id": str(row["id"]),
+            "title": row.get("title"),
+            "filename": filename,
+            "filetype": filetype,
+            "category": row.get("category"),
+            "layer": row.get("layer"),
+            "source_type": row.get("source_type"),
+            "sector": sector_str,
+            "uploaded_at": str(row.get("source_date") or row.get("created_at", ""))[:10],
+            "chunk_count": row.get("chunk_count", 0),
+            "excerpt": row.get("excerpt"),
+        })
+
+    return {
+        "total": total or 0,
+        "documents": documents,
+    }
+
+
+# ============================================
 # POST /admin/collect — Run data collectors
 # ============================================
 
