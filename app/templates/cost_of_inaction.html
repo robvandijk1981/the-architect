@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost of Inaction Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: white;
+            padding: 30mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+        
+        .page.page-2 {
+            page-break-before: always;
+        }
+        
+        header {
+            border-bottom: 3px solid #009EAB;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #002E4F;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .headline-cost {
+            background: linear-gradient(135deg, #009EAB, #007A8A);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .headline-cost .value {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .headline-cost .label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .breakdown-card {
+            background: #f9f9f9;
+            border-left: 4px solid #009EAB;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .breakdown-card .label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .breakdown-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #002E4F;
+        }
+        
+        .breakdown-card .pct {
+            font-size: 13px;
+            color: #009EAB;
+            margin-top: 5px;
+        }
+        
+        .section {
+            margin-top: 25px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #002E4F;
+            border-left: 4px solid #009EAB;
+            padding-left: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .projection-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        
+        .projection-table th {
+            background: #f9f9f9;
+            border-bottom: 2px solid #009EAB;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+            color: #002E4F;
+        }
+        
+        .projection-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .projection-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .projection-bar {
+            background: linear-gradient(90deg, #009EAB, #007A8A);
+            height: 20px;
+            border-radius: 3px;
+            display: inline-block;
+            min-width: 30px;
+            position: relative;
+        }
+        
+        .bar-label {
+            font-size: 11px;
+            color: white;
+            padding: 2px 6px;
+            font-weight: bold;
+        }
+        
+        .interventions {
+            background: #f0f8fa;
+            border-left: 4px solid #009EAB;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+        
+        .intervention-title {
+            font-weight: 600;
+            color: #002E4F;
+            margin-bottom: 10px;
+        }
+        
+        .intervention-list {
+            list-style: none;
+        }
+        
+        .intervention-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 13px;
+        }
+        
+        .intervention-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .intervention-name {
+            font-weight: 500;
+            color: #002E4F;
+        }
+        
+        .intervention-impact {
+            color: #009EAB;
+            font-weight: 600;
+        }
+        
+        .priority {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .priority.high {
+            background: #D32F2F;
+            color: white;
+        }
+        
+        .priority.medium {
+            background: #F57C00;
+            color: white;
+        }
+        
+        .confidence-note {
+            background: #f9f9f9;
+            border-left: 4px solid #999;
+            padding: 12px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            border-radius: 4px;
+        }
+        
+        footer {
+            position: absolute;
+            bottom: 30mm;
+            left: 30mm;
+            right: 30mm;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 10px;
+            color: #999;
+        }
+        
+        .footer-text {
+            margin-bottom: 5px;
+        }
+        
+        .footer-brand {
+            font-weight: 600;
+            color: #009EAB;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGE 1: HEADLINE + BREAKDOWN -->
+    <div class="page">
+        <header>
+            <h1>Cost of Inaction</h1>
+            <p class="subtitle">Workforce Analytics Brief — Annual Cost Impact Analysis</p>
+        </header>
+        
+        <div class="headline-cost">
+            <div class="value">{{ total_annual_cost|eur }}</div>
+            <div class="label">Annual Cost of Inaction</div>
+        </div>
+        
+        <p style="color: #666; margin-top: 15px; font-size: 13px;">
+            This represents the quantified cost impact of unaddressed workforce challenges across three key areas.
+        </p>
+        
+        <div class="breakdown-grid">
+            {% for item in breakdown %}
+            <div class="breakdown-card">
+                <div class="label">{{ item.component }}</div>
+                <div class="value">{{ item.amount|eur }}</div>
+                <div class="pct">{{ item.percentage|pct }} of total</div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Sector Benchmark Comparison</div>
+            {% if benchmark_comparison.variance %}
+            <p style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                Your organization is <strong>{{ benchmark_comparison.variance }}</strong> the sector average for workforce-related costs.
+            </p>
+            {% endif %}
+        </div>
+        
+        <footer>
+            <div class="footer-text">Source: {{ sources|join(', ') }}</div>
+            <div class="footer-text">Confidence Level: {{ confidence_level }}</div>
+            <div class="footer-brand">ModellenWerk — The Architect</div>
+            <div class="footer-text">{{ generated_at }}</div>
+        </footer>
+    </div>
+    
+    <!-- PAGE 2: PROJECTION + MONTE CARLO + INTERVENTIONS -->
+    <div class="page page-2">
+        <div class="section">
+            <div class="section-title">{{ projection_years }}-Year Cost Projection</div>
+            <table class="projection-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Vacancy Costs</th>
+                        <th>Turnover Costs</th>
+                        <th>Absenteeism</th>
+                        <th>Total Annual</th>
+                        <th>Cumulative</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for proj in projection %}
+                    <tr>
+                        <td>Year {{ proj.year }}</td>
+                        <td>{{ proj.vacancy_costs|eur }}</td>
+                        <td>{{ proj.turnover_costs|eur }}</td>
+                        <td>{{ proj.absenteeism_costs|eur }}</td>
+                        <td><strong>{{ proj.total_cost|eur }}</strong></td>
+                        <td style="font-weight: bold; color: #009EAB;">{{ proj.cumulative_cost|eur }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        {% if monte_carlo %}
+        <div class="section">
+            <div class="section-title">Confidence Interval (Monte Carlo)</div>
+            <p style="font-size: 12px; color: #666; margin-bottom: 10px;">
+                Based on {{ monte_carlo.iterations }} simulations with sector-level parameter uncertainty:
+            </p>
+            <div style="background: #f9f9f9; padding: 12px; border-radius: 4px; font-size: 12px;">
+                <div style="margin-bottom: 8px;">
+                    <strong>Expected Range:</strong>
+                    {{ monte_carlo.percentile_5|eur }} (5th %ile) — 
+                    {{ monte_carlo.percentile_95|eur }} (95th %ile)
+                </div>
+                <div>
+                    <strong>Most Likely:</strong> {{ monte_carlo.percentile_50|eur }} (median)
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="section">
+            <div class="section-title">Top Impact Interventions</div>
+            <div class="interventions">
+                <div class="intervention-title">Recommended Areas to Address</div>
+                <ul class="intervention-list">
+                    {% for intervention in top_3_interventions %}
+                    <li>
+                        <span class="intervention-name">{{ intervention.intervention }}</span>
+                        <br>
+                        <span style="font-size: 12px; color: #666;">{{ intervention.current_cost_component }}</span>
+                        <span class="intervention-impact">{{ intervention.potential_impact|eur }} potential impact</span>
+                        <span class="priority {{ intervention.priority|lower }}">{{ intervention.priority }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+        <div class="confidence-note">
+            <strong>Methodology:</strong> {{ methodology }}
+        </div>
+        
+        <footer>
+            <div class="footer-brand">ModellenWerk — The Architect</div>
+            <div class="footer-text">{{ generated_at }}</div>
+        </footer>
+    </div>
+</body>
+</html>

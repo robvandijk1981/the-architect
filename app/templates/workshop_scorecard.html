@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Scorecard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .scorecard {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #002E4F, #009EAB);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .headline {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f9f9f9;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .headline-number {
+            font-size: 52px;
+            font-weight: bold;
+            color: #009EAB;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .headline-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .content {
+            padding: 25px 20px;
+        }
+        
+        .levers {
+            margin-bottom: 25px;
+        }
+        
+        .levers-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #002E4F;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        .lever {
+            margin-bottom: 15px;
+        }
+        
+        .lever-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        
+        .lever-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .lever-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #009EAB, #007A8A);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .biggest-lever {
+            background: #f0f8fa;
+            border-left: 4px solid #D32F2F;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .biggest-lever-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #D32F2F;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .biggest-lever-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #002E4F;
+            margin-bottom: 5px;
+        }
+        
+        .biggest-lever-impact {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .cta-section {
+            background: #f9f9f9;
+            border-top: 2px solid #eee;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #009EAB, #007A8A);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 158, 171, 0.4);
+        }
+        
+        .cta-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        footer {
+            background: #002E4F;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 11px;
+        }
+        
+        .footer-brand {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .footer-date {
+            opacity: 0.7;
+            font-size: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .scorecard {
+                max-width: 100%;
+                border-radius: 0;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            .headline {
+                padding: 25px 15px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .headline-number {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scorecard">
+        <header>
+            <h1>Workforce Cost Analysis</h1>
+            <p>{{ organisation_name }}</p>
+        </header>
+        
+        <div class="headline">
+            <div class="headline-number">{{ total_annual_cost|eur }}</div>
+            <div class="headline-label">Annual Cost Impact</div>
+        </div>
+        
+        <div class="content">
+            <div class="levers">
+                <div class="levers-title">Cost Drivers</div>
+                
+                {% if vacancy_costs %}
+                <div class="lever">
+                    <div class="lever-name">Vacancy Costs</div>
+                    <div class="lever-bar">
+                        <div class="lever-fill" style="width: {{ (vacancy_costs / total_annual_cost * 100)|round2 }}%"></div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if turnover_costs %}
+                <div class="lever">
+                    <div class="lever-name">Turnover Costs</div>
+                    <div class="lever-bar">
+                        <div class="lever-fill" style="width: {{ (turnover_costs / total_annual_cost * 100)|round2 }}%"></div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if absenteeism_costs %}
+                <div class="lever">
+                    <div class="lever-name">Absenteeism & Burnout</div>
+                    <div class="lever-bar">
+                        <div class="lever-fill" style="width: {{ (absenteeism_costs / total_annual_cost * 100)|round2 }}%"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            {% if biggest_lever %}
+            <div class="biggest-lever">
+                <div class="biggest-lever-title">Biggest Opportunity</div>
+                <div class="biggest-lever-name">{{ biggest_lever.name }}</div>
+                <div class="biggest-lever-impact">Potential impact: {{ biggest_lever.impact|eur }}</div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="cta-section">
+            <p style="font-size: 13px; color: #333; margin-bottom: 15px;">
+                Want the full analysis?
+            </p>
+            <button class="cta-button">Get Full Report</button>
+            <p class="cta-text">15-minute deep dive included</p>
+        </div>
+        
+        <footer>
+            <div class="footer-brand">ModellenWerk</div>
+            <div class="footer-date">Generated {{ generated_at }}</div>
+        </footer>
+    </div>
+</body>
+</html>

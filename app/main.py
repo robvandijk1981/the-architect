@@ -11,6 +11,8 @@ from app.core.logging import setup_logging
 from app.api.routes import router
 from app.api.function_routes import router as function_router
 from app.api.organization_routes import router as organization_router
+from app.api.calculation_routes import router as calculation_router
+from app.api.ai_routes import router as ai_router
 
 # Initialize logging
 setup_logging()
@@ -49,6 +51,13 @@ async def lifespan(app: FastAPI):
             await seed_organization_data()
         except Exception as e:
             logger.warning("organization_seed_failed", error=str(e))
+
+        # Auto-seed calculation benchmarks
+        try:
+            from app.pipeline.seed_benchmarks import seed_sector_benchmarks
+            await seed_sector_benchmarks()
+        except Exception as e:
+            logger.warning("benchmark_seed_failed", error=str(e))
 
         logger.info(
             "architect_api_started",
@@ -95,3 +104,5 @@ app.add_middleware(
 app.include_router(router)
 app.include_router(function_router)
 app.include_router(organization_router)
+app.include_router(calculation_router)
+app.include_router(ai_router)
