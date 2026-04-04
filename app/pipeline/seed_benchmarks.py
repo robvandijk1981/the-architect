@@ -97,9 +97,105 @@ SECTOR_BENCHMARKS = {
 }
 
 
+async def _ensure_calculation_tables():
+    """Create calculation tables if they don't exist yet."""
+    migration_sql = """
+    CREATE TABLE IF NOT EXISTS sector_benchmarks (
+        id SERIAL PRIMARY KEY,
+        sector_id VARCHAR(50) NOT NULL,
+        sector_name VARCHAR(100) NOT NULL,
+        subsector VARCHAR(100),
+        year INTEGER NOT NULL,
+        quarter INTEGER,
+        total_workforce_fte INTEGER,
+        avg_labour_cost_fte NUMERIC(10,2),
+        labour_cost_ratio NUMERIC(5,2),
+        avg_revenue_per_fte NUMERIC(12,2),
+        sector_total_revenue_eur NUMERIC(15,2),
+        vacancy_rate NUMERIC(5,2),
+        open_vacancies INTEGER,
+        time_to_fill_days NUMERIC(6,1),
+        cost_per_hire NUMERIC(10,2),
+        cost_per_vacancy_month NUMERIC(10,2),
+        turnover_rate NUMERIC(5,2),
+        turnover_cost_per_exit NUMERIC(10,2),
+        turnover_cost_pct_salary NUMERIC(5,2),
+        absenteeism_rate NUMERIC(5,2),
+        cost_per_sick_day NUMERIC(8,2),
+        burnout_prevalence NUMERIC(5,2),
+        burnout_cost_per_case NUMERIC(10,2),
+        long_term_absence_pct NUMERIC(5,2),
+        productivity_index NUMERIC(8,2),
+        overhead_ratio NUMERIC(5,2),
+        span_of_control NUMERIC(4,1),
+        ai_adoption_rate NUMERIC(5,2),
+        robotics_adoption_rate NUMERIC(5,2),
+        automation_roi_typical NUMERIC(5,2),
+        automation_payback_months NUMERIC(5,1),
+        digital_invest_per_fte NUMERIC(10,2),
+        training_investment_per_fte NUMERIC(10,2),
+        internal_mobility_rate NUMERIC(5,2),
+        flex_ratio NUMERIC(5,2),
+        source VARCHAR(500),
+        confidence_level VARCHAR(20) DEFAULT 'medium',
+        notes TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(sector_id, subsector, year, quarter)
+    );
+
+    CREATE TABLE IF NOT EXISTS calculation_defaults (
+        id SERIAL PRIMARY KEY,
+        calculation_type VARCHAR(50) NOT NULL,
+        parameter_name VARCHAR(100) NOT NULL,
+        sector_id VARCHAR(50),
+        default_value NUMERIC(15,4) NOT NULL,
+        unit VARCHAR(30),
+        min_value NUMERIC(15,4),
+        max_value NUMERIC(15,4),
+        description TEXT,
+        source VARCHAR(500),
+        year INTEGER,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(calculation_type, parameter_name, sector_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS calculation_results (
+        id SERIAL PRIMARY KEY,
+        calculation_type VARCHAR(50) NOT NULL,
+        sector_id VARCHAR(50),
+        input_parameters JSONB NOT NULL,
+        output_results JSONB NOT NULL,
+        methodology TEXT,
+        confidence_level VARCHAR(20),
+        user_session_id VARCHAR(100),
+        source_context VARCHAR(200),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """
+    await execute(migration_sql)
+
+    # Create indexes (IF NOT EXISTS not supported for all PG versions, so wrap in try)
+    for idx_sql in [
+        "CREATE INDEX IF NOT EXISTS idx_benchmarks_sector_year ON sector_benchmarks(sector_id, year)",
+        "CREATE INDEX IF NOT EXISTS idx_defaults_calc_sector ON calculation_defaults(calculation_type, sector_id)",
+        "CREATE INDEX IF NOT EXISTS idx_results_type ON calculation_results(calculation_type, created_at)",
+        "CREATE INDEX IF NOT EXISTS idx_results_session ON calculation_results(user_session_id)",
+    ]:
+        try:
+            await execute(idx_sql)
+        except Exception:
+            pass  # Index already exists
+
+    logger.info("calculation_tables_ensured")
+
+
 async def seed_sector_benchmarks():
-    """Load all sector benchmarks into database if not already present."""
+    """Create tables (if needed) and load sector benchmarks."""
     logger.info("seeding_sector_benchmarks_start")
+
+    # Ensure tables exist before seeding
+    await _ensure_calculation_tables()
 
     for sector_id, benchmark_data in SECTOR_BENCHMARKS.items():
         try:
