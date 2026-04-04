@@ -366,3 +366,152 @@ async def calculate_cost_of_inaction(
     except Exception as e:
         logger.error("cost_of_inaction_calculation_error", error=str(e))
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/reskilling-roi")
+async def calculate_reskilling_roi(
+    input_data: ReskillingRoiInput,
+    _: str = Depends(verify_api_key),
+):
+    """Calculate ROI of reskilling/upskilling investment."""
+    try:
+        benchmarks = await _get_sector_benchmarks(input_data.sector.value)
+        salary = input_data.avg_salary or (benchmarks or {}).get("avg_labour_cost_fte") or 50000
+
+        result = CalculationEngine.reskilling_roi(
+            num_employees=input_data.num_employees,
+            investment_per_person=input_data.investment_per_person,
+            expected_productivity_gain_pct=input_data.expected_productivity_gain_pct,
+            avg_salary=float(salary),
+            time_horizon_years=input_data.time_horizon_years,
+            discount_rate=input_data.discount_rate,
+        )
+
+        session_id = str(uuid.uuid4())
+        await execute(
+            """INSERT INTO calculation_results
+               (calculation_type, sector_id, input_parameters, output_results,
+                user_session_id, source_context, created_at)
+               VALUES ($1, $2, $3, $4, $5, $6, NOW())""",
+            "reskilling_roi", input_data.sector.value,
+            json.dumps(input_data.model_dump()), json.dumps(result, default=str),
+            session_id, "api",
+        )
+
+        return result
+
+    except Exception as e:
+        logger.error("reskilling_roi_error", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/automation-roi")
+async def calculate_automation_roi(
+    input_data: AutomationRoiInput,
+    _: str = Depends(verify_api_key),
+):
+    """Calculate risk-adjusted ROI of automation investment."""
+    try:
+        benchmarks = await _get_sector_benchmarks(input_data.sector.value)
+        salary = input_data.avg_salary or (benchmarks or {}).get("avg_labour_cost_fte") or 50000
+
+        result = CalculationEngine.automation_roi(
+            current_fte_allocated=input_data.current_fte_allocated,
+            implementation_cost=input_data.implementation_cost,
+            expected_fte_reduction=input_data.expected_fte_reduction,
+            avg_salary=float(salary),
+            time_horizon_years=input_data.time_horizon_years,
+            failure_rate=input_data.failure_rate_adjustment,
+        )
+
+        session_id = str(uuid.uuid4())
+        await execute(
+            """INSERT INTO calculation_results
+               (calculation_type, sector_id, input_parameters, output_results,
+                user_session_id, source_context, created_at)
+               VALUES ($1, $2, $3, $4, $5, $6, NOW())""",
+            "automation_roi", input_data.sector.value,
+            json.dumps(input_data.model_dump()), json.dumps(result, default=str),
+            session_id, "api",
+        )
+
+        return result
+
+    except Exception as e:
+        logger.error("automation_roi_error", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/scenario-compare")
+async def calculate_scenario_compare(
+    input_data: ScenarioCompareInput,
+    _: str = Depends(verify_api_key),
+):
+    """Compare two workforce scenarios."""
+    try:
+        result = CalculationEngine.scenario_compare(
+            scenario_a=input_data.scenario_a.model_dump(),
+            scenario_b=input_data.scenario_b.model_dump(),
+            time_horizon_years=input_data.time_horizon_years,
+        )
+
+        session_id = str(uuid.uuid4())
+        await execute(
+            """INSERT INTO calculation_results
+               (calculation_type, sector_id, input_parameters, output_results,
+                user_session_id, source_context, created_at)
+               VALUES ($1, $2, $3, $4, $5, $6, NOW())""",
+            "scenario_compare", "cross-sector",
+            json.dumps(input_data.model_dump()), json.dumps(result, default=str),
+            session_id, "api",
+        )
+
+        return result
+
+    except Exception as e:
+        logger.error("scenario_compare_error", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/benchmark-score")
+async def calculate_benchmark_score(
+    input_data: BenchmarkScoreInput,
+    _: str = Depends(verify_api_key),
+):
+    """Score organisation KPIs against sector benchmarks."""
+    try:
+        benchmarks = await _get_sector_benchmarks(input_data.sector.value)
+        if not benchmarks:
+            raise HTTPException(status_code=404, detail=f"No benchmarks for sector {input_data.sector.value}")
+
+        sector_benchmarks = {
+            "turnover_rate": float(benchmarks.get("turnover_rate") or 12),
+            "absenteeism_rate": float(benchmarks.get("absenteeism_rate") or 5),
+            "time_to_fill_days": float(benchmarks.get("time_to_fill_days") or 60),
+            "burnout_prevalence": float(benchmarks.get("burnout_prevalence") or 15),
+            "cost_per_hire": float(benchmarks.get("cost_per_hire") or 4000),
+        }
+
+        result = CalculationEngine.benchmark_score(
+            kpis=input_data.kpis,
+            sector_benchmarks=sector_benchmarks,
+        )
+
+        session_id = str(uuid.uuid4())
+        await execute(
+            """INSERT INTO calculation_results
+               (calculation_type, sector_id, input_parameters, output_results,
+                user_session_id, source_context, created_at)
+               VALUES ($1, $2, $3, $4, $5, $6, NOW())""",
+            "benchmark_score", input_data.sector.value,
+            json.dumps(input_data.model_dump()), json.dumps(result, default=str),
+            session_id, "api",
+        )
+
+        return result
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("benchmark_score_error", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))

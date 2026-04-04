@@ -48,7 +48,7 @@ class VacancyCostOutput(BaseModel):
     benchmark_comparison: Dict[str, Any]
     monte_carlo: Optional[Dict[str, Any]] = None
     methodology: str
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     sources: List[str]
     confidence_level: ConfidenceLevel
 
@@ -71,7 +71,7 @@ class TurnoverCostOutput(BaseModel):
     benchmark_comparison: Dict[str, Any]
     monte_carlo: Optional[Dict[str, Any]] = None
     methodology: str
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     sources: List[str]
     confidence_level: ConfidenceLevel
 
@@ -96,7 +96,7 @@ class AbsenteeismCostOutput(BaseModel):
     benchmark_comparison: Dict[str, Any]
     monte_carlo: Optional[Dict[str, Any]] = None
     methodology: str
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     sources: List[str]
     confidence_level: ConfidenceLevel
 
@@ -136,7 +136,7 @@ class CostOfInactionOutput(BaseModel):
     benchmark_comparison: Dict[str, Any]
     top_3_interventions: List[Dict[str, Any]]
     methodology: str
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     sources: List[str]
     confidence_level: ConfidenceLevel
 
@@ -161,7 +161,7 @@ class ReskillingRoiOutput(BaseModel):
     payback_period_years: float
     breakeven_year: int
     methodology: str
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     confidence_level: ConfidenceLevel
 
 
@@ -185,7 +185,7 @@ class AutomationRoiOutput(BaseModel):
     roi_percentage: float
     payback_period_years: float
     methodology: str
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     confidence_level: ConfidenceLevel
 
 
@@ -346,7 +346,7 @@ class GapProjectionYear(BaseModel):
 class WorkforceGapResponse(BaseModel):
     sector: str
     current_fte: int
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     projection: List[GapProjectionYear]
     total_gap_person_years: int
     max_gap_single_year: int
@@ -373,7 +373,7 @@ class CostTrajectoryYear(BaseModel):
 class CostTrajectoryResponse(BaseModel):
     sector: str
     current_total: float
-    assumptions: Dict[str, Any]
+    assumptions: Any  # list[str] from engine, dict from API overrides
     projection: List[CostTrajectoryYear]
     total_cost_5yr: float
     total_cost_5yr_vs_today: float
