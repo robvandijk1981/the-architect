@@ -99,7 +99,7 @@ async def seed_function_data():
 
     # Load both JSON files
     all_sectors = []
-    for filename in ["research_data_part1.json", "research_data_part2.json"]:
+    for filename in ["research_data_part1.json", "research_data_part2.json", "research_data_part3.json"]:
         filepath = DATA_DIR / filename
         if not filepath.exists():
             logger.warning("function_data_file_missing", file=str(filepath))
