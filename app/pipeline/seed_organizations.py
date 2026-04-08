@@ -1781,9 +1781,14 @@ async def seed_sector_profiles():
 
     # Check if data already loaded
     count = await fetch_one("SELECT COUNT(*) as cnt FROM sector_profiles")
-    if count and count.get("cnt", 0) > 0:
+    if count and count.get("cnt", 0) >= 9:
         logger.info("sector_profiles_already_seeded", count=count["cnt"])
         return
+
+    # Clear old data if partial (less than 9 sectors)
+    if count and count.get("cnt", 0) > 0:
+        logger.info("sector_profiles_partial_seed", count=count["cnt"], action="reseed")
+        await execute("DELETE FROM sector_profiles")
 
     logger.info("seeding_sector_profiles", sectors=len(SECTOR_PROFILES_DATA))
 
