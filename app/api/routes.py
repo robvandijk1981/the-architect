@@ -204,17 +204,91 @@ async def chat(
     sector = request.context.get("sector")
     org_context = request.context.get("organization")
 
-    answer, citations = await rag.query(
-        question=request.message,
-        sector=sector,
-        organization_context=org_context,
-    )
+    try:
+        answer, citations = await rag.query(
+            question=request.message,
+            sector=sector,
+            organization_context=org_context,
+        )
+    except Exception as e:
+        logger.error("chat_failed", error=str(e), error_type=type(e).__name__)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Chat pipeline failed: {type(e).__name__}: {str(e)[:500]}",
+        )
 
     return ChatResponse(
         response=answer,
         sources=[c.model_dump() for c in citations],
         suggested_actions=[],  # TODO: extract from answer
     )
+
+
+# ============================================
+# GET /debug/chat — Diagnose chat pipeline step by step
+# ============================================
+
+@router.get("/debug/chat")
+async def debug_chat(
+    _: str = Depends(verify_api_key),
+):
+    """
+    Step-by-step diagnostic of the chat pipeline.
+    Tests: DB → Voyage AI embedding → Anthropic Claude.
+    """
+    results = {"db": None, "voyage_embed": None, "vector_search": None, "anthropic": None}
+
+    # Step 1: Database
+    try:
+        stats = await fetch_one("SELECT * FROM knowledge_stats()")
+        results["db"] = {"status": "ok", "stats": stats}
+    except Exception as e:
+        results["db"] = {"status": "error", "error": f"{type(e).__name__}: {e}"}
+        return results
+
+    # Step 2: Voyage AI embedding
+    try:
+        from app.services.embedder import EmbeddingService
+        embedder = EmbeddingService()
+        embedding = await embedder.embed_query("test query arbeidsmarkt")
+        results["voyage_embed"] = {"status": "ok", "dimensions": len(embedding)}
+    except Exception as e:
+        results["voyage_embed"] = {"status": "error", "error": f"{type(e).__name__}: {e}"}
+        return results
+
+    # Step 3: Vector search
+    try:
+        from app.core.database import vector_search as db_vector_search
+        chunks = await db_vector_search(
+            query_embedding=embedding,
+            match_count=3,
+            similarity_threshold=0.25,
+        )
+        results["vector_search"] = {"status": "ok", "chunks_found": len(chunks)}
+    except Exception as e:
+        results["vector_search"] = {"status": "error", "error": f"{type(e).__name__}: {e}"}
+        return results
+
+    # Step 4: Anthropic Claude
+    try:
+        import anthropic
+        from app.core.config import get_settings
+        settings = get_settings()
+        client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        response = client.messages.create(
+            model=settings.claude_model,
+            max_tokens=50,
+            messages=[{"role": "user", "content": "Zeg alleen: OK"}],
+        )
+        results["anthropic"] = {
+            "status": "ok",
+            "model": settings.claude_model,
+            "response": response.content[0].text[:100],
+        }
+    except Exception as e:
+        results["anthropic"] = {"status": "error", "error": f"{type(e).__name__}: {e}"}
+
+    return results
 
 
 # ============================================
