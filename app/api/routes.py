@@ -690,34 +690,48 @@ async def admin_test_hybrid_search(
     alpha: float = 0.85,
     threshold: float = 0.30,
     match_count: int = 5,
+    expand: bool = True,
     _: str = Depends(verify_api_key),
 ):
     """
     Run a sample hybrid query — validates the installed function works.
 
     Returns top-N chunks with `similarity` (dense), `bm25_score`, and
-    `hybrid_score`, sorted by hybrid_score desc. Use to compare against
-    the regular `embedder.search` output before switching `rag.query` over.
+    `hybrid_score`, sorted by hybrid_score desc.
 
-    Default `alpha=0.85` mirrors production chat retrieval
-    (see CHAT_HYBRID_ALPHA in app/services/rag.py).
+    Defaults mirror production chat retrieval:
+      - alpha=0.85 (see CHAT_HYBRID_ALPHA in app/services/rag.py)
+      - expand=true (acronym expansion via app/services/query_expansion.py)
+
+    Set `expand=false` to see raw behaviour on the original query —
+    useful for isolating whether expansion made a difference.
+
+    Response includes both `original_query` and `expanded_query` so you
+    can see exactly what the retrieval layer saw.
 
     Example:
       GET /admin/test-hybrid-search?query=ZSM%20OM%20capaciteit&sector=overheid
+      GET /admin/test-hybrid-search?query=ZSM%20OM%20capaciteit&expand=false
     """
     from app.services.embedder import EmbeddingService
+    from app.services.query_expansion import expand_query
 
     embedder = EmbeddingService()
+    effective_query = expand_query(query) if expand else query
+
     try:
         rows = await embedder.hybrid_search(
-            query=query,
+            query=effective_query,
             match_count=match_count,
             sector=sector,
             threshold=threshold,
             alpha=alpha,
         )
         return {
-            "query": query,
+            "original_query": query,
+            "expanded_query": effective_query,
+            "expand": expand,
+            "expansion_applied": effective_query != query,
             "sector": sector,
             "alpha": alpha,
             "threshold": threshold,
