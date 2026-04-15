@@ -50,12 +50,17 @@ router = APIRouter(prefix="/api/v1")
 
 @router.get("/health")
 async def health_check():
-    """Health check endpoint for Railway."""
+    """
+    Health check endpoint for Railway.
+
+    Performs a real roundtrip `SELECT 1` to verify the database is reachable —
+    more reliable than pool.get_size() which can be 0 immediately after
+    startup while the pool is still lazy-initialising.
+    """
     db_ok = False
     try:
-        from app.core.database import get_pool
-        pool = get_pool()
-        db_ok = pool is not None and pool.get_size() > 0
+        result = await fetch_val("SELECT 1")
+        db_ok = result == 1
     except Exception:
         pass
 
