@@ -584,6 +584,32 @@ async def admin_collect(
 
 
 # ============================================
+# POST /admin/install-benchmark-v2 — Upgrade benchmark SQL function
+# ============================================
+
+@router.post("/admin/install-benchmark-v2")
+async def admin_install_benchmark_v2(_: str = Depends(verify_api_key)):
+    """
+    Install or re-apply the v2 get_sector_benchmarks SQL function.
+
+    The v1 function (from 002_functions.sql) reads from the empty
+    sector_intelligence table. The v2 aggregates live over the
+    organizations table (median / min / max / p25 / p75 per metric).
+
+    Idempotent — safe to call multiple times.
+    """
+    from app.pipeline.benchmark_function import install_benchmark_function_v2
+    try:
+        result = await install_benchmark_function_v2()
+        return result
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to install benchmark function: {type(e).__name__}: {e}",
+        )
+
+
+# ============================================
 # Background Task: Full Analysis
 # ============================================
 
