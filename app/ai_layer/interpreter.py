@@ -4,6 +4,7 @@ Transforms calculation results into human-readable Dutch insights using Claude A
 """
 
 import httpx
+import re
 import json
 import structlog
 from typing import Dict, Any
@@ -96,11 +97,17 @@ Maximum 100 woorden. Maak het relevant, actionable, en spannend.""",
                 max_tokens=1500,
             )
 
-            # Parse Claude's response as JSON
+            # Parse Claude's response as JSON.
+            # Strip markdown code fences if present (Claude sometimes wraps JSON in ```json ... ```).
+            cleaned = response.strip()
+            if cleaned.startswith("```"):
+                cleaned = re.sub(r'^```(?:json)?\s*\n?', '', cleaned)
+                cleaned = re.sub(r'\n?```\s*$', '', cleaned)
             try:
-                insights = json.loads(response)
+                insights = json.loads(cleaned)
             except json.JSONDecodeError:
-                # If Claude didn't return JSON, parse the text into structured format
+                # If Claude didn't return JSON even after stripping fences,
+                # parse the text into structured format
                 insights = cls._parse_text_response(response, calculation_type)
 
             insights["generated_at"] = datetime.utcnow().isoformat()
