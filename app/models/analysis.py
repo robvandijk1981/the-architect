@@ -10,6 +10,14 @@ from enum import Enum
 # ============================================
 
 class SectorSlug(str, Enum):
+    """
+    Canonical sector slugs used across the entire API surface
+    (Nederlands, lowercase). Aligned with database `sector_profiles.sector_slug`,
+    /sectors endpoint output, and RAG sector-keyword detection.
+
+    Used directly in /chat, /analyze, /benchmark, and re-exported as
+    SectorEnum in app.models.calculation for /calculate/* and /ai/*.
+    """
     ZORG = "zorg"
     BOUW = "bouw"
     TECHNIEK = "techniek"
@@ -18,6 +26,7 @@ class SectorSlug(str, Enum):
     FINANCIEEL = "financieel"
     RETAIL = "retail"
     TRANSPORT = "transport"
+    ENERGIE = "energie"
 
 
 class IntakeData(BaseModel):
