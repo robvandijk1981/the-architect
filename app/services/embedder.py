@@ -9,7 +9,7 @@ import voyageai
 import structlog
 
 from app.core.config import get_settings
-from app.core.database import get_connection, vector_search as db_vector_search
+from app.core.database import get_connection, fetch_all, vector_search as db_vector_search
 from app.models.knowledge import KnowledgeDocument, KnowledgeChunk
 
 logger = structlog.get_logger()
@@ -162,6 +162,80 @@ class EmbeddingService:
             filter_category=category,
             similarity_threshold=threshold,
         )
+
+    async def hybrid_search(
+        self,
+        query: str,
+        match_count: int = 10,
+        sector: str | None = None,
+        layer: int | None = None,
+        category: str | None = None,
+        threshold: float = 0.30,
+        alpha: float = 0.7,
+    ) -> list[dict]:
+        """
+        Hybrid retrieval: dense (cosine) + BM25 (ts_rank) combined.
+
+        Phase 4c. Calls the hybrid_search_chunks() SQL function from
+        migration 007 (must be installed first via
+        POST /admin/install-hybrid-search).
+
+        Args:
+            query: User query (used both for embedding and BM25 lexical match).
+            match_count: Number of chunks to return after blending.
+            sector / layer / category: Optional metadata filters.
+            threshold: Minimum dense similarity to consider a candidate (0.30).
+            alpha: Weight of dense score in the blend. 1.0 = pure dense
+                   (= regular search), 0.0 = pure BM25, 0.7 = strong dense
+                   with BM25 boost (default).
+
+        Returns:
+            List of chunk dicts with `similarity`, `bm25_score`, and
+            `hybrid_score` populated. Sorted desc by hybrid_score.
+
+        Falls back to dense-only `search()` if the SQL function is missing
+        (e.g. migration not yet applied).
+        """
+        query_embedding = await self.embed_query(query)
+        embedding_str = "[" + ",".join(str(x) for x in query_embedding) + "]"
+
+        try:
+            rows = await fetch_all(
+                """SELECT * FROM hybrid_search_chunks(
+                       $1, $2::vector(1024), $3, $4, $5, $6, $7, $8
+                   )""",
+                query,
+                embedding_str,
+                match_count,
+                threshold,
+                alpha,
+                sector,
+                layer,
+                category,
+            )
+            logger.info(
+                "hybrid_search_executed",
+                query_len=len(query),
+                returned=len(rows),
+                alpha=alpha,
+                threshold=threshold,
+                sector=sector,
+            )
+            return rows
+        except Exception as e:
+            logger.warning(
+                "hybrid_search_failed_fallback_to_dense",
+                error=str(e),
+                hint="install hybrid_search_chunks via POST /admin/install-hybrid-search",
+            )
+            return await db_vector_search(
+                query_embedding=query_embedding,
+                match_count=match_count,
+                filter_sector=sector,
+                filter_layer=layer,
+                filter_category=category,
+                similarity_threshold=threshold,
+            )
 
     async def rerank_chunks(
         self,
