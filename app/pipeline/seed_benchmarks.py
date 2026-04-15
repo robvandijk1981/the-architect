@@ -10,7 +10,7 @@ logger = structlog.get_logger()
 
 
 SECTOR_BENCHMARKS = {
-    "healthcare": {
+    "zorg": {
         "year": 2026,
         "time_to_fill_days": 65,
         "cost_per_hire": 4200,
@@ -190,12 +190,33 @@ async def _ensure_calculation_tables():
     logger.info("calculation_tables_ensured")
 
 
+async def _cleanup_legacy_healthcare_row():
+    """
+    Delete the legacy sector_id='healthcare' row if it exists.
+
+    Before phase 5a the SectorEnum used 'healthcare' as the zorg slug.
+    Post-5a all endpoints use 'zorg'. The old row is dead data —
+    clean it up for hygiene. Idempotent: no-op if absent.
+    """
+    try:
+        result = await execute(
+            "DELETE FROM sector_benchmarks WHERE sector_id = $1",
+            "healthcare",
+        )
+        logger.info("legacy_healthcare_row_cleanup_attempted")
+    except Exception as e:
+        logger.warning("legacy_healthcare_cleanup_failed", error=str(e))
+
+
 async def seed_sector_benchmarks():
     """Create tables (if needed) and load sector benchmarks."""
     logger.info("seeding_sector_benchmarks_start")
 
     # Ensure tables exist before seeding
     await _ensure_calculation_tables()
+
+    # Clean up legacy 'healthcare' row from pre-5a days
+    await _cleanup_legacy_healthcare_row()
 
     for sector_id, benchmark_data in SECTOR_BENCHMARKS.items():
         try:
