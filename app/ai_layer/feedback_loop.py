@@ -229,6 +229,7 @@ class FeedbackLoop:
         else:
             kpi_data = new_data
 
+        current_kpi = None  # tracked for error logging
         try:
             benchmarks = await fetch_one(
                 "SELECT * FROM sector_benchmarks WHERE sector_id = $1 ORDER BY year DESC LIMIT 1",
@@ -242,6 +243,8 @@ class FeedbackLoop:
             checked_kpis = []
 
             for raw_kpi_name, observed_value in kpi_data.items():
+                current_kpi = raw_kpi_name  # for error context
+
                 # Translate Dutch KPI slug → English column name (or keep as-is if already English)
                 kpi_name = _normalize_kpi_name(str(raw_kpi_name))
 
@@ -252,18 +255,23 @@ class FeedbackLoop:
                 checked_kpis.append(raw_kpi_name)
 
                 benchmark = benchmarks[kpi_name]
+                # asyncpg returns NUMERIC columns as Python Decimal — cast to float
+                # before any arithmetic with floats (e.g. * 0.15) to avoid
+                # `unsupported operand type(s) for *: 'decimal.Decimal' and 'float'`.
                 if isinstance(benchmark, dict):
                     benchmark_mean = benchmark.get("mean", benchmark.get("value"))
-                    benchmark_std = benchmark.get("std", abs(benchmark_mean * 0.15) if benchmark_mean else 1)
+                    benchmark_mean_f = float(benchmark_mean) if benchmark_mean is not None else None
+                    benchmark_std = float(benchmark.get("std", abs(benchmark_mean_f * 0.15) if benchmark_mean_f else 1))
                 else:
                     benchmark_mean = benchmark
-                    benchmark_std = abs(benchmark * 0.15) if benchmark else 1
+                    benchmark_mean_f = float(benchmark_mean) if benchmark_mean is not None else None
+                    benchmark_std = abs(benchmark_mean_f * 0.15) if benchmark_mean_f else 1
 
                 # Calculate z-score
-                if benchmark_std == 0 or benchmark_mean is None:
+                if benchmark_std == 0 or benchmark_mean_f is None:
                     z_score = 0
                 else:
-                    z_score = (float(observed_value) - float(benchmark_mean)) / float(benchmark_std)
+                    z_score = (float(observed_value) - benchmark_mean_f) / benchmark_std
 
                 # Flag if anomalous
                 if abs(z_score) > cls.ANOMALY_THRESHOLD_SIGMA:
@@ -272,10 +280,10 @@ class FeedbackLoop:
                     anomalies.append({
                         "kpi": raw_kpi_name,  # report back the user's original slug
                         "value": float(observed_value),
-                        "benchmark_mean": float(benchmark_mean) if benchmark_mean else 0,
+                        "benchmark_mean": benchmark_mean_f if benchmark_mean_f is not None else 0,
                         "z_score": round(z_score, 2),
                         "severity": severity,
-                        "message": f"{raw_kpi_name}: {severity} anomaly — {abs(z_score):.1f}σ {direction} sector benchmark ({benchmark_mean})",
+                        "message": f"{raw_kpi_name}: {severity} anomaly — {abs(z_score):.1f}σ {direction} sector benchmark ({benchmark_mean_f})",
                     })
 
             logger.info(
@@ -293,8 +301,20 @@ class FeedbackLoop:
             }
 
         except Exception as e:
-            logger.error("error_detecting_anomalies", error=str(e))
-            return {"has_anomalies": False, "anomaly_count": 0, "anomalies": [], "error": str(e)}
+            logger.error(
+                "error_detecting_anomalies",
+                error=str(e),
+                error_type=type(e).__name__,
+                sector=sector,
+                failing_kpi=current_kpi,
+            )
+            return {
+                "has_anomalies": False,
+                "anomaly_count": 0,
+                "anomalies": [],
+                "action": "Anomaly check failed — see logs",
+                "error": f"{type(e).__name__}: {e}",
+            }
 
     @classmethod
     async def get_sector_trend(
