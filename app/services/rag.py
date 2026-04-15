@@ -281,12 +281,20 @@ class RAGService:
         # Step 1: Structured data lookup (also auto-detects sector from keywords)
         structured_context, detected_sector = await self._lookup_structured_data(question, sector)
 
-        # Step 2: Retrieve relevant knowledge (RAG) — filter by detected sector to tighten relevance
-        chunks = await self.embedder.search(
+        # Step 2a: Retrieve candidate pool (wider than max_sources — reranker picks the best)
+        candidate_count = max(20, max_sources * 2)
+        candidates = await self.embedder.search(
             query=question,
-            match_count=max_sources,
+            match_count=candidate_count,
             sector=detected_sector,
-            threshold=0.35,
+            threshold=0.30,
+        )
+
+        # Step 2b: Rerank candidates with Voyage rerank-2 and keep top max_sources
+        chunks = await self.embedder.rerank_chunks(
+            query=question,
+            chunks=candidates,
+            top_k=max_sources,
         )
 
         if not chunks and not structured_context:
@@ -341,11 +349,13 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
         logger.info(
             "hybrid_rag_query_completed",
             question=question[:80],
+            candidates_retrieved=len(candidates),
             chunks_used=len(chunks),
             has_structured_data=bool(structured_context),
             provided_sector=sector,
             detected_sector=detected_sector,
-            threshold=0.35,
+            threshold=0.30,
+            reranked=True,
             tokens_in=response.usage.input_tokens,
             tokens_out=response.usage.output_tokens,
         )
@@ -558,11 +568,13 @@ Wees specifiek voor de sector {sector}. Combineer data met contextuele kennis.""
                 continue
             seen_sources.add(source)
 
+            # Prefer rerank_score (post-reranker precision) over raw cosine similarity
+            relevance = chunk.get("rerank_score", chunk.get("similarity", 0))
             citations.append(Citation(
                 source_name=source,
                 source_url=chunk.get("source_url"),
                 source_date=chunk.get("source_date"),
-                relevance=chunk.get("similarity", 0),
+                relevance=relevance,
                 excerpt=chunk.get("chunk_text", "")[:200],
             ))
 

@@ -163,6 +163,52 @@ class EmbeddingService:
             similarity_threshold=threshold,
         )
 
+    async def rerank_chunks(
+        self,
+        query: str,
+        chunks: list[dict],
+        top_k: int = 10,
+        model: str = "rerank-2",
+    ) -> list[dict]:
+        """
+        Rerank retrieved chunks using Voyage rerank-2 for improved precision.
+        Returns top_k chunks enriched with rerank_score, sorted desc by relevance.
+        Falls back to original order (truncated to top_k) if rerank fails.
+        """
+        if not chunks:
+            return []
+
+        documents = [c.get("chunk_text", "") for c in chunks]
+        try:
+            result = self.client.rerank(
+                query=query,
+                documents=documents,
+                model=model,
+                top_k=min(top_k, len(chunks)),
+            )
+        except Exception as e:
+            logger.warning(
+                "rerank_failed_fallback_to_original",
+                error=str(e),
+                chunks=len(chunks),
+            )
+            return chunks[:top_k]
+
+        reranked = []
+        for r in result.results:
+            chunk = dict(chunks[r.index])
+            chunk["rerank_score"] = r.relevance_score
+            reranked.append(chunk)
+
+        logger.info(
+            "chunks_reranked",
+            model=model,
+            input_chunks=len(chunks),
+            output_chunks=len(reranked),
+            top_rerank_score=reranked[0].get("rerank_score") if reranked else None,
+        )
+        return reranked
+
     # ============================================
     # Chunking Strategies
     # ============================================
