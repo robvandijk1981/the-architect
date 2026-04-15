@@ -10,11 +10,18 @@ from datetime import datetime
 
 
 class SectorEnum(str, Enum):
-    HEALTHCARE = "healthcare"
-    GOVERNMENT = "overheid"
-    CONSTRUCTION = "bouw"
-    ENERGY = "energie"
-    EDUCATION = "onderwijs"
+    """
+    Canonical sector slugs (Nederlands, lowercase).
+
+    Aligned with database `sector_profiles.sector_slug`, /sectors endpoint
+    output, and RAG sector-keyword detection. Used by /calculate/* and /ai/*
+    request/response models.
+    """
+    ZORG = "zorg"
+    OVERHEID = "overheid"
+    BOUW = "bouw"
+    ENERGIE = "energie"
+    ONDERWIJS = "onderwijs"
     TRANSPORT = "transport"
 
 
