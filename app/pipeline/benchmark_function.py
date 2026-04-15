@@ -5,7 +5,9 @@ Phase 5b of the retrieval-infra roadmap. Replaces the v1 function (which
 read from the empty sector_intelligence table) with one that aggregates
 live statistics over the organizations table.
 
-Idempotent — safe to run multiple times; uses CREATE OR REPLACE.
+Idempotent — safe to run multiple times. Explicitly DROPs the old
+function first because PostgreSQL forbids changing a set-returning
+function's return-type columns via CREATE OR REPLACE.
 """
 
 import structlog
@@ -15,7 +17,11 @@ from app.core.database import execute
 logger = structlog.get_logger()
 
 
+# Drop v1 first — its RETURNS TABLE(...) columns differ from v2, and
+# PostgreSQL rejects CREATE OR REPLACE when the row-type changes.
 BENCHMARK_FUNCTION_V2_SQL = """
+DROP FUNCTION IF EXISTS get_sector_benchmarks(TEXT);
+
 CREATE OR REPLACE FUNCTION get_sector_benchmarks(p_sector_slug TEXT)
 RETURNS TABLE (
     metric_name TEXT,
@@ -88,7 +94,9 @@ $$;
 async def install_benchmark_function_v2() -> dict:
     """
     Install or replace the v2 get_sector_benchmarks SQL function.
-    Idempotent: uses CREATE OR REPLACE.
+
+    Drops the v1 function first (its return-type columns differ) then
+    creates the v2. Idempotent — safe to run multiple times.
     """
     await execute(BENCHMARK_FUNCTION_V2_SQL)
     logger.info("benchmark_function_v2_installed")
