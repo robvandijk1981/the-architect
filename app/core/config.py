@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     """Central config, auto-loaded from .env or Railway env vars."""
 
     # --- App ---
-    app_name: str = "The Architect API"
+    app_name: str = "ModellenWerk Workforce Intelligence API"
     app_version: str = "0.1.0"
     environment: str = "development"
     log_level: str = "INFO"
