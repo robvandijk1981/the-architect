@@ -687,7 +687,7 @@ async def admin_hybrid_search_status(_: str = Depends(verify_api_key)):
 async def admin_test_hybrid_search(
     query: str,
     sector: str | None = None,
-    alpha: float = 0.7,
+    alpha: float = 0.85,
     threshold: float = 0.30,
     match_count: int = 5,
     _: str = Depends(verify_api_key),
@@ -698,6 +698,9 @@ async def admin_test_hybrid_search(
     Returns top-N chunks with `similarity` (dense), `bm25_score`, and
     `hybrid_score`, sorted by hybrid_score desc. Use to compare against
     the regular `embedder.search` output before switching `rag.query` over.
+
+    Default `alpha=0.85` mirrors production chat retrieval
+    (see CHAT_HYBRID_ALPHA in app/services/rag.py).
 
     Example:
       GET /admin/test-hybrid-search?query=ZSM%20OM%20capaciteit&sector=overheid
