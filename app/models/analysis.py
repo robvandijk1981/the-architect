@@ -145,10 +145,17 @@ class AnalysisStatus(str, Enum):
 
 
 class AnalysisRequest(BaseModel):
-    """Request to start a full analysis."""
+    """
+    Request to start a full analysis.
+
+    `sector` is optional — if omitted, falls back to
+    `organization_profile.sector`. Provide it only to override the
+    profile's sector (rare: when analyzing a multi-sector org from a
+    specific sector's perspective).
+    """
 
     organization_profile: OrganizationProfile
-    sector: SectorSlug
+    sector: SectorSlug | None = None
     documents: list[str] | None = None  # file references
 
 
