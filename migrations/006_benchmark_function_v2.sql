@@ -9,7 +9,11 @@
 -- rich fields from migration 004) and produces statistical benchmarks
 -- (median / min / max / p25 / p75) per key metric per sector.
 --
--- Safe to re-run: CREATE OR REPLACE is idempotent.
+-- Safe to re-run: idempotent. We DROP first because the v1 return-type
+-- columns differ from v2 and PostgreSQL rejects CREATE OR REPLACE in
+-- that case.
+
+DROP FUNCTION IF EXISTS get_sector_benchmarks(TEXT);
 
 CREATE OR REPLACE FUNCTION get_sector_benchmarks(p_sector_slug TEXT)
 RETURNS TABLE (
