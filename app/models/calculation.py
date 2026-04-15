@@ -8,21 +8,11 @@ from enum import Enum
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 
-
-class SectorEnum(str, Enum):
-    """
-    Canonical sector slugs (Nederlands, lowercase).
-
-    Aligned with database `sector_profiles.sector_slug`, /sectors endpoint
-    output, and RAG sector-keyword detection. Used by /calculate/* and /ai/*
-    request/response models.
-    """
-    ZORG = "zorg"
-    OVERHEID = "overheid"
-    BOUW = "bouw"
-    ENERGIE = "energie"
-    ONDERWIJS = "onderwijs"
-    TRANSPORT = "transport"
+# Re-export the canonical SectorSlug from analysis.py as SectorEnum so all
+# /calculate/* and /ai/* endpoints share the same 9-sector taxonomy as
+# /chat, /analyze, /benchmark. Existing code that imports SectorEnum from
+# this module continues to work unchanged.
+from app.models.analysis import SectorSlug as SectorEnum
 
 
 class ConfidenceLevel(str, Enum):
