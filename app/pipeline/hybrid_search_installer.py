@@ -10,19 +10,20 @@ Idempotent — safe to run multiple times. Uses ADD COLUMN IF NOT EXISTS,
 CREATE INDEX IF NOT EXISTS, and DROP FUNCTION IF EXISTS before CREATE.
 
 Split into 3 phases because the ALTER TABLE part rewrites the whole
-knowledge_embeddings table (~160k rows, 30-90s on Neon) which exceeds
-Railway's HTTP timeout. The API endpoint runs the full install as a
+knowledge_embeddings table (~160k rows, 60-120s on Neon) which exceeds
+both Railway's HTTP timeout AND the asyncpg pool's default 30s
+command_timeout. The API endpoint runs the full install as a
 BackgroundTask; status can be polled via /admin/hybrid-search-status.
 """
 
 import structlog
 
-from app.core.database import execute, fetch_one
+from app.core.database import execute, fetch_one, get_connection
 
 logger = structlog.get_logger()
 
 
-# Phase 1: ALTER TABLE — slow (table rewrite ~30-90s for 160k rows)
+# Phase 1: ALTER TABLE — slow (table rewrite ~60-120s for 160k rows)
 TSV_COLUMN_SQL = """
 ALTER TABLE knowledge_embeddings
     ADD COLUMN IF NOT EXISTS search_tsv tsvector
@@ -122,16 +123,25 @@ $$;
 
 
 async def install_tsv_column() -> None:
-    """Phase 1: ALTER TABLE — table rewrite, slow."""
+    """
+    Phase 1: ALTER TABLE — table rewrite, slow.
+
+    Bypasses the pool's default command_timeout (30s) by acquiring a
+    connection directly and passing a 600s timeout to conn.execute().
+    Without this, Neon rewriting 160k rows is killed mid-flight.
+    """
     logger.info("hybrid_install_phase_1_tsv_column_start")
-    await execute(TSV_COLUMN_SQL)
+    async with get_connection() as conn:
+        await conn.execute(TSV_COLUMN_SQL, timeout=600)
     logger.info("hybrid_install_phase_1_tsv_column_done")
 
 
 async def install_gin_index() -> None:
     """Phase 2: GIN index on the new tsvector column."""
     logger.info("hybrid_install_phase_2_gin_index_start")
-    await execute(GIN_INDEX_SQL)
+    # GIN on 160k rows can still take ~30-60s — give it room.
+    async with get_connection() as conn:
+        await conn.execute(GIN_INDEX_SQL, timeout=300)
     logger.info("hybrid_install_phase_2_gin_index_done")
 
 
@@ -148,7 +158,7 @@ async def install_hybrid_search() -> dict:
     Idempotent — safe to run multiple times.
 
     Run as a BackgroundTask from the API to avoid HTTP timeout, since
-    phase 1 takes 30-90s on the 160k-row knowledge_embeddings table.
+    phase 1 takes 60-120s on the 160k-row knowledge_embeddings table.
     """
     try:
         await install_tsv_column()
@@ -160,7 +170,11 @@ async def install_hybrid_search() -> dict:
             "phases": ["tsv_column", "gin_index", "hybrid_function"],
         }
     except Exception as e:
-        logger.error("hybrid_install_failed", error=str(e))
+        logger.error(
+            "hybrid_install_failed",
+            error=str(e),
+            error_type=type(e).__name__,
+        )
         raise
 
 
