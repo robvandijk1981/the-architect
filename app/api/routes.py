@@ -99,12 +99,16 @@ async def start_analysis(
         uuid.UUID(analysis_id), intake_json,
     )
 
+    # Resolve effective sector: top-level override wins, else fall back
+    # to the profile's sector. See AnalysisRequest docstring.
+    effective_sector = request.sector or request.organization_profile.sector
+
     # Run analysis in background
     background_tasks.add_task(
         _run_analysis,
         analysis_id,
         request.organization_profile,
-        request.sector,
+        effective_sector,
         rag,
         risk_calc,
         bc_calc,
