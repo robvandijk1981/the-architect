@@ -1,4 +1,4 @@
-"""FastAPI application entry point — The Architect API."""
+"""FastAPI application entry point — ModellenWerk Workforce Intelligence API."""
 
 import sentry_sdk
 from contextlib import asynccontextmanager
