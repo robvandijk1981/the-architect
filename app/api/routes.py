@@ -619,31 +619,63 @@ async def admin_install_benchmark_v2(_: str = Depends(verify_api_key)):
 
 
 # ============================================
-# POST /admin/install-hybrid-search — Phase 4c install
+# POST /admin/install-hybrid-search — Phase 4c install (async)
 # ============================================
 
-@router.post("/admin/install-hybrid-search")
-async def admin_install_hybrid_search(_: str = Depends(verify_api_key)):
-    """
-    Install hybrid search infrastructure (migration 007).
-
-    Adds:
-    - `search_tsv` generated column on `knowledge_embeddings` (Dutch tsvector)
-    - GIN index `idx_knowledge_embeddings_search_tsv`
-    - `hybrid_search_chunks(...)` SQL function combining dense + BM25
-
-    First-install note: ADD COLUMN with GENERATED ALWAYS AS ... STORED on
-    the existing ~160k rows takes 30-90 seconds (full table rewrite). Run
-    during low-traffic window. Subsequent calls are no-ops (idempotent).
-    """
+async def _bg_install_hybrid_search() -> None:
+    """Background-task wrapper around install_hybrid_search()."""
     from app.pipeline.hybrid_search_installer import install_hybrid_search
     try:
-        result = await install_hybrid_search()
-        return result
+        await install_hybrid_search()
+    except Exception as e:
+        logger.error("bg_install_hybrid_search_failed", error=str(e))
+
+
+@router.post("/admin/install-hybrid-search")
+async def admin_install_hybrid_search(
+    background_tasks: BackgroundTasks,
+    _: str = Depends(verify_api_key),
+):
+    """
+    Schedule the hybrid search install in the background.
+
+    Returns immediately with {started: true}. Poll
+    GET /admin/hybrid-search-status to check progress.
+
+    Why background: ALTER TABLE ... ADD COLUMN GENERATED ... STORED on
+    the existing ~160k rows in knowledge_embeddings rewrites the table,
+    which takes 30-90s on Neon and exceeds the Railway HTTP timeout.
+
+    Idempotent — repeated calls are no-ops once components exist.
+    """
+    background_tasks.add_task(_bg_install_hybrid_search)
+    return {
+        "started": True,
+        "message": "Install scheduled. Poll GET /admin/hybrid-search-status to check progress.",
+        "expected_duration_seconds": "30-90 on first install, <1s on subsequent runs",
+    }
+
+
+# ============================================
+# GET /admin/hybrid-search-status — Inspect 4c install state
+# ============================================
+
+@router.get("/admin/hybrid-search-status")
+async def admin_hybrid_search_status(_: str = Depends(verify_api_key)):
+    """
+    Read-only inspection of which hybrid-search components are in place.
+
+    Returns per-component booleans (tsv_column / gin_index / hybrid_function).
+    All three True means the install completed and /admin/test-hybrid-search
+    will return real bm25_score / hybrid_score values.
+    """
+    from app.pipeline.hybrid_search_installer import check_hybrid_search_status
+    try:
+        return await check_hybrid_search_status()
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Failed to install hybrid search: {type(e).__name__}: {e}",
+            detail=f"Status check failed: {type(e).__name__}: {e}",
         )
 
 
