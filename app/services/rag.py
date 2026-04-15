@@ -8,9 +8,16 @@ from decimal import Decimal
 from app.core.config import get_settings
 from app.core.database import fetch_all, fetch_one
 from app.services.embedder import EmbeddingService
+from app.services.query_expansion import expand_query
 from app.models.knowledge import Citation
 
 logger = structlog.get_logger()
+
+# Hybrid search alpha: dense weight (0.85) + BM25 weight (0.15).
+# Strong dense bias because Voyage embeddings are semantic; BM25 is a
+# tie-breaker for exact-term matches (acronyms, names, IDs) that the
+# embedder may underweight.
+CHAT_HYBRID_ALPHA = 0.85
 
 # System prompt for The Architect — v2: Intelligent Analyst
 ARCHITECT_SYSTEM_PROMPT = """Je bent de workforce intelligence van ModellenWerk.
@@ -273,24 +280,34 @@ class RAGService:
         """
         Hybrid RAG pipeline:
         1. Query structured database (functions, organizations, sectors)
-        2. Embed question + retrieve relevant RAG chunks
-        3. Combine structured data + RAG context
-        4. Generate answer with Claude
-        5. Extract citations
+        2. Expand acronyms in the query (ZSM → +"Zo Snel Mogelijk", etc.)
+        3. Hybrid retrieve (dense cosine + BM25 ts_rank blended with alpha=0.85)
+        4. Rerank with Voyage rerank-2 using the ORIGINAL (non-expanded) query
+        5. Combine structured data + RAG context
+        6. Generate answer with Claude
+        7. Extract citations
         """
-        # Step 1: Structured data lookup (also auto-detects sector from keywords)
+        # Step 1: Structured data lookup uses the ORIGINAL question —
+        # its keyword matching is already tolerant.
         structured_context, detected_sector = await self._lookup_structured_data(question, sector)
 
-        # Step 2a: Retrieve candidate pool (wider than max_sources — reranker picks the best)
+        # Step 2: Acronym expansion — only for the retrieval call.
+        # Dense embeddings barely change, but BM25 now matches both the
+        # abbreviation and the spelled-out form in the corpus.
+        expanded_query = expand_query(question)
+
+        # Step 3: Hybrid retrieve (wider pool — reranker picks the best)
         candidate_count = max(20, max_sources * 2)
-        candidates = await self.embedder.search(
-            query=question,
+        candidates = await self.embedder.hybrid_search(
+            query=expanded_query,
             match_count=candidate_count,
             sector=detected_sector,
             threshold=0.30,
+            alpha=CHAT_HYBRID_ALPHA,
         )
 
-        # Step 2b: Rerank candidates with Voyage rerank-2 and keep top max_sources
+        # Step 4: Rerank with ORIGINAL query — rerank-2 is semantic and
+        # does best with the user's natural phrasing, not the expansion.
         chunks = await self.embedder.rerank_chunks(
             query=question,
             chunks=candidates,
@@ -305,7 +322,7 @@ class RAGService:
                 [],
             )
 
-        # Step 3: Assemble combined context
+        # Step 5: Assemble combined context
         rag_context = self._assemble_context(chunks, organization_context)
 
         # Combine: structured data first (exact), then RAG (contextual)
@@ -315,7 +332,7 @@ class RAGService:
         if rag_context:
             full_context += "## KENNISBASIS (contextuele bronnen)\n" + rag_context
 
-        # Step 4: Generate with Claude
+        # Step 6: Generate with Claude
         system = system_prompt_override or ARCHITECT_SYSTEM_PROMPT
         messages = [
             {
@@ -343,18 +360,20 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
 
         answer = response.content[0].text
 
-        # Step 5: Build citations
+        # Step 7: Build citations
         citations = self._build_citations(chunks)
 
         logger.info(
             "hybrid_rag_query_completed",
             question=question[:80],
+            acronyms_expanded=expanded_query != question,
             candidates_retrieved=len(candidates),
             chunks_used=len(chunks),
             has_structured_data=bool(structured_context),
             provided_sector=sector,
             detected_sector=detected_sector,
             threshold=0.30,
+            alpha=CHAT_HYBRID_ALPHA,
             reranked=True,
             tokens_in=response.usage.input_tokens,
             tokens_out=response.usage.output_tokens,
@@ -371,30 +390,36 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
         """
         Generate a comprehensive workforce analysis for an organization.
         Used by the /analyze endpoint.
+
+        Uses hybrid_search for all three retrievals — identical retrieval
+        semantics to chat so analysis consistency stays aligned.
         """
-        # Get structured data for the sector (ignores detected_sector — already have explicit one)
+        # Get structured data for the sector
         structured_context, _ = await self._lookup_structured_data(
             f"workforce analyse {sector} AI impact functies kosten baten", sector
         )
 
         # Retrieve sector-specific knowledge
-        sector_knowledge = await self.embedder.search(
+        sector_knowledge = await self.embedder.hybrid_search(
             query=f"workforce analyse {sector} sector kenmerken arbeidsmarkt",
             match_count=20,
             sector=sector,
+            alpha=CHAT_HYBRID_ALPHA,
         )
 
         # Retrieve risk-specific knowledge
-        risk_knowledge = await self.embedder.search(
+        risk_knowledge = await self.embedder.hybrid_search(
             query="vergrijzing arbeidsmarkt automatisering verzuim verloop innovatie risico",
             match_count=10,
             sector=sector,
+            alpha=CHAT_HYBRID_ALPHA,
         )
 
-        # Retrieve intervention knowledge
-        intervention_knowledge = await self.embedder.search(
+        # Retrieve intervention knowledge (no sector filter — cross-sector interventions)
+        intervention_knowledge = await self.embedder.hybrid_search(
             query="interventies strategische personeelsplanning retentie verzuimreductie AI verandermanagement",
             match_count=10,
+            alpha=CHAT_HYBRID_ALPHA,
         )
 
         # Combine all knowledge
