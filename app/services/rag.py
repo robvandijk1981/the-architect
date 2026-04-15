@@ -1,5 +1,6 @@
 """RAG service — orchestrates retrieval + structured data + Claude for grounded responses."""
 
+import httpx
 import anthropic
 import structlog
 from decimal import Decimal
@@ -71,7 +72,11 @@ class RAGService:
 
     def __init__(self):
         settings = get_settings()
-        self.claude = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        self.claude = anthropic.AsyncAnthropic(
+            api_key=settings.anthropic_api_key,
+            timeout=httpx.Timeout(120.0, connect=10.0),
+            max_retries=2,
+        )
         self.embedder = EmbeddingService()
         self.model = settings.claude_model
         self.max_tokens = settings.claude_max_tokens
@@ -321,7 +326,7 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
             }
         ]
 
-        response = self.claude.messages.create(
+        response = await self.claude.messages.create(
             model=self.model,
             max_tokens=self.max_tokens,
             system=system,
@@ -455,7 +460,7 @@ Genereer een JSON-response met de volgende structuur:
 Baseer alles op de beschikbare data. Gebruik EXACTE CIJFERS uit de gestructureerde database.
 Wees specifiek voor de sector {sector}. Combineer data met contextuele kennis."""
 
-        response = self.claude.messages.create(
+        response = await self.claude.messages.create(
             model=self.model,
             max_tokens=8192,
             system=ARCHITECT_SYSTEM_PROMPT,
