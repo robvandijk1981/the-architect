@@ -619,6 +619,94 @@ async def admin_install_benchmark_v2(_: str = Depends(verify_api_key)):
 
 
 # ============================================
+# POST /admin/install-hybrid-search — Phase 4c install
+# ============================================
+
+@router.post("/admin/install-hybrid-search")
+async def admin_install_hybrid_search(_: str = Depends(verify_api_key)):
+    """
+    Install hybrid search infrastructure (migration 007).
+
+    Adds:
+    - `search_tsv` generated column on `knowledge_embeddings` (Dutch tsvector)
+    - GIN index `idx_knowledge_embeddings_search_tsv`
+    - `hybrid_search_chunks(...)` SQL function combining dense + BM25
+
+    First-install note: ADD COLUMN with GENERATED ALWAYS AS ... STORED on
+    the existing ~160k rows takes 30-90 seconds (full table rewrite). Run
+    during low-traffic window. Subsequent calls are no-ops (idempotent).
+    """
+    from app.pipeline.hybrid_search_installer import install_hybrid_search
+    try:
+        result = await install_hybrid_search()
+        return result
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to install hybrid search: {type(e).__name__}: {e}",
+        )
+
+
+# ============================================
+# GET /admin/test-hybrid-search — Validation harness for phase 4c
+# ============================================
+
+@router.get("/admin/test-hybrid-search")
+async def admin_test_hybrid_search(
+    query: str,
+    sector: str | None = None,
+    alpha: float = 0.7,
+    threshold: float = 0.30,
+    match_count: int = 5,
+    _: str = Depends(verify_api_key),
+):
+    """
+    Run a sample hybrid query — validates the installed function works.
+
+    Returns top-N chunks with `similarity` (dense), `bm25_score`, and
+    `hybrid_score`, sorted by hybrid_score desc. Use to compare against
+    the regular `embedder.search` output before switching `rag.query` over.
+
+    Example:
+      GET /admin/test-hybrid-search?query=ZSM%20OM%20capaciteit&sector=overheid
+    """
+    from app.services.embedder import EmbeddingService
+
+    embedder = EmbeddingService()
+    try:
+        rows = await embedder.hybrid_search(
+            query=query,
+            match_count=match_count,
+            sector=sector,
+            threshold=threshold,
+            alpha=alpha,
+        )
+        return {
+            "query": query,
+            "sector": sector,
+            "alpha": alpha,
+            "threshold": threshold,
+            "result_count": len(rows),
+            "results": [
+                {
+                    "chunk_id": str(r.get("id", "")),
+                    "source_name": r.get("source_name"),
+                    "similarity": r.get("similarity"),
+                    "bm25_score": r.get("bm25_score"),
+                    "hybrid_score": r.get("hybrid_score"),
+                    "excerpt": (r.get("chunk_text", "") or "")[:200],
+                }
+                for r in rows
+            ],
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Hybrid search test failed: {type(e).__name__}: {e}",
+        )
+
+
+# ============================================
 # Background Task: Full Analysis
 # ============================================
 
