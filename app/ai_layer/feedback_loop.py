@@ -14,6 +14,38 @@ from app.statistical.bayesian import BayesianBenchmarkUpdater
 logger = structlog.get_logger()
 
 
+# Mapping: Dutch KPI slugs (used in chat / portal / RAG) → English column
+# names in the sector_benchmarks table. Keeps the public API consistent
+# (Dutch everywhere) while the legacy DB schema stays English.
+KPI_NAME_MAPPING = {
+    # Dutch slug → English column
+    "verzuim_pct": "absenteeism_rate",
+    "verzuimpercentage": "absenteeism_rate",
+    "ziekteverzuim": "absenteeism_rate",
+    "verloop_pct": "turnover_rate",
+    "verlooppercentage": "turnover_rate",
+    "vacaturegraad": "vacancy_rate",
+    "vacatures_pct": "vacancy_rate",
+    "tijd_tot_invulling": "time_to_fill_days",
+    "ttv_dagen": "time_to_fill_days",
+    "kosten_per_hire": "cost_per_hire",
+    "wervingskosten": "cost_per_hire",
+    "burnout_pct": "burnout_prevalence",
+    "burnoutprevalentie": "burnout_prevalence",
+    "gem_loonkosten_fte": "avg_labour_cost_fte",
+    "gem_jaarsalaris": "avg_labour_cost_fte",
+}
+
+
+def _normalize_kpi_name(kpi_name: str) -> str:
+    """
+    Translate a KPI slug to the canonical English column name used in
+    sector_benchmarks. If the input is already English (or unknown),
+    return it unchanged.
+    """
+    return KPI_NAME_MAPPING.get(kpi_name.lower(), kpi_name)
+
+
 class FeedbackLoop:
     """
     Manages the continuous learning cycle:
@@ -23,8 +55,12 @@ class FeedbackLoop:
     4. Track sector trends over time
     """
 
-    # Thresholds for anomaly detection (standard deviations from mean)
-    ANOMALY_THRESHOLD_SIGMA = 2.5  # Flag data > 2.5 sigma from benchmark mean
+    # Standard deviations from mean to flag as anomaly. 2.0σ is industry
+    # standard for "moderate anomaly worth attention". 2.5σ was too strict
+    # — only caught extreme outliers, missed obviously-high values like
+    # verzuim 9.5% (sector mean 6.1%, std ~0.92% → 3.7σ but routinely
+    # missed because of KPI name mismatches in the legacy implementation).
+    ANOMALY_THRESHOLD_SIGMA = 2.0
 
     @classmethod
     async def log_interaction(
@@ -170,6 +206,10 @@ class FeedbackLoop:
         """
         Detect anomalies by comparing new data to sector benchmarks.
 
+        Accepts both flat dict ({kpi: value}) and wrapped dict
+        ({"kpis": {kpi: value}}). Translates Dutch KPI slugs to the
+        English column names used in sector_benchmarks.
+
         Args:
             sector: Sector ID
             new_data: New KPI data to analyze
@@ -183,19 +223,33 @@ class FeedbackLoop:
                 ]
             }
         """
+        # Auto-unwrap if caller used the {"kpis": {...}} shape from docs/API.md
+        if isinstance(new_data, dict) and "kpis" in new_data and isinstance(new_data["kpis"], dict):
+            kpi_data = new_data["kpis"]
+        else:
+            kpi_data = new_data
+
         try:
             benchmarks = await fetch_one(
                 "SELECT * FROM sector_benchmarks WHERE sector_id = $1 ORDER BY year DESC LIMIT 1",
                 sector,
             )
             if not benchmarks:
-                return {"has_anomalies": False, "anomalies": []}
+                logger.warning("anomalies_no_benchmarks", sector=sector)
+                return {"has_anomalies": False, "anomaly_count": 0, "anomalies": [], "action": "No benchmarks for this sector"}
 
             anomalies = []
+            checked_kpis = []
 
-            for kpi_name, observed_value in new_data.items():
+            for raw_kpi_name, observed_value in kpi_data.items():
+                # Translate Dutch KPI slug → English column name (or keep as-is if already English)
+                kpi_name = _normalize_kpi_name(str(raw_kpi_name))
+
                 if kpi_name not in benchmarks:
+                    logger.debug("anomalies_kpi_not_found", raw=raw_kpi_name, normalized=kpi_name)
                     continue
+
+                checked_kpis.append(raw_kpi_name)
 
                 benchmark = benchmarks[kpi_name]
                 if isinstance(benchmark, dict):
@@ -214,25 +268,33 @@ class FeedbackLoop:
                 # Flag if anomalous
                 if abs(z_score) > cls.ANOMALY_THRESHOLD_SIGMA:
                     severity = "HIGH" if abs(z_score) > 4 else "MEDIUM"
+                    direction = "above" if z_score > 0 else "below"
                     anomalies.append({
-                        "kpi": kpi_name,
+                        "kpi": raw_kpi_name,  # report back the user's original slug
                         "value": float(observed_value),
                         "benchmark_mean": float(benchmark_mean) if benchmark_mean else 0,
                         "z_score": round(z_score, 2),
                         "severity": severity,
-                        "message": f"{kpi_name}: {severity} anomaly ({z_score:.1f} σ from benchmark)",
+                        "message": f"{raw_kpi_name}: {severity} anomaly — {abs(z_score):.1f}σ {direction} sector benchmark ({benchmark_mean})",
                     })
+
+            logger.info(
+                "anomaly_check_completed",
+                sector=sector,
+                checked=len(checked_kpis),
+                found=len(anomalies),
+            )
 
             return {
                 "has_anomalies": len(anomalies) > 0,
                 "anomaly_count": len(anomalies),
                 "anomalies": anomalies,
-                "action": "Review data quality" if anomalies else "Data within normal range",
+                "action": "Review data quality and underlying causes" if anomalies else "Data within normal range",
             }
 
         except Exception as e:
             logger.error("error_detecting_anomalies", error=str(e))
-            return {"has_anomalies": False, "anomalies": [], "error": str(e)}
+            return {"has_anomalies": False, "anomaly_count": 0, "anomalies": [], "error": str(e)}
 
     @classmethod
     async def get_sector_trend(
