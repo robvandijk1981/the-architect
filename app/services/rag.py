@@ -85,10 +85,10 @@ class RAGService:
     # Structured Data Lookup
     # ============================================
 
-    async def _lookup_structured_data(self, question: str, sector: str | None = None) -> str:
+    async def _lookup_structured_data(self, question: str, sector: str | None = None) -> tuple[str, str | None]:
         """
         Query the structured database for relevant data based on the question.
-        Returns formatted context string, or empty string if no relevant data found.
+        Returns (formatted context string, detected sector). Empty string = no relevant data found.
         """
         q_lower = question.lower()
         parts = []
@@ -115,7 +115,7 @@ class RAGService:
                 "SELECT * FROM function_profiles LIMIT 0"  # Just check if table exists
             )
         except Exception:
-            return ""  # Tables don't exist yet
+            return ("", detected_sector)  # Tables don't exist yet
 
         # Search for function names in the question
         try:
@@ -255,8 +255,8 @@ class RAGService:
                 logger.warning("structured_totals_lookup_failed", error=str(e))
 
         if parts:
-            return "## GESTRUCTUREERDE DATA (exacte cijfers uit database)\n" + "\n".join(parts)
-        return ""
+            return ("## GESTRUCTUREERDE DATA (exacte cijfers uit database)\n" + "\n".join(parts), detected_sector)
+        return ("", detected_sector)
 
     # ============================================
     # Main Query Pipeline
@@ -278,15 +278,15 @@ class RAGService:
         4. Generate answer with Claude
         5. Extract citations
         """
-        # Step 1: Structured data lookup
-        structured_context = await self._lookup_structured_data(question, sector)
+        # Step 1: Structured data lookup (also auto-detects sector from keywords)
+        structured_context, detected_sector = await self._lookup_structured_data(question, sector)
 
-        # Step 2: Retrieve relevant knowledge (RAG)
+        # Step 2: Retrieve relevant knowledge (RAG) — filter by detected sector to tighten relevance
         chunks = await self.embedder.search(
             query=question,
             match_count=max_sources,
-            sector=sector,
-            threshold=0.25,
+            sector=detected_sector,
+            threshold=0.35,
         )
 
         if not chunks and not structured_context:
@@ -343,6 +343,9 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
             question=question[:80],
             chunks_used=len(chunks),
             has_structured_data=bool(structured_context),
+            provided_sector=sector,
+            detected_sector=detected_sector,
+            threshold=0.35,
             tokens_in=response.usage.input_tokens,
             tokens_out=response.usage.output_tokens,
         )
@@ -359,8 +362,8 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
         Generate a comprehensive workforce analysis for an organization.
         Used by the /analyze endpoint.
         """
-        # Get structured data for the sector
-        structured_context = await self._lookup_structured_data(
+        # Get structured data for the sector (ignores detected_sector — already have explicit one)
+        structured_context, _ = await self._lookup_structured_data(
             f"workforce analyse {sector} AI impact functies kosten baten", sector
         )
 
