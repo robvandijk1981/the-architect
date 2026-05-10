@@ -276,7 +276,7 @@ async def admin_reseed_organizations(
                 except Exception:
                     pass
 
-            # Create sector_profiles table
+            # Create sector_profiles table (TIMESTAMPTZ for tz-aware freshness checks)
             await conn.execute("""
                 CREATE TABLE IF NOT EXISTS sector_profiles (
                     sector_slug TEXT PRIMARY KEY,
@@ -294,15 +294,26 @@ async def admin_reseed_organizations(
                     ai_baten_75_mln DECIMAL(10,2),
                     fte_bespaard_50 INTEGER,
                     kritieke_functies TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    created_at TIMESTAMPTZ DEFAULT now(),
+                    updated_at TIMESTAMPTZ DEFAULT now()
                 )
             """)
 
-        # Clean existing readiness scan data before re-seed
+            # Migrate existing tables from TIMESTAMP to TIMESTAMPTZ (idempotent)
+            for col in ("created_at", "updated_at"):
+                try:
+                    await conn.execute(
+                        f"ALTER TABLE sector_profiles ALTER COLUMN {col} "
+                        f"TYPE TIMESTAMPTZ USING {col} AT TIME ZONE 'UTC'"
+                    )
+                except Exception:
+                    pass
+
+        # Clean existing data before re-seed (force fresh created_at on all rows)
         from app.pipeline.seed_organizations import seed_organizations, seed_sector_profiles
         async with get_connection() as conn:
             await conn.execute("DELETE FROM organizations WHERE source = 'readiness_scan_2026'")
+            await conn.execute("DELETE FROM sector_profiles")
         await seed_organizations()
         await seed_sector_profiles()
 
@@ -344,7 +355,10 @@ async def data_freshness(
         for row in layer_stats:
             latest = row.get("latest_update")
             if latest:
-                age_days = (now - latest).days if latest.tzinfo else (now.replace(tzinfo=None) - latest).days
+                if latest.tzinfo:
+                    age_days = (now - latest).days
+                else:
+                    age_days = (now.replace(tzinfo=None) - latest).days
                 if age_days < 30:
                     status = "green"
                 elif age_days < 90:
@@ -367,24 +381,30 @@ async def data_freshness(
     except Exception:
         pass
 
-    # Check structured tables
+    # Check structured tables (use GREATEST of created/updated; handle naive timestamps)
     tables = {}
     for table, query in [
-        ("function_profiles", "SELECT count(*) as cnt, max(created_at) as latest FROM function_profiles"),
+        ("function_profiles", "SELECT count(*) as cnt, max(GREATEST(created_at, COALESCE(updated_at, created_at))) as latest FROM function_profiles"),
         ("function_impacts", "SELECT count(*) as cnt, max(created_at) as latest FROM function_impacts"),
-        ("organizations", "SELECT count(*) as cnt, max(created_at) as latest FROM organizations WHERE source = 'readiness_scan_2026'"),
-        ("sector_profiles", "SELECT count(*) as cnt, max(created_at) as latest FROM sector_profiles"),
+        ("organizations", "SELECT count(*) as cnt, max(GREATEST(created_at, COALESCE(updated_at, created_at))) as latest FROM organizations WHERE source = 'readiness_scan_2026'"),
+        ("sector_profiles", "SELECT count(*) as cnt, max(GREATEST(created_at, COALESCE(updated_at, created_at))) as latest FROM sector_profiles"),
     ]:
         try:
             row = await fetch_one(query)
             if row:
                 latest = row.get("latest")
-                age_days = (now - latest).days if latest and latest.tzinfo else None
+                if latest:
+                    if latest.tzinfo:
+                        age_days = (now - latest).days
+                    else:
+                        age_days = (now.replace(tzinfo=None) - latest).days
+                else:
+                    age_days = None
                 tables[table] = {
                     "records": row.get("cnt", 0),
                     "latest_update": str(latest)[:10] if latest else None,
                     "age_days": age_days,
-                    "status": "green" if age_days and age_days < 30 else ("orange" if age_days and age_days < 90 else "red"),
+                    "status": "green" if age_days is not None and age_days < 30 else ("orange" if age_days is not None and age_days < 90 else "red"),
                 }
         except Exception:
             tables[table] = {"records": 0, "status": "missing"}
