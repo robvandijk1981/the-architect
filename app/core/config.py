@@ -32,7 +32,8 @@ class Settings(BaseSettings):
     chunk_overlap: int = 50
 
     # --- Claude ---
-    claude_model: str = "claude-sonnet-4-20250514"
+    # Override via Railway env var CLAUDE_MODEL indien nodig.
+    claude_model: str = "claude-sonnet-4-6"
     claude_max_tokens: int = 4096
 
     # --- Monitoring ---
