@@ -15,6 +15,7 @@ per sector. Meermaals draaien is veilig.
 
 import json
 import re
+from datetime import date
 from pathlib import Path
 
 import structlog
@@ -101,6 +102,15 @@ def _statements(sql: str) -> list[str]:
     return [s.strip() for s in statements if s.strip()]
 
 
+def _datum(waarde):
+    """asyncpg wil een date-object voor een DATE-parameter, geen tekst.
+
+    De ::date-cast in de UPDATE helpt niet: Postgres kent de parameter dan al
+    het type date toe, en asyncpg weigert er tekst in te stoppen.
+    """
+    return date.fromisoformat(waarde) if isinstance(waarde, str) else waarde
+
+
 async def install_robot_parameters() -> dict:
     if not MIGRATIE.exists():
         raise FileNotFoundError(f"Migratie ontbreekt: {MIGRATIE}")
@@ -164,7 +174,7 @@ async def install_robot_parameters() -> dict:
                 s["robot_vervanging_pct"],
                 s.get("nea_fysiek_belastend_pct"),
                 json.dumps(s["robot_params_herkomst"], ensure_ascii=False),
-                s["robot_params_peildatum"],
+                _datum(s["robot_params_peildatum"]),
                 s["robot_params_versie"],
                 s.get("robot_params_onzekerheid"),
             )
