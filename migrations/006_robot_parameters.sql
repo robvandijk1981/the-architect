@@ -25,7 +25,7 @@ COMMENT ON COLUMN sector_profiles.robot_vervanging_pct IS
   'Autonome uitvoering zonder mens in de lus. Nooit gebruiken als prognose van FTE-verlies.';
 
 COMMENT ON COLUMN sector_profiles.robot_params_herkomst IS
-  'Per veld: waarde, betrouwbaarheid (hard cijfer, afgeleid of inschatting), toelichting en bronnen met jaar en url. Deze kolom bestaat omdat rag.py gestructureerde cijfers als exacte feiten presenteert; zonder herkomst zou een ModellenWerk-schatting hetzelfde gezag krijgen als een FTE-telling.';
+  'Per veld: waarde, betrouwbaarheid (hard cijfer, afgeleid of inschatting), toelichting en bronnen met jaar en url. Deze kolom bestaat omdat rag.py gestructureerde cijfers als exacte feiten presenteert — zonder herkomst zou een ModellenWerk-schatting hetzelfde gezag krijgen als een FTE-telling.';
 
 COMMENT ON COLUMN sector_profiles.robot_params_onzekerheid IS
   'Onzekerheidsmarge in procentpunten op de som van de drie robotvelden.';

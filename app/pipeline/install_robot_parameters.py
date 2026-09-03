@@ -3,7 +3,8 @@
 Waarom een eigen installer en niet run_migration() uit seed_organizations:
 die splitst de SQL op ';' en gooit elk blok weg dat met '--' begint, waardoor
 een statement met een commentaarregel erboven stilzwijgend verdwijnt. Hier
-worden commentaarregels eerst gestript en pas daarna wordt er gesplitst.
+splitst een scanner die tekst, dollar-quotes en commentaar herkent, zodat een
+puntkomma binnen een COMMENT-tekst het statement niet meer doormidden knipt.
 
 Waarom niet via seed_sector_profiles(): die functie keert vroegtijdig terug
 zodra er negen sectoren in de tabel staan, dus hij zou niets doen.
@@ -13,6 +14,7 @@ per sector. Meermaals draaien is veilig.
 """
 
 import json
+import re
 from pathlib import Path
 
 import structlog
@@ -25,6 +27,9 @@ WORTEL = Path(__file__).parent.parent.parent
 MIGRATIE = WORTEL / "migrations" / "006_robot_parameters.sql"
 DATA = WORTEL / "data" / "sector_profiles_robot.json"
 
+# Postgres dollar-quote: $$ of $tag$ met een identifier als tag.
+DOLLAR_QUOTE = re.compile(r"\$(?:[A-Za-z_][A-Za-z_0-9]*)?\$")
+
 VELDEN = (
     "robotrelevant_aandeel_pct",
     "robot_ondersteuning_pct",
@@ -34,11 +39,66 @@ VELDEN = (
 
 
 def _statements(sql: str) -> list[str]:
-    """Strip commentaarregels, splits daarna pas op puntkomma."""
-    schoon = "\n".join(
-        r for r in sql.splitlines() if not r.strip().startswith("--")
-    )
-    return [s.strip() for s in schoon.split(";") if s.strip()]
+    """Splits de SQL op puntkomma, maar alleen buiten tekst en commentaar.
+
+    Naief splitsen op elke ';' brak op migratie 006: een COMMENT ON COLUMN
+    bevatte een puntkomma binnen de aanhalingstekens, waardoor de staart van
+    die zin als los statement met een openstaande quote werd aangeboden.
+    Deze scanner loopt teken voor teken en herkent tekst ('...', met '' als
+    ontsnapping), dollar-quotes ($$ of $tag$), regelcommentaar (--) en
+    blokcommentaar (/* */). Commentaar valt weg, de rest blijft heel.
+    """
+    statements: list[str] = []
+    huidig: list[str] = []
+    i, n = 0, len(sql)
+
+    while i < n:
+        teken = sql[i]
+
+        if teken == "'":
+            j = i + 1
+            while j < n:
+                if sql[j] != "'":
+                    j += 1
+                elif j + 1 < n and sql[j + 1] == "'":  # '' is een quote in de tekst
+                    j += 2
+                else:
+                    j += 1
+                    break
+            huidig.append(sql[i:j])
+            i = j
+            continue
+
+        if teken == "$":
+            tag = DOLLAR_QUOTE.match(sql, i)
+            if tag:
+                sluit = sql.find(tag.group(), tag.end())
+                j = n if sluit == -1 else sluit + len(tag.group())
+                huidig.append(sql[i:j])
+                i = j
+                continue
+
+        if sql.startswith("--", i):
+            einde = sql.find("\n", i)
+            i = n if einde == -1 else einde
+            continue
+
+        if sql.startswith("/*", i):
+            einde = sql.find("*/", i + 2)
+            i = n if einde == -1 else einde + 2
+            continue
+
+        if teken == ";":
+            statements.append("".join(huidig))
+            huidig = []
+            i += 1
+            continue
+
+        huidig.append(teken)
+        i += 1
+
+    statements.append("".join(huidig))
+    return [s.strip() for s in statements if s.strip()]
 
 
 async def install_robot_parameters() -> dict:
