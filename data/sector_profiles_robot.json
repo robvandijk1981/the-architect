@@ -1,0 +1,524 @@
+{
+  "peildatum": "2026-09-01",
+  "versie": "voorstel-2",
+  "sector_profiles_robot": [
+    {
+      "sector_slug": "transport",
+      "robotrelevant_aandeel_pct": 51,
+      "robot_ondersteuning_pct": 7,
+      "robot_augmentatie_pct": 10,
+      "robot_vervanging_pct": 8,
+      "nea_fysiek_belastend_pct": 51,
+      "robot_params_onzekerheid": 5,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 51,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            49,
+            51
+          ],
+          "toelichting": "De enige sector waar de beroepenmaat en de belastingmaat vrijwel samenvallen. Daarmee het best onderbouwde fysiek_aandeel van de negen."
+        },
+        "robot_ondersteuning": {
+          "waarde": 7,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Tilhulpen en cobots bij bagage, distributie en laden en lossen. Schiphol is het hardste NL-voorbeeld: 19 plus 5 bagagerobots, 120 e-CLS tilhulpen en de eis dat alle 385 werkplekken in de bagagehallen per april 2024 een tilhulp hebben. Aanleiding was een eis van de Arbeidsinspectie, niet een business case; dat is relevant voor het tempo elders.",
+          "bronnen": [
+            {
+              "bron": "Schiphol: 19 plus 5 bagagerobots en 120 e-CLS tilhulpen; alle 385 werkplekken in de bagagehallen een tilhulp per april 2024, op eis van de Arbeidsinspectie",
+              "jaar": 2023,
+              "url": "https://news.schiphol.com/employees-start-making-use-of-new-baggage-robots/"
+            }
+          ]
+        },
+        "robot_augmentatie": {
+          "waarde": 10,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "AMR's in distributiecentra waarbij de orderpicker blijft beslissen, op afstand bediende kranen, en ATO op GoA2 waarbij de machinist verantwoordelijk blijft. Transport en logistiek is wereldwijd de grootste categorie professionele servicerobots met 102.900 units in 2024 (+14%). Een NL-penetratiecijfer voor magazijnautomatisering bestaat niet; dit getal steunt dus op de wereldwijde trend plus NL-cases.",
+          "bronnen": [
+            {
+              "bron": "IFR, Service Robots persbericht okt 2025: transport en logistiek 102.900 units (+14%), grootste categorie",
+              "jaar": 2024,
+              "url": "https://ifr.org/ifr-press-releases/news/service-robots-see-global-growth-boom"
+            },
+            {
+              "bron": "ProRail, ATO-testfase Betuweroute gestart okt 2025: GoA2, een jaar, zonder commerciele lading, testteam altijd in de cabine",
+              "jaar": 2025,
+              "url": "https://www.prorail.nl/nieuws/prorail-start-testfase-met-automatisch-rijdende-treinen-op-betuweroute"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 8,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Horizontaal containertransport en stapelen zijn in Rotterdam aantoonbaar vervangen. RWG draait een volautomatische terminal met 180 medewerkers en dagelijks tien a vijftien man operationeel; ECT Delta is geautomatiseerd sinds 1993. Dit is de enige NL-sector met een decennialang bewezen vervangingsspoor.",
+          "bronnen": [
+            {
+              "bron": "Binnenvaartkrant, RWG Maasvlakte 2: volautomatische terminal, 180 medewerkers, dagelijks 10 a 15 man operationeel",
+              "jaar": 2015,
+              "url": "https://binnenvaartkrant.nl/rwg-een-it-bedrijf-dat-containers-overslaat"
+            },
+            {
+              "bron": "ECT: Delta-terminal Rotterdam geautomatiseerd sinds 1993, start met 58 AGV's",
+              "jaar": 2023,
+              "url": "https://www.ect.nl/en/news/fast-forward/30-years-ago-ect-opened-very-first-automated-terminal-world"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sector_slug": "industrie",
+      "robotrelevant_aandeel_pct": 41,
+      "robot_ondersteuning_pct": 5,
+      "robot_augmentatie_pct": 7,
+      "robot_vervanging_pct": 10,
+      "nea_fysiek_belastend_pct": 41,
+      "robot_params_onzekerheid": 4,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 41,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            34,
+            43
+          ],
+          "toelichting": "Ankers convergeren; goed onderbouwd."
+        },
+        "robot_ondersteuning": {
+          "waarde": 5,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Tilhulpen, manipulatoren en exoskeletten bij assemblage en handling. Geen NL-adoptiecijfer gevonden.",
+          "bronnen": []
+        },
+        "robot_augmentatie": {
+          "waarde": 7,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Cobots naast de operator en visuele kwaliteitsinspectie waarbij de mens beoordeelt. Cobots scoren op kwaliteitsinspectie relatief hoger dan klassieke robots.",
+          "bronnen": [
+            {
+              "bron": "IFR World Robotics (data 2023), geciteerd in TNO 2026 R10389: NL 264 robots per 10.000 werknemers, Duitsland 429, Zuid-Korea 1.012",
+              "jaar": 2023,
+              "url": "https://publications.tno.nl/publication/34645840/IPjRTIJK/TNO-2026-R10389.pdf"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 10,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "HOOGSTE VERVANGINGSSCORE VAN DE NEGEN, en de enige die op een echte internationale benchmark rust. De robotdichtheid in Nederland is 264 per 10.000 werknemers in de industrie (IFR, data 2023, geciteerd door TNO), tegen 429 in Duitsland en 1.012 in Zuid-Korea; West-Europa kwam in 2024 op 267 en de EU-27 op 231. Nederland zit dus rond het West-Europese gemiddelde en ver onder de koplopers. Palletiseren, machinebelading, verpakken, lassen en oppervlaktebehandeling zijn bewezen vervangbaar.",
+          "bronnen": [
+            {
+              "bron": "IFR World Robotics (data 2023), geciteerd in TNO 2026 R10389: NL 264 robots per 10.000 werknemers, Duitsland 429, Zuid-Korea 1.012",
+              "jaar": 2023,
+              "url": "https://publications.tno.nl/publication/34645840/IPjRTIJK/TNO-2026-R10389.pdf"
+            },
+            {
+              "bron": "IFR, persbericht World Robotics 2025: West-Europa 267, EU-27 231, wereldgemiddelde 132",
+              "jaar": 2024,
+              "url": "https://ifr.org/ifr-press-releases/news/robot-density-surges-in-europe-asia-and-americas"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sector_slug": "bouw",
+      "robotrelevant_aandeel_pct": 52,
+      "robot_ondersteuning_pct": 6,
+      "robot_augmentatie_pct": 8,
+      "robot_vervanging_pct": 6,
+      "nea_fysiek_belastend_pct": 48,
+      "robot_params_onzekerheid": 7,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 52,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            48,
+            57
+          ],
+          "toelichting": "Hoogste fysiek_aandeel van de negen; beide ankers liggen dicht bij elkaar. Let op een editieverschil: de TNO-factsheet 2024 (data NEA 2023) gaf bouw 57% en de factsheet 2025 (data NEA 2024) geeft 48%. Er is voor gekozen consequent de nieuwste editie als ondergrens te gebruiken."
+        },
+        "robot_ondersteuning": {
+          "waarde": 6,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Exoskeletten bij stukadoren, boren boven schouderhoogte en gevelwerk. In het TNO-, Knauf- en NOA-praktijkonderzoek met 39 stukadoors voelde 93% zich fysiek ondersteund, wilde 65% doorgaan, en werd in het lab 30 tot 40% minder spieractiviteit gemeten. Volandis publiceert geen adoptiegraad, dus de omvang is onbekend.",
+          "bronnen": [
+            {
+              "bron": "TNO/Knauf/NOA praktijkonderzoek exoskelet stukadoors (n=39): 93% voelde ondersteuning, lab 30-40% minder spieractiviteit",
+              "jaar": 2022,
+              "url": "https://www.tno.nl/nl/newsroom/2022/03/stukadoors-overwegend-positief-gebruik/"
+            }
+          ]
+        },
+        "robot_augmentatie": {
+          "waarde": 8,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Metselrobots en drone-opname met menselijke beoordeling. Monumental is het snelst bewegende harde NL-datapunt van dit hele voorstel: van 15 robots in juli 2025 naar meer dan 150 in NL en het VK een jaar later, meer dan 100 woningen, met een robots-as-a-service-model waarbij de aannemer per opgeleverde muur betaalt en niet per robot. Dat verdienmodel omzeilt precies de kapitaaldrempel die de sector remt.",
+          "bronnen": [
+            {
+              "bron": "IO+, Monumental haalt USD 32 mln op: >150 metselrobots NL+VK, >100 woningen, robots-as-a-service (jul 2025 nog 15 robots)",
+              "jaar": 2026,
+              "url": "https://ioplus.nl/nl/posts/monumental-haalt-32m-op-voor-bakstenen-robots"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 6,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Prefab en industrieel bouwen verplaatsen uitvoering naar de fabriek. Het EIB becijfert dat industrieel bouwen toepasbaar is bij ongeveer 15% van de nieuwbouwwoningen en tot 35% op arbeidskosten bespaart, netto 8% na hogere kapitaalkosten. Gecorrigeerd voor het feit dat nieuwbouw maar een deel van de bouwsector is, want renovatie, onderhoud en infra vallen erbuiten, komt dat neer op een klein percentage van de sectorarbeid.",
+          "bronnen": [
+            {
+              "bron": "EIB, Industrieel bouwen en de bouwarbeidsmarkt: toepasbaar bij ca. 15% van de nieuwbouw, tot 35% minder arbeidskosten, netto 8%",
+              "jaar": 2023,
+              "url": "https://www.eib.nl/wp-content/uploads/2023/05/Industrieel_bouwen_en_de_bouwarbeidsmarkt_web.pdf"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sector_slug": "energie",
+      "robotrelevant_aandeel_pct": 35,
+      "robot_ondersteuning_pct": 3,
+      "robot_augmentatie_pct": 9,
+      "robot_vervanging_pct": 3,
+      "nea_fysiek_belastend_pct": null,
+      "robot_params_onzekerheid": 10,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 35,
+          "betrouwbaarheid": "inschatting",
+          "bandbreedte": [
+            25,
+            50
+          ],
+          "toelichting": "ZWAKST ONDERBOUWDE CEL VAN DE NEGEN. Er is geen NEA-cijfer voor energievoorziening. Punt geschat op basis van de installatiebranche-proxy van 50,3%, neerwaarts gecorrigeerd voor het aanzienlijke aandeel engineering-, project- en bedrijfsvoeringsfuncties in de sector. Wie een harder cijfer wil moet een maatwerkvraag bij CBS uitzetten."
+        },
+        "robot_ondersteuning": {
+          "waarde": 3,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Tilhulpen en exoskeletten bij montage en kabelwerk. Geen NL-adoptiecijfer gevonden.",
+          "bronnen": []
+        },
+        "robot_augmentatie": {
+          "waarde": 9,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Hier beweegt de sector daadwerkelijk: drones voor hoogspanningsinkartering, de robothond LASS-E voor gaslekdetectie, inspectiecrawlers, en bedrijfsvoering die bij TenneT al volledig op afstand gebeurt met onbemande stations. Enexis, Stedin, Gasunie en Alliander spraken in 2025 de intentie uit een gezamenlijk robotica-lab op te richten.",
+          "bronnen": [
+            {
+              "bron": "Alliander, robotica: drones, robothonden en inspectierobots; sectoraal robotica-lab in oprichting met Enexis, Stedin en Gasunie",
+              "jaar": 2025,
+              "url": "https://www.alliander.com/nl/robotica-bij-alliander/"
+            },
+            {
+              "bron": "TenneT: elektriciteitsstations onbemand, bediend vanuit bedrijfsvoeringscentra Arnhem en Ede",
+              "jaar": 2026,
+              "url": "https://www.tennet.eu/nl/ons-hoogspanningsnet/stroomstoringen"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 3,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "BEWUST LAAG, tegen de intuitie in. De grootste arbeidspost in deze sector is graven en kabelleggen: 100.000 km kabel tot 2050, in 2025 alleen al 2.015 km laagspanning en 2.424 km middenspanning plus 2.183 transformatorhuisjes. Voor graafrobots voor kabels en leidingen is in Nederland geen enkele pilot, leverancier of netbeheerderproject gevonden. Het volume blijft dus handwerk terwijl de robotica op inspectie landt.",
+          "bronnen": [
+            {
+              "bron": "Netbeheer Nederland, feiten en cijfers: tekort 28.000 technici tot 2029; 100.000 km kabel tot 2050; 27% van de stroomstoringen door graafschade",
+              "jaar": 2026,
+              "url": "https://www.netbeheernederland.nl/feiten-en-cijfers"
+            },
+            {
+              "bron": "Netbeheer Nederland, investeringsplannen 2026: meer dan EUR 15 mld per jaar tot 2028",
+              "jaar": 2026,
+              "url": "https://www.netbeheernederland.nl/artikelen/persbericht/investeringsplannen2026"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sector_slug": "zorg",
+      "robotrelevant_aandeel_pct": 35,
+      "robot_ondersteuning_pct": 6,
+      "robot_augmentatie_pct": 4,
+      "robot_vervanging_pct": 2,
+      "nea_fysiek_belastend_pct": 43,
+      "robot_params_onzekerheid": 5,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 35,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            6,
+            43
+          ],
+          "toelichting": "De grootste divergentie tussen de twee ankers van alle negen sectoren, en hier is de ISCO-maat aantoonbaar het verkeerde instrument: verpleegkundigen vallen in ISCO 3 (associate professionals) terwijl hun werk zwaar tillen bevat. Punt daarom dicht bij het NEA-anker, met de krachtinspanningsmaat van 27,1% als ondergrens van het robotrelevante deel."
+        },
+        "robot_ondersteuning": {
+          "waarde": 6,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Hoogste van de drie categorieen, want hier zit het bewijs: tilliften, actieve tilhulpen, heupairbags en exoskeletten. Tegelijk is de realisatie zwak. Praktijkprobleem uit de pilot West-Brabant 2022: veel zorgmedewerkers waren te klein voor het exoskelet.",
+          "bronnen": [
+            {
+              "bron": "Vilans/Significant i.o.v. VWS, Tijdbesparende technologieen ouderenzorg: 5 van 17 met aangetoonde besparing, geen enkele daarvan een robot",
+              "jaar": 2021,
+              "url": "https://www.tweedekamer.nl/downloads/document?id=2021D28981"
+            },
+            {
+              "bron": "TNO voor de Nederlandse Arbeidsinspectie: zorgrobots brengen nog weinig verlichting in taken en arbeidsomstandigheden",
+              "jaar": 2022,
+              "url": "https://arbeidsveiligheid.tno.nl/wp-content/uploads/sites/7/2022/06/Sliderapport-Zorgrobots-NLA-TNO_.pdf"
+            }
+          ]
+        },
+        "robot_augmentatie": {
+          "waarde": 4,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Interne logistiek (linnen, maaltijden, steriel), medicatielogistiek, desinfectie en robotgeassisteerde chirurgie. Twee ontnuchterende NL-feiten: het Jeroen Bosch Ziekenhuis verkocht zijn dertien AGV's omdat de koppeling met liftbesturing en verpleegoproepsysteem nooit lukte, en het Zorginstituut concludeerde in 2020 dat de meerwaarde van de meest uitgevoerde Da Vinci-ingreep niet is aangetoond bij EUR 2.000 tot 4.500 hogere kosten per operatie.",
+          "bronnen": [
+            {
+              "bron": "Zorginstituut Nederland, Wat leren we van de introductie van de Da Vinci robot: meerwaarde niet aangetoond, EUR 1,7 mln plus 10% p.j., EUR 2.000-4.500 duurder per ingreep",
+              "jaar": 2020,
+              "url": "https://www.zorginstituutnederland.nl/binaries/zinl/documenten/rapport/2020/08/31/onderzoeksrapport-wat-leren-we-van-de-introductie-van-de-da-vinci-robot/Eindrapport+Leren+Robotchirurgie+Zorginstituut+aug+2020.PDF"
+            },
+            {
+              "bron": "Jeroen Bosch Ziekenhuis verkocht zijn 13 AGV's; koppeling met liftbesturing en verpleegoproepsysteem lukte nooit",
+              "jaar": 2019,
+              "url": "https://www.loginext.nl/artikelen/ziekenhuis-doet-agv-s-in-de-ban"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 2,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "BEWUST ZEER LAAG, en dit is de belangrijkste tegenintuitieve uitkomst van dit voorstel. CBS mat dat 1% van de zorginstellingen robotica inzet, bij geen enkele met een werkgelegenheidseffect. Vilans en Significant onderzochten voor VWS zeventien zorgtechnologieen: vijf hadden onafhankelijk aangetoonde kwantificeerbare besparing en geen enkele daarvan was een robot. Het waren medicijndispenser, leefstijlmonitoring, heupairbag, slim incontinentiemateriaal en zorgdomotica. De hoge druk in de zorg wordt makkelijk verward met hoog robotpotentieel.",
+          "bronnen": [
+            {
+              "bron": "CBS, ICT-gebruik bedrijven: 1% van de zorginstellingen zet robotica in (7% alle bedrijven, 29% industrie), geen werkgelegenheidseffect",
+              "jaar": 2018,
+              "url": "https://www.cbs.nl/nl-nl/nieuws/2019/42/7-procent-bedrijven-gebruikt-robots"
+            },
+            {
+              "bron": "Vilans/Significant i.o.v. VWS, Tijdbesparende technologieen ouderenzorg: 5 van 17 met aangetoonde besparing, geen enkele daarvan een robot",
+              "jaar": 2021,
+              "url": "https://www.tweedekamer.nl/downloads/document?id=2021D28981"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sector_slug": "overheid",
+      "robotrelevant_aandeel_pct": 12,
+      "robot_ondersteuning_pct": 1,
+      "robot_augmentatie_pct": 2,
+      "robot_vervanging_pct": 2,
+      "nea_fysiek_belastend_pct": 22,
+      "robot_params_onzekerheid": 8,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 12,
+          "betrouwbaarheid": "inschatting",
+          "bandbreedte": [
+            4,
+            22
+          ],
+          "toelichting": "De twee ankers staan ver uit elkaar omdat de NEA lichte belasting in kantoorrollen meetelt en de ISCO-maat de buitendienst grotendeels elders classificeert. Punt boven het ISCO-anker gelegd omdat groen, reiniging, afvalinzameling, areaalinspectie en gladheidsbestrijding wel degelijk gemeentelijk werk zijn. Geen enkele bron kwantificeert de omvang van de gemeentelijke buitendienst: A&O fonds Gemeenten noemt fysieke belasting de meest genoemde verzuimoorzaak maar publiceert geen percentage."
+        },
+        "robot_ondersteuning": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Tilhulpen bij reiniging en afvalinzameling. Geen NL-penetratiecijfer gevonden.",
+          "bronnen": []
+        },
+        "robot_augmentatie": {
+          "waarde": 2,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Areaal- en kunstwerkinspectie met drones waarbij de inspecteur beoordeelt. Rijkswaterstaat heeft een operationeel droneteam met 23 gecertificeerde piloten en een expliciet afwegingskader per kunstwerk; dat is de hardste bevestigde toepassing in deze sector.",
+          "bronnen": [
+            {
+              "bron": "Rijkswaterstaat, droneteam sinds 2020 met 23 gecertificeerde piloten en een dronelabel per kunstwerk",
+              "jaar": 2025,
+              "url": "https://www.rijkswaterstaat.nl/zakelijk/innovatie/informatievoorziening/gebruik-van-drones-bij-rijkswaterstaat"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 2,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Zijbelading bij afvalinzameling vervangt uitvoering aantoonbaar. Autonoom maaien en vegen is technisch rijp maar in NL nauwelijks uitgerold. Nuance: bij Midden-Delfland en Avalex wordt vrijgekomen arbeid herbezet, dus verschuiving in plaats van netto reductie.",
+          "bronnen": [
+            {
+              "bron": "Gemeente Midden-Delfland/Avalex, zijbelading afvalinzameling: minder medewerkers nodig, vrijgekomen plaatsen worden herbezet",
+              "jaar": 2025,
+              "url": "https://www.middendelfland.nl/afvalinzameling"
+            },
+            {
+              "bron": "Stad+Groen: Nederland loopt achterop met autonome robotmaaiers in de openbare ruimte",
+              "jaar": 2024,
+              "url": "https://www.stad-en-groen.nl/article/44126/nederland-loopt-achterop-met-gebruik-autonome-robotmaaiers-in-openbare-ruimte"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "sector_slug": "ict",
+      "robotrelevant_aandeel_pct": 6,
+      "robot_ondersteuning_pct": 1,
+      "robot_augmentatie_pct": 1,
+      "robot_vervanging_pct": 1,
+      "nea_fysiek_belastend_pct": 18,
+      "robot_params_onzekerheid": 8,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 6,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            3,
+            19
+          ],
+          "toelichting": "Het NEA-cijfer van 19% wordt vrijwel volledig gedragen door herhalende bewegingen bij beeldschermwerk; 89% van de ICT-werknemers werkt zes uur of meer per dag achter een scherm. Dat is RSI-territorium, geen robotterritorium. Punt daarom dicht bij het ISCO-anker. Let op: veldmonteurs die glasvezel aanleggen worden in de statistiek vaak in bouw of installatie geteld, niet in ICT."
+        },
+        "robot_ondersteuning": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Tilhulpen bij hardware-installatie en kabelwerk. Geen NL-cijfer gevonden.",
+          "bronnen": []
+        },
+        "robot_augmentatie": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Geen noemenswaardige NL-toepassing gevonden.",
+          "bronnen": []
+        },
+        "robot_vervanging": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Tape-libraries en lights-out-datacenterconcepten bestaan, maar het vervangen van servers gebeurt met de hand. Waarde afgerond naar boven vanaf minder dan 1.",
+          "bronnen": []
+        }
+      }
+    },
+    {
+      "sector_slug": "onderwijs",
+      "robotrelevant_aandeel_pct": 6,
+      "robot_ondersteuning_pct": 1,
+      "robot_augmentatie_pct": 1,
+      "robot_vervanging_pct": 1,
+      "nea_fysiek_belastend_pct": 15,
+      "robot_params_onzekerheid": 8,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 6,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            1,
+            15
+          ],
+          "toelichting": "Onderwijs is de minst fysiek belaste bedrijfstak van Nederland. Extra neerwaartse correctie omdat schoonmaak in het onderwijs veelal is uitbesteed en dus in de schoonmaaksector wordt geteld, waar het ISCO 6-9-aandeel 76,9% is, en niet op de onderwijsloonlijst staat."
+        },
+        "robot_ondersteuning": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Tilhulpen in het speciaal onderwijs. Geen NL-cijfer gevonden.",
+          "bronnen": []
+        },
+        "robot_augmentatie": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Schoonmaakrobotica is in NL nog R&D (project Assisted Cleaning Robot). Telepresence, zoals KlasseContact met circa 560 sets en AV1 met 20 stuks, is nadrukkelijk geen bewegende robot en bespaart geen arbeid; niet meetellen.",
+          "bronnen": [
+            {
+              "bron": "KlasseContact en AV1: ca. 560 telepresence-sets in NL; telepresence is geen bewegende robot en bespaart geen arbeid",
+              "jaar": 2024,
+              "url": "https://klassecontact.nl/nl"
+            },
+            {
+              "bron": "De Haagse Hogeschool en Fontys, project Assisted Cleaning Robot (R&D, gestart 2022)",
+              "jaar": 2022,
+              "url": "https://www.dehaagsehogeschool.nl/onderzoek/centres-expertise/robot-technologie-inzetten-de-schoonmaak-branche-acr"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Alleen in het facilitaire randgebied. Geen Nederlandse evaluatie gevonden die arbeidsbesparing door onderwijsrobotica meet, positief of negatief. NAO en Zora worden consequent gepositioneerd als aanvulling op de leerkracht.",
+          "bronnen": []
+        }
+      }
+    },
+    {
+      "sector_slug": "finance",
+      "robotrelevant_aandeel_pct": 3,
+      "robot_ondersteuning_pct": 0,
+      "robot_augmentatie_pct": 1,
+      "robot_vervanging_pct": 1,
+      "nea_fysiek_belastend_pct": 16,
+      "robot_params_onzekerheid": 6,
+      "robot_params_peildatum": "2026-09-01",
+      "robot_params_versie": "voorstel-2",
+      "robot_params_herkomst": {
+        "robotrelevant_aandeel": {
+          "waarde": 3,
+          "betrouwbaarheid": "afgeleid",
+          "bandbreedte": [
+            0.4,
+            18
+          ],
+          "toelichting": "Twee onafhankelijke maten wijzen allebei de bodem aan: ISCO 0,4% en krachtinspanning 0,6%. Het NEA-cijfer van 18% bestaat vrijwel volledig uit herhalende bewegingen bij beeldschermwerk; 90% werkt zes uur of meer per dag achter een scherm. Punt daarom dicht bij nul."
+        },
+        "robot_ondersteuning": {
+          "waarde": 0,
+          "betrouwbaarheid": "afgeleid",
+          "toelichting": "Geen betekenisvolle fysieke ondersteuningscasus in deze sector. Nul is hier een uitkomst, geen ontbrekende waarde.",
+          "bronnen": []
+        },
+        "robot_augmentatie": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Geldtelcentrales en het bijvullen en onderhouden van automaten.",
+          "bronnen": [
+            {
+              "bron": "Betaalvereniging Nederland: ca. 3.900 geldautomaten en 157 mln contante opnamen",
+              "jaar": 2024,
+              "url": "https://www.betaalvereniging.nl/kennisbank/contant-betalen/geldautomaat/"
+            }
+          ]
+        },
+        "robot_vervanging": {
+          "waarde": 1,
+          "betrouwbaarheid": "inschatting",
+          "toelichting": "Biljetten tellen en sorteren is al zwaar gemechaniseerd en krimpt mee met het contante geld: circa 3.900 automaten en 157 mln opnamen in 2024, met een dalende trend. Het potentieel verdampt sneller dan het wordt gerealiseerd.",
+          "bronnen": [
+            {
+              "bron": "Betaalvereniging Nederland: ca. 3.900 geldautomaten en 157 mln contante opnamen",
+              "jaar": 2024,
+              "url": "https://www.betaalvereniging.nl/kennisbank/contant-betalen/geldautomaat/"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

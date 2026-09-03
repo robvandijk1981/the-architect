@@ -60,6 +60,17 @@ TOON:
 """
 
 
+# Korte-antwoord-instructie voor de live brainstorm-chat (concise=True).
+CONCISE_INSTRUCTION = """
+
+BELANGRIJK — ANTWOORDSTIJL (live brainstorm-chat):
+Antwoord kort en scanbaar, maximaal ~150 woorden. Leid met het concrete cijfer of
+kernantwoord, daarna hooguit 2-3 zinnen context of duiding. Geen uitgebreide
+kopjes-structuur, geen herhaling van de vraag, geen lange inleiding. Behoud de
+bronvermelding bij cijfers. Als de vraag echt om diepgang vraagt: geef het
+kernantwoord en bied aan om door te vragen."""
+
+
 def _decimal_to_str(val):
     """Convert Decimal to string for prompt inclusion."""
     if isinstance(val, Decimal):
@@ -80,6 +91,8 @@ class RAGService:
         self.embedder = EmbeddingService()
         self.model = settings.claude_model
         self.max_tokens = settings.claude_max_tokens
+        self.chat_model = settings.chat_model
+        self.chat_max_tokens = settings.chat_max_tokens
 
     # ============================================
     # Structured Data Lookup
@@ -269,6 +282,9 @@ class RAGService:
         organization_context: dict | None = None,
         max_sources: int = 15,
         system_prompt_override: str | None = None,
+        model_override: str | None = None,
+        max_tokens_override: int | None = None,
+        concise: bool = False,
     ) -> tuple[str, list[Citation]]:
         """
         Hybrid RAG pipeline:
@@ -309,6 +325,8 @@ class RAGService:
 
         # Step 4: Generate with Claude
         system = system_prompt_override or ARCHITECT_SYSTEM_PROMPT
+        if concise:
+            system = system + CONCISE_INSTRUCTION
         messages = [
             {
                 "role": "user",
@@ -327,8 +345,8 @@ Verwijs naar bronnen met [Bron: naam, datum] en naar database-cijfers met [Data:
         ]
 
         response = await self.claude.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
+            model=model_override or self.model,
+            max_tokens=max_tokens_override or self.max_tokens,
             system=system,
             messages=messages,
         )

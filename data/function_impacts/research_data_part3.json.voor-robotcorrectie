@@ -22,8 +22,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 2.0,
+                  "robotiseringAugmentatie": 1.0,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 15.0,
                   "aiAugmentatie": 5.0,
@@ -70,9 +70,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 18.0,
                   "aiAugmentatie": 12.0,
                   "aiVervanging": 5.0,
@@ -118,9 +118,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 16.0,
                   "aiVervanging": 10.0,
@@ -166,9 +166,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 18.0,
                   "aiVervanging": 14.0,
@@ -214,9 +214,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 24.0,
                   "aiAugmentatie": 20.0,
                   "aiVervanging": 15.0,
@@ -260,13 +260,7 @@
                     "Conventionele ontwikkeltools"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 34.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             },
             {
               "name": "DevOps Engineer",
@@ -284,8 +278,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 2.0,
+                  "robotiseringAugmentatie": 1.0,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 4.0,
@@ -332,9 +326,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 17.0,
                   "aiAugmentatie": 10.0,
                   "aiVervanging": 4.0,
@@ -380,9 +374,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 19.0,
                   "aiAugmentatie": 14.0,
                   "aiVervanging": 8.0,
@@ -428,9 +422,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 21.0,
                   "aiAugmentatie": 16.0,
                   "aiVervanging": 11.0,
@@ -476,9 +470,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 18.0,
                   "aiVervanging": 13.0,
@@ -522,13 +516,7 @@
                     "Operationele monitoring"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 33.5,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             }
           ]
         },
@@ -551,8 +539,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 1.5,
+                  "robotiseringAugmentatie": 0.5,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 4.0,
@@ -599,9 +587,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 2.5,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 17.0,
                   "aiAugmentatie": 9.0,
                   "aiVervanging": 4.0,
@@ -647,9 +635,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.5,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 13.0,
                   "aiVervanging": 8.0,
@@ -695,9 +683,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 16.0,
                   "aiVervanging": 11.0,
@@ -743,9 +731,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 23.0,
                   "aiAugmentatie": 18.0,
                   "aiVervanging": 13.0,
@@ -789,13 +777,7 @@
                     "Operationele data-dashboards"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 28.5,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             },
             {
               "name": "Cybersecurity Specialist",
@@ -813,8 +795,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 1.5,
+                  "robotiseringAugmentatie": 0.5,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 12.0,
                   "aiAugmentatie": 4.0,
@@ -861,9 +843,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 2.5,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 15.0,
                   "aiAugmentatie": 8.0,
                   "aiVervanging": 3.0,
@@ -909,9 +891,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 18.0,
                   "aiAugmentatie": 12.0,
                   "aiVervanging": 5.0,
@@ -957,9 +939,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.5,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 14.0,
                   "aiVervanging": 8.0,
@@ -1005,9 +987,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 16.0,
                   "aiVervanging": 10.0,
@@ -1051,13 +1033,7 @@
                     "Conventionele security tools"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 27.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             }
           ]
         },
@@ -1080,8 +1056,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 1.5,
+                  "robotiseringAugmentatie": 0.5,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 12.0,
                   "aiAugmentatie": 4.0,
@@ -1128,9 +1104,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 2.5,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 16.0,
                   "aiAugmentatie": 8.0,
                   "aiVervanging": 3.0,
@@ -1176,9 +1152,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.5,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 19.0,
                   "aiAugmentatie": 12.0,
                   "aiVervanging": 6.0,
@@ -1224,9 +1200,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 21.0,
                   "aiAugmentatie": 15.0,
                   "aiVervanging": 9.0,
@@ -1272,9 +1248,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 17.0,
                   "aiVervanging": 12.0,
@@ -1318,13 +1294,7 @@
                     "Conventionele PM-methoden"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 28.5,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             },
             {
               "name": "Functioneel Beheerder",
@@ -1342,8 +1312,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 2.0,
+                  "robotiseringAugmentatie": 0.5,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 13.0,
                   "aiAugmentatie": 5.0,
@@ -1390,9 +1360,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 16.0,
                   "aiAugmentatie": 9.0,
                   "aiVervanging": 4.0,
@@ -1438,9 +1408,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.5,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 19.0,
                   "aiAugmentatie": 13.0,
                   "aiVervanging": 7.0,
@@ -1486,9 +1456,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 21.0,
                   "aiAugmentatie": 15.0,
                   "aiVervanging": 10.0,
@@ -1534,9 +1504,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 17.0,
                   "aiVervanging": 13.0,
@@ -1580,13 +1550,7 @@
                     "Legacy beheerprocessen"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 29.5,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             }
           ]
         }
@@ -1614,8 +1578,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 2.0,
+                  "robotiseringAugmentatie": 0.5,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 12.0,
                   "aiAugmentatie": 3.0,
@@ -1662,9 +1626,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 16.0,
                   "aiAugmentatie": 7.0,
                   "aiVervanging": 3.0,
@@ -1710,9 +1674,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 10.0,
                   "aiVervanging": 5.0,
@@ -1758,9 +1722,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 22.0,
                   "aiAugmentatie": 13.0,
                   "aiVervanging": 8.0,
@@ -1806,9 +1770,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 24.0,
                   "aiAugmentatie": 15.0,
                   "aiVervanging": 10.0,
@@ -1852,13 +1816,7 @@
                     "Traditionele bankproducten"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 33.5,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             },
             {
               "name": "Acceptant Verzekeringen",
@@ -1876,9 +1834,9 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 8.0,
                   "aiAugmentatie": 3.0,
                   "aiVervanging": 1.0,
@@ -1924,9 +1882,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 11.0,
                   "aiAugmentatie": 5.0,
                   "aiVervanging": 3.0,
@@ -1972,9 +1930,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 6.0,
+                  "robotiseringAugmentatie": 3.5,
+                  "robotiseringVervanging": 2.5,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 7.0,
                   "aiVervanging": 4.0,
@@ -2020,9 +1978,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 7.0,
+                  "robotiseringAugmentatie": 4.0,
+                  "robotiseringVervanging": 3.0,
                   "aiOndersteuning": 16.0,
                   "aiAugmentatie": 9.0,
                   "aiVervanging": 5.0,
@@ -2068,9 +2026,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 7.0,
+                  "robotiseringAugmentatie": 4.5,
+                  "robotiseringVervanging": 3.5,
                   "aiOndersteuning": 17.0,
                   "aiAugmentatie": 10.0,
                   "aiVervanging": 6.0,
@@ -2114,13 +2072,7 @@
                     "Operationele acceptatietools"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 58.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             }
           ]
         },
@@ -2143,9 +2095,9 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 10.0,
                   "aiAugmentatie": 4.0,
                   "aiVervanging": 2.0,
@@ -2191,9 +2143,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 7.0,
                   "aiVervanging": 4.0,
@@ -2239,9 +2191,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 17.0,
                   "aiAugmentatie": 10.0,
                   "aiVervanging": 6.0,
@@ -2287,9 +2239,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.5,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 19.0,
                   "aiAugmentatie": 12.0,
                   "aiVervanging": 8.0,
@@ -2335,9 +2287,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 6.0,
+                  "robotiseringAugmentatie": 3.5,
+                  "robotiseringVervanging": 2.5,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 14.0,
                   "aiVervanging": 9.0,
@@ -2381,13 +2333,7 @@
                     "Traditionele audit-aanpak"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 43.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             },
             {
               "name": "Financial Controller",
@@ -2405,9 +2351,9 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 11.0,
                   "aiAugmentatie": 5.0,
                   "aiVervanging": 2.0,
@@ -2453,9 +2399,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 8.0,
                   "aiVervanging": 4.0,
@@ -2501,9 +2447,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 17.0,
                   "aiAugmentatie": 10.0,
                   "aiVervanging": 6.0,
@@ -2549,9 +2495,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 6.0,
+                  "robotiseringAugmentatie": 3.5,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 19.0,
                   "aiAugmentatie": 12.0,
                   "aiVervanging": 8.0,
@@ -2597,9 +2543,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 6.0,
+                  "robotiseringAugmentatie": 4.0,
+                  "robotiseringVervanging": 2.5,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 14.0,
                   "aiVervanging": 9.0,
@@ -2643,13 +2589,7 @@
                     "Legacy controlling systemen"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 46.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             }
           ]
         },
@@ -2672,8 +2612,8 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
+                  "robotiseringOndersteuning": 1.5,
+                  "robotiseringAugmentatie": 0.5,
                   "robotiseringVervanging": 0.0,
                   "aiOndersteuning": 10.0,
                   "aiAugmentatie": 5.0,
@@ -2720,9 +2660,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.0,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 8.0,
                   "aiVervanging": 4.0,
@@ -2768,9 +2708,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.0,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 18.0,
                   "aiAugmentatie": 11.0,
                   "aiVervanging": 6.0,
@@ -2816,9 +2756,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 20.0,
                   "aiAugmentatie": 13.0,
                   "aiVervanging": 8.0,
@@ -2864,9 +2804,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 21.0,
                   "aiAugmentatie": 14.0,
                   "aiVervanging": 9.0,
@@ -2910,13 +2850,7 @@
                     "Traditionele vermogensbeheer-tools"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 32.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             },
             {
               "name": "Compliance Officer",
@@ -2934,9 +2868,9 @@
               "periods": [
                 {
                   "period": "2025-2027",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 2.0,
+                  "robotiseringAugmentatie": 1.0,
+                  "robotiseringVervanging": 0.5,
                   "aiOndersteuning": 8.0,
                   "aiAugmentatie": 3.0,
                   "aiVervanging": 1.0,
@@ -2982,9 +2916,9 @@
                 },
                 {
                   "period": "2028-2030",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 3.5,
+                  "robotiseringAugmentatie": 1.5,
+                  "robotiseringVervanging": 1.0,
                   "aiOndersteuning": 11.0,
                   "aiAugmentatie": 5.0,
                   "aiVervanging": 2.0,
@@ -3030,9 +2964,9 @@
                 },
                 {
                   "period": "2031-2033",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 4.5,
+                  "robotiseringAugmentatie": 2.0,
+                  "robotiseringVervanging": 1.5,
                   "aiOndersteuning": 14.0,
                   "aiAugmentatie": 8.0,
                   "aiVervanging": 3.0,
@@ -3078,9 +3012,9 @@
                 },
                 {
                   "period": "2034-2036",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.0,
+                  "robotiseringAugmentatie": 2.5,
+                  "robotiseringVervanging": 2.0,
                   "aiOndersteuning": 16.0,
                   "aiAugmentatie": 10.0,
                   "aiVervanging": 5.0,
@@ -3126,9 +3060,9 @@
                 },
                 {
                   "period": "2037-2040",
-                  "robotiseringOndersteuning": 0,
-                  "robotiseringAugmentatie": 0,
-                  "robotiseringVervanging": 0,
+                  "robotiseringOndersteuning": 5.5,
+                  "robotiseringAugmentatie": 3.0,
+                  "robotiseringVervanging": 2.5,
                   "aiOndersteuning": 17.0,
                   "aiAugmentatie": 11.0,
                   "aiVervanging": 6.0,
@@ -3172,13 +3106,7 @@
                     "Legacy governance tools"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "NUL",
-                "oude_som": 38.0,
-                "reden": "Kantoorfunctie in een kantoorsector zonder fysieke robotinhoud in de taken. Wat hier als robotisering stond is procesautomatisering en hoort in de AI-laag. Zie werk/robot-parameters/robot_functiescores_diagnose_2026-09.md."
-              }
+              ]
             }
           ]
         }
@@ -4734,13 +4662,7 @@
                     "Operationele SC-systemen"
                   ]
                 }
-              ],
-              "robotScoreCorrectie": {
-                "datum": "2026-09-01",
-                "oordeel": "HERIJK",
-                "waarde_ongewijzigd": true,
-                "reden": "Functie heeft aantoonbaar fysiek werk maar de taakbeschrijving benoemt geen robotica. Score is niet te onderbouwen en ook niet op nul te zetten: opnieuw afleiden via een FTE-gewogen taakmethode, begrensd op de sectorlaag."
-              }
+              ]
             }
           ]
         }

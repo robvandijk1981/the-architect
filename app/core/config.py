@@ -35,6 +35,14 @@ class Settings(BaseSettings):
     claude_model: str = "claude-sonnet-4-20250514"
     claude_max_tokens: int = 4096
 
+    # --- Chat (snelle conversationele endpoint) ---
+    # Apart, lichter model voor de live brainstorm-chat. Sonnet blijft op de
+    # zware endpoints (/analyze, /businesscase, /risk). Override via Railway env
+    # var CHAT_MODEL als deze modelnaam niet beschikbaar is
+    # (fallback: claude-3-5-haiku-20241022).
+    chat_model: str = "claude-haiku-4-5-20251001"
+    chat_max_tokens: int = 700
+
     # --- Monitoring ---
     sentry_dsn: str = ""
 

@@ -30,6 +30,7 @@ from app.api.deps import (
     get_risk_calculator,
     get_businesscase_calculator,
 )
+from app.core.config import get_settings
 from app.core.database import fetch_all, fetch_one, fetch_val, execute, execute_returning
 from app.models.analysis import (
     AnalysisRequest, AnalysisResponse, AnalysisStatus,
@@ -203,12 +204,16 @@ async def chat(
     """Chat with the workforce specialist agent."""
     sector = request.context.get("sector")
     org_context = request.context.get("organization")
+    settings = get_settings()
 
     try:
         answer, citations = await rag.query(
             question=request.message,
             sector=sector,
             organization_context=org_context,
+            model_override=settings.chat_model,
+            max_tokens_override=settings.chat_max_tokens,
+            concise=True,
         )
     except Exception as e:
         logger.error("chat_failed", error=str(e), error_type=type(e).__name__)
@@ -648,4 +653,26 @@ async def _run_analysis(
             """UPDATE analyses SET status = 'failed', error_message = $2, processing_time_ms = $3
                WHERE id = $1::uuid""",
             aid, str(e), elapsed,
+        )
+
+
+@router.post("/admin/install-robot-parameters")
+async def admin_install_robot_parameters(
+    _: str = Depends(verify_api_key),
+):
+    """Installeer de robotparameters per sector: migratie 006 plus de negen datarijen.
+
+    Idempotent. Voegt de kolommen toe, zet de CHECK-constraints, normaliseert het
+    sectorvocabulaire in documents en schrijft de waarden met herkomst weg.
+    """
+    from app.pipeline.install_robot_parameters import install_robot_parameters
+
+    try:
+        result = await install_robot_parameters()
+        return {"status": "robot_parameters_installed", "result": result}
+    except Exception as e:
+        logger.error("install_robot_parameters_failed", error=str(e), error_type=type(e).__name__)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Install robot parameters failed: {type(e).__name__}: {e}",
         )
