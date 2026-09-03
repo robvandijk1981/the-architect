@@ -48,16 +48,26 @@ ALTER TABLE sector_profiles ADD CONSTRAINT robot_pct_bereik CHECK (
   AND COALESCE(robot_vervanging_pct, 0) BETWEEN 0 AND 100
 );
 
-UPDATE documents SET sector = 'finance' WHERE sector IN ('financieel', 'financiele_dienstverlening');
-
-UPDATE documents SET sector = 'industrie' WHERE sector = 'automotive';
-
-UPDATE documents SET sector = replace(sector, 'financiele_dienstverlening', 'finance') WHERE sector LIKE '%financiele_dienstverlening%';
-
-UPDATE documents SET sector = replace(sector, 'financieel', 'finance') WHERE sector LIKE '%financieel%' AND sector NOT LIKE '%finance%';
-
-UPDATE documents SET sector = replace(sector, 'automotive', 'industrie') WHERE sector LIKE '%automotive%' AND sector NOT LIKE '%industrie%';
-
-UPDATE documents SET sector = replace(sector, 'automotive,', '') WHERE sector LIKE '%automotive%';
-
-UPDATE documents SET sector = replace(sector, ',automotive', '') WHERE sector LIKE '%automotive%';
+-- Sectorlabels gelijktrekken met de negen slugs van sector_profiles.
+--
+-- De tabel heet knowledge_documents, niet documents, en sector is een TEXT[]
+-- en geen komma-gescheiden tekst. De eerdere opzet met LIKE en replace() ging
+-- van allebei uit en liep stuk op de eerste UPDATE. Daarom: unnest, hernoem,
+-- en er weer een array van maken. DISTINCT ruimt het dubbele label op dat
+-- ontstaat wanneer een document naast 'automotive' al 'industrie' had staan.
+-- De volgorde binnen de array draagt geen betekenis: match_knowledge_chunks
+-- toetst met = ANY(kd.sector).
+UPDATE knowledge_documents
+SET sector = (
+        SELECT array_agg(DISTINCT nieuw ORDER BY nieuw)
+        FROM (
+            SELECT CASE label
+                       WHEN 'financieel'                 THEN 'finance'
+                       WHEN 'financiele_dienstverlening' THEN 'finance'
+                       WHEN 'automotive'                 THEN 'industrie'
+                       ELSE label
+                   END AS nieuw
+            FROM unnest(knowledge_documents.sector) AS u(label)
+        ) AS hernoemd
+    )
+WHERE sector && ARRAY['financieel', 'financiele_dienstverlening', 'automotive'];

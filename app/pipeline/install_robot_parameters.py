@@ -176,11 +176,11 @@ async def install_robot_parameters() -> dict:
     )
     vreemd = await fetch_all(
         """
-        SELECT DISTINCT trim(s) AS sector
-        FROM documents, unnest(string_to_array(sector, ',')) AS s
-        WHERE trim(s) <> ''
-          AND trim(s) NOT IN ('overheid','ict','transport','energie','onderwijs',
-                              'finance','zorg','bouw','industrie')
+        SELECT DISTINCT s AS sector
+        FROM knowledge_documents, unnest(sector) AS s
+        WHERE s <> ''
+          AND s NOT IN ('overheid','ict','transport','energie','onderwijs',
+                        'finance','zorg','bouw','industrie')
         """
     )
 
